@@ -40,3 +40,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
 }
+
+sceneform.asset('sampledata/cap2.fbx',
+        'default',
+        'sampledata/cap2.sfa',
+        'src/main/res/raw/cap2')
