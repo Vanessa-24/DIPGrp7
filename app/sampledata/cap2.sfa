@@ -62,7 +62,7 @@
     file: 'sampledata/cap2.fbx',
     name: 'cap2',
     recenter: {x:0.5,y:-0.55,z:0.5},
-    scale: 1.2
+    scale: 1.1
   },
   version: '0.54:2',
 }
