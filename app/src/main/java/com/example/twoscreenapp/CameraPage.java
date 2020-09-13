@@ -15,10 +15,9 @@ import android.os.HandlerThread;
 import android.util.Log;
 import android.view.PixelCopy;
 import android.view.View;
-<<<<<<< HEAD
-=======
+
 import android.widget.Button;
->>>>>>> 9872a3daae17f8bc10b862ee7e5ee9ad8121e250
+
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -167,13 +166,8 @@ public class CameraPage extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
-<<<<<<< HEAD
-    public void popUp(View view){
 
-    }
-=======
 
->>>>>>> 9872a3daae17f8bc10b862ee7e5ee9ad8121e250
     public void takePicture(View view1) {
         final String filename = generateFilename();
         ArSceneView view = customArFragment.getArSceneView();
