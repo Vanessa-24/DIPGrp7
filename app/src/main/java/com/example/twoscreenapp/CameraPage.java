@@ -40,6 +40,8 @@ import java.util.Date;
 import java.util.Iterator;
 
 public class CameraPage extends AppCompatActivity {
+    public static final String fileNameMsg = "PhotoTaken";
+
     private ModelRenderable modelRenderable;
     private ModelRenderable modelRenderable1;
     private Texture texture;
@@ -206,6 +208,11 @@ public class CameraPage extends AppCompatActivity {
 
                 });
                 snackbar.show();
+
+                Intent previewPhoto = new Intent(this, PreviewPhoto.class);
+                previewPhoto.putExtra(fileNameMsg, filename);
+                startActivity(previewPhoto);
+
             } else {
                 Toast toast = Toast.makeText(this,
                         "Failed to copyPixels: " + copyResult, Toast.LENGTH_LONG);
@@ -239,4 +246,15 @@ public class CameraPage extends AppCompatActivity {
             //Log.e("Hello", "Hello world")
         }
     }
+
+
+    //This code no longer need
+//    public void viewFolderImg(View v) {
+//        String folderName = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + File.separator + "Sceneform/";
+//
+//        Uri selectedUri = Uri.parse(folderName);
+//        Intent intent = new Intent(Intent.ACTION_VIEW);
+//        intent.setDataAndType(selectedUri, "resource/folder");
+//        startActivity(intent);
+//    }
 }
