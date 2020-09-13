@@ -112,13 +112,14 @@ public class CameraPage extends AppCompatActivity {
                 AugmentedFaceNode augmentedFaceNode = new AugmentedFaceNode(augmentedFace);
                 augmentedFaceNode.setParent(customArFragment.getArSceneView().getScene());
                 //augmentedFaceNode.setFaceRegionsRenderable(modelRenderable);
+                //              Overylay the texture on face
+
                 //augmentedFaceNode.setFaceMeshTexture(texture);
 
                 AugmentedFaceNode augmentedFaceNode1 = new AugmentedFaceNode(augmentedFace);
                 augmentedFaceNode1.setParent(customArFragment.getArSceneView().getScene());
                 //Overlay the 3D assets on face
                 //augmentedFaceNode1.setFaceRegionsRenderable(modelRenderable1);
-//              Overylay the texture on face
 
                 augmentedFaceNodes[0] = augmentedFaceNode;
                 augmentedFaceNodes[1] = augmentedFaceNode1;
