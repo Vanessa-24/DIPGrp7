@@ -145,11 +145,11 @@ public class CameraPage extends AppCompatActivity {
     public void trigger1(View v) {
         trigger1 = !trigger1;
         if (!trigger1) {
-            augmentedFaceNodes[0].setFaceMeshTexture(null);
+            //augmentedFaceNodes[0].setFaceMeshTexture(null);
             augmentedFaceNodes[0].setFaceRegionsRenderable(null);
         } else {
             augmentedFaceNodes[0].setFaceRegionsRenderable(modelRenderable);
-            augmentedFaceNodes[0].setFaceMeshTexture(texture);
+            //augmentedFaceNodes[0].setFaceMeshTexture(texture);
         }
     }
 
