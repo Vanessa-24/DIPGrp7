@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
+
+
+    <Button
+        android:id="@+id/download"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="87dp"
+        android:layout_height="66dp"
+        android:background="#00FFFFFF"
+        android:backgroundTint="#00FFFFFF"
+        android:foreground="@android:drawable/stat_sys_download"
+        android:foregroundTint="#3F393A"
+        tools:layout_editor_absoluteX="166dp"
+        tools:layout_editor_absoluteY="608dp"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/share"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="76dp"
+        android:layout_height="66dp"
+        android:foreground="?attr/actionModeShareDrawable"
+        android:foregroundTint="#4F4A4B"
+        tools:layout_editor_absoluteX="298dp"
+        tools:layout_editor_absoluteY="608dp"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/shop"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="79dp"
+        android:layout_height="71dp"
+        android:background="#00FFFFFF"
+        android:backgroundTint="#03FFFFFF"
+        android:foreground="?attr/actionModePasteDrawable"
+        android:foregroundTint="#3F393A"
+        tools:layout_editor_absoluteX="34dp"
+        tools:layout_editor_absoluteY="613dp"
+        tools:ignore="MissingConstraints" />
+</androidx.constraintlayout.widget.ConstraintLayout>
