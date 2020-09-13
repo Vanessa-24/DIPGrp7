@@ -15,6 +15,8 @@ import android.os.HandlerThread;
 import android.util.Log;
 import android.view.PixelCopy;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -44,12 +46,21 @@ public class CameraPage extends AppCompatActivity {
     private boolean trigger2 = true;
     private CustomArFragment customArFragment;
 
+    private Button hat, glass;
+    private ImageView greybox;
+    private boolean visible = true;
+
     private AugmentedFaceNode[] augmentedFaceNodes = new AugmentedFaceNode[2];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera_page);
+
+        hat = findViewById(R.id.button);
+        glass = findViewById(R.id.button3);
+        greybox = findViewById(R.id.imageView);
+
         customArFragment = (CustomArFragment) getSupportFragmentManager().findFragmentById(R.id.arFragment);
 
         //Load models
@@ -114,6 +125,19 @@ public class CameraPage extends AppCompatActivity {
         });
     }
 
+    public void visibleFilterButtons(View v) {
+        visible = !visible;
+        if (visible) {
+            hat.setVisibility(View.VISIBLE);
+            glass.setVisibility(View.VISIBLE);
+            greybox.setVisibility(View.VISIBLE);
+        } else {
+            hat.setVisibility(View.GONE);
+            glass.setVisibility(View.GONE);
+            greybox.setVisibility(View.GONE);
+        }
+    }
+
     public void trigger1(View v) {
         trigger1 = !trigger1;
         if (!trigger1) {
@@ -139,6 +163,7 @@ public class CameraPage extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
     public void takePicture(View view1) {
         final String filename = generateFilename();
         ArSceneView view = customArFragment.getArSceneView();
@@ -187,8 +212,7 @@ public class CameraPage extends AppCompatActivity {
     private String generateFilename() {
         String date =
                 new SimpleDateFormat("yyyyMMddHHmmss", java.util.Locale.getDefault()).format(new Date());
-        return Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES) + File.separator + "Sceneform/" + date + "_screenshot.jpg";
+        return "/Internal storage/Pictures" + File.separator + date + "_screenshot.jpg";
     }
     private void saveBitmapToDisk(Bitmap bitmap, String filename) throws IOException {
 
@@ -203,6 +227,7 @@ public class CameraPage extends AppCompatActivity {
             outputStream.flush();
             outputStream.close();
         } catch (IOException ex) {
+            ex.printStackTrace();
             throw new IOException("Failed to save bitmap to disk", ex);
         }
     }
