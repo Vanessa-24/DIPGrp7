@@ -6,7 +6,43 @@
     android:layout_height="match_parent"
     tools:context=".CameraPage">
 
-    <fragment
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="94dp"
+        android:layout_height="86dp"
+        android:layout_marginBottom="4dp"
+        android:onClick="trigger2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.914"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageButton"
+        app:layout_constraintVertical_bias="0.314"
+        app:srcCompat="@drawable/ic_glasses" />
+
+    <ImageView
+        android:id="@+id/bottombar2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cameraButton"
+        app:srcCompat="@drawable/ic_bar_page1" />
+
+    <ImageView
+        android:id="@+id/bottombar3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cameraButton"
+        app:srcCompat="@drawable/ic_bar_page1" />
+
+        <fragment
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/arFragment"
@@ -22,38 +58,43 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="trigger1"
-        android:text="Toggle F1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button3"
-        app:layout_constraintHorizontal_bias="0.396"
-        app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="trigger2"
-        android:text="Toggle F2"
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="87dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="80dp"
+        android:onClick="trigger1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.746"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.092"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageButton"
+        app:layout_constraintVertical_bias="0.324"
+        app:srcCompat="@drawable/ic_pamela_hat"
+        android:visibility="gone"/>
 
-
-    <Button
-        android:id="@+id/picCamera"
+    <ImageButton
+        android:id="@+id/cameraButton2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="takePicture"
-        android:text="Take Picture"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.886"
+        app:srcCompat="@drawable/btn_camera" />
+
+    <ImageButton
+        android:id="@+id/scrollup2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="popUp"
+        app:srcCompat="@drawable/ic_baseline_arrow_drop_up_24"
+        tools:layout_editor_absoluteX="157dp"
+        tools:layout_editor_absoluteY="683dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

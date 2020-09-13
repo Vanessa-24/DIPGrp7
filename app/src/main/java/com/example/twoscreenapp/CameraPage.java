@@ -15,6 +15,7 @@ import android.os.HandlerThread;
 import android.util.Log;
 import android.view.PixelCopy;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -43,6 +44,7 @@ public class CameraPage extends AppCompatActivity {
     private boolean trigger1 = true;
     private boolean trigger2 = true;
     private CustomArFragment customArFragment;
+    private ImageView imageView;
 
     private AugmentedFaceNode[] augmentedFaceNodes = new AugmentedFaceNode[2];
 
@@ -139,6 +141,9 @@ public class CameraPage extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+    public void popUp(View view){
+
+    }
     public void takePicture(View view1) {
         final String filename = generateFilename();
         ArSceneView view = customArFragment.getArSceneView();
@@ -204,6 +209,8 @@ public class CameraPage extends AppCompatActivity {
             outputStream.close();
         } catch (IOException ex) {
             throw new IOException("Failed to save bitmap to disk", ex);
+            //ex.printStackTrace();
+            //Log.e("Hello", "Hello world")
         }
     }
 }
