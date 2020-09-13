@@ -44,14 +44,14 @@ public class CameraPage extends AppCompatActivity {
     private ModelRenderable modelRenderable1;
     private Texture texture;
     private boolean isAdded = false;
-    private boolean trigger1 = true;
-    private boolean trigger2 = true;
+    private boolean trigger1 = false;
+    private boolean trigger2 = false;
     private CustomArFragment customArFragment;
     private ImageView imageView;
 
     private Button hat, glass;
     private ImageView greybox;
-    private boolean visible = true;
+    private boolean visible = false;
 
     private AugmentedFaceNode[] augmentedFaceNodes = new AugmentedFaceNode[2];
 
@@ -70,7 +70,7 @@ public class CameraPage extends AppCompatActivity {
         //R.raw.fox_face will go to res/raw/fox_face
         // to render the 3d object. load 3d content into sceneform
         ModelRenderable.builder()
-                .setSource(this, R.raw.glasses_model)
+                .setSource(this, R.raw.glasses)
                 .build()
                 .thenAccept(renderable -> {
                     modelRenderable = renderable;
@@ -78,7 +78,7 @@ public class CameraPage extends AppCompatActivity {
                     modelRenderable.setShadowReceiver(false);
                 });
         ModelRenderable.builder()
-                .setSource(this, R.raw.fox_face1)
+                .setSource(this, R.raw.cap2)
                 .build()
                 .thenAccept(renderable -> {
                     modelRenderable1 = renderable;
@@ -111,13 +111,13 @@ public class CameraPage extends AppCompatActivity {
                 //Create an AugmentedFaceNode with the given AugmentedFace.
                 AugmentedFaceNode augmentedFaceNode = new AugmentedFaceNode(augmentedFace);
                 augmentedFaceNode.setParent(customArFragment.getArSceneView().getScene());
-                augmentedFaceNode.setFaceRegionsRenderable(modelRenderable);
-                augmentedFaceNode.setFaceMeshTexture(texture);
+                //augmentedFaceNode.setFaceRegionsRenderable(modelRenderable);
+                //augmentedFaceNode.setFaceMeshTexture(texture);
 
                 AugmentedFaceNode augmentedFaceNode1 = new AugmentedFaceNode(augmentedFace);
                 augmentedFaceNode1.setParent(customArFragment.getArSceneView().getScene());
                 //Overlay the 3D assets on face
-                augmentedFaceNode1.setFaceRegionsRenderable(modelRenderable1);
+                //augmentedFaceNode1.setFaceRegionsRenderable(modelRenderable1);
 //              Overylay the texture on face
 
                 augmentedFaceNodes[0] = augmentedFaceNode;
@@ -216,7 +216,8 @@ public class CameraPage extends AppCompatActivity {
     private String generateFilename() {
         String date =
                 new SimpleDateFormat("yyyyMMddHHmmss", java.util.Locale.getDefault()).format(new Date());
-        return "/Internal storage/Pictures" + File.separator + date + "_screenshot.jpg";
+        return Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES) + File.separator + "Sceneform/" + date + "_screenshot.jpg";
     }
     private void saveBitmapToDisk(Bitmap bitmap, String filename) throws IOException {
 
