@@ -6,41 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".CameraPage">
 
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="94dp"
-        android:layout_height="86dp"
-        android:layout_marginBottom="4dp"
-        android:onClick="trigger2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.914"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageButton"
-        app:layout_constraintVertical_bias="0.314"
-        app:srcCompat="@drawable/ic_glasses" />
 
-    <ImageView
-        android:id="@+id/bottombar2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cameraButton"
-        app:srcCompat="@drawable/ic_bar_page1" />
 
-    <ImageView
-        android:id="@+id/bottombar3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cameraButton"
-        app:srcCompat="@drawable/ic_bar_page1" />
+
 
         <fragment
         android:layout_width="match_parent"
@@ -49,17 +17,10 @@
         android:name="com.example.twoscreenapp.CustomArFragment"
         tools:layout="@layout/activity_camera_page" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="back"
-        android:text="Back"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 
-<<<<<<< HEAD
+
+
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="87dp"
@@ -164,7 +125,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
->>>>>>> 9872a3daae17f8bc10b862ee7e5ee9ad8121e250
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
