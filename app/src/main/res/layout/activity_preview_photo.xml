@@ -8,12 +8,75 @@
 
     <ImageView
         android:id="@+id/previewPhoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="365dp"
+        android:layout_height="595dp"
         android:contentDescription="Preview Photo"
+        android:adjustViewBounds="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.117" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="292dp"
+        android:alpha="1.0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_bar_page2" />
+
+    <Button
+        android:id="@+id/download"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="87dp"
+        android:layout_height="66dp"
+        android:background="#00FFFFFF"
+        android:backgroundTint="#00FFFFFF"
+        android:foreground="@android:drawable/stat_sys_download"
+        android:foregroundTint="#1B1D1E"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.984"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/share"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="76dp"
+        android:layout_height="66dp"
+        android:foreground="?attr/actionModeShareDrawable"
+        android:foregroundTint="#1B1D1E"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.889"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.984"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/shop"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="79dp"
+        android:layout_height="71dp"
+        android:background="#00FFFFFF"
+        android:backgroundTint="#03FFFFFF"
+        android:foreground="?attr/actionModePasteDrawable"
+        android:foregroundTint="#1B1D1E"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.102"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.992"
+        tools:ignore="MissingConstraints" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

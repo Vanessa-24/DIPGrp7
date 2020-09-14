@@ -209,7 +209,9 @@ public class CameraPage extends AppCompatActivity {
                 });
                 snackbar.show();
 
+                //To preview the photo via an intent
                 Intent previewPhoto = new Intent(this, PreviewPhoto.class);
+                // to put msg into intent
                 previewPhoto.putExtra(fileNameMsg, filename);
                 startActivity(previewPhoto);
 

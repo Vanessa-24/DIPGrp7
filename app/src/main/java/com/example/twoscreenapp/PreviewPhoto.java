@@ -18,6 +18,7 @@ public class PreviewPhoto extends AppCompatActivity {
         setContentView(R.layout.activity_preview_photo);
 
         Intent intent = getIntent();
+        //get the message of the intent
         String fileName = intent.getStringExtra(CameraPage.fileNameMsg);
 
         File imgFile = new  File(fileName);
@@ -26,6 +27,7 @@ public class PreviewPhoto extends AppCompatActivity {
             Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
 
             ImageView myImage = findViewById(R.id.previewPhoto);
+            //Place the image
             myImage.setImageBitmap(myBitmap);
 
         };
