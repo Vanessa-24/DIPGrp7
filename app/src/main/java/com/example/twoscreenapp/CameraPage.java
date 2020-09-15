@@ -76,7 +76,7 @@ public class CameraPage extends AppCompatActivity {
         //R.raw.fox_face will go to res/raw/fox_face
         // to render the 3d object. load 3d content into sceneform
         ModelRenderable.builder()
-                .setSource(this, R.raw.glasses)
+                .setSource(this, R.raw.aviators2)
                 .build()
                 .thenAccept(renderable -> {
                     modelRenderable = renderable;

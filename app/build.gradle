@@ -41,7 +41,7 @@ dependencies {
 
 }
 
-sceneform.asset('sampledata/redsunglasses.fbx',
+sceneform.asset('sampledata/Aviators2.fbx',
         'default',
-        'sampledata/redsunglasses.sfa',
-        'src/main/res/raw/redsunglasses')
+        'sampledata/aviators2.sfa',
+        'src/main/res/raw/aviators2')
