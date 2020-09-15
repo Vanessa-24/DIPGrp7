@@ -39,9 +39,9 @@
         android:layout_height="71dp"
         android:background="#00FFFFFF"
         android:backgroundTint="#03FFFFFF"
-        android:foreground="?attr/actionModePasteDrawable"
+        android:foreground="@drawable/ic_shopping_cart"
         android:foregroundTint="#3F393A"
+        tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="34dp"
-        tools:layout_editor_absoluteY="613dp"
-        tools:ignore="MissingConstraints" />
+        tools:layout_editor_absoluteY="615dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
