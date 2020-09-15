@@ -4,14 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:foregroundTint="#FFFFFF"
     tools:context=".PreviewPhoto">
 
     <ImageView
         android:id="@+id/previewPhoto"
         android:layout_width="365dp"
         android:layout_height="595dp"
-        android:contentDescription="Preview Photo"
         android:adjustViewBounds="true"
+        android:contentDescription="Preview Photo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,50 +34,65 @@
     <Button
         android:id="@+id/download"
         style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="87dp"
-        android:layout_height="66dp"
+        android:layout_width="54dp"
+        android:layout_height="53dp"
         android:background="#00FFFFFF"
         android:backgroundTint="#00FFFFFF"
         android:foreground="@android:drawable/stat_sys_download"
         android:foregroundTint="#1B1D1E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.386"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.984"
+        app:layout_constraintVertical_bias="0.949"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/share"
         style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="76dp"
-        android:layout_height="66dp"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
         android:foreground="?attr/actionModeShareDrawable"
         android:foregroundTint="#1B1D1E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.889"
+        app:layout_constraintHorizontal_bias="0.637"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.984"
+        app:layout_constraintVertical_bias="0.948"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/shop"
         style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="79dp"
-        android:layout_height="71dp"
+        android:layout_width="58dp"
+        android:layout_height="55dp"
         android:background="#00FFFFFF"
         android:backgroundTint="#03FFFFFF"
         android:foreground="@drawable/ic_shopping_cart"
         android:foregroundTint="#1B1D1E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.102"
+        app:layout_constraintHorizontal_bias="0.09"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.992"
+        app:layout_constraintVertical_bias="0.949"
         tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/post"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="64dp"
+        android:layout_height="52dp"
+        android:foreground="@android:drawable/ic_menu_send"
+        android:foregroundTint="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.913"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.945" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
