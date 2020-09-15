@@ -68,7 +68,7 @@
         android:layout_height="71dp"
         android:background="#00FFFFFF"
         android:backgroundTint="#03FFFFFF"
-        android:foreground="?attr/actionModePasteDrawable"
+        android:foreground="@drawable/ic_shopping_cart"
         android:foregroundTint="#1B1D1E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
