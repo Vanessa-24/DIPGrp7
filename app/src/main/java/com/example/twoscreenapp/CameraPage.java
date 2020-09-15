@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.PixelCopy;
 import android.view.View;
@@ -61,6 +62,9 @@ public class CameraPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera_page);
+        // Bottom 2 line of code needed to allow the sharing of the image to work
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
 
         hat = findViewById(R.id.button);
         glass = findViewById(R.id.button3);
