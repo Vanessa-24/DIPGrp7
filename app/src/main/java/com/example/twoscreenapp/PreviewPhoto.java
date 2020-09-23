@@ -7,12 +7,26 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.InputStreamEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 import java.io.File;
+import java.io.FileInputStream;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.util.EntityUtils;
+
 
 public class PreviewPhoto extends AppCompatActivity {
 
@@ -43,6 +57,9 @@ public class PreviewPhoto extends AppCompatActivity {
             myImage.setImageBitmap(myBitmap);
 
         };
+        String url = "http://ec2-18-223-170-40.us-east-2.compute.amazonaws.com:8080/upload";
+
+        Log.e("face shape", faceShapeDetect(url, fileName));
     }
 
     private View.OnClickListener shareOnClickListener = new View.OnClickListener() {
@@ -73,5 +90,30 @@ public class PreviewPhoto extends AppCompatActivity {
                 ex.printStackTrace();
             }
         }
+    }
+    public  String faceShapeDetect(String url, String fileName) {
+            try {
+                HttpClient httpclient = new DefaultHttpClient();
+                HttpPost httppost = new HttpPost(url);
+
+
+                MultipartEntityBuilder builder = MultipartEntityBuilder.create();
+                builder.addBinaryBody(
+                        "content", new File(fileName), ContentType.APPLICATION_OCTET_STREAM, fileName);
+                HttpEntity multipart = builder.build();
+
+                httppost.setEntity(multipart);
+                HttpResponse response = httpclient.execute(httppost);
+
+
+                HttpEntity entity = response.getEntity();
+                String responseString = EntityUtils.toString(entity, "UTF-8");
+                return responseString;
+
+            } catch (Exception e) {
+                // show error
+                Log.e("face shape err", e + "");
+            }
+            return "";
     }
 }

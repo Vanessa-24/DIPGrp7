@@ -4,12 +4,14 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
 
+
     <uses-feature
         android:name="android.hardware.camera.ar"
         android:required="true" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -18,7 +20,8 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
         <activity android:name=".PreviewPhoto"></activity>
         <activity
             android:name=".CameraPage"
@@ -44,6 +47,8 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/paths" />
         </provider>
+        <uses-library android:name="org.apache.http.legacy" android:required="false" />
+
     </application>
 
 </manifest>
