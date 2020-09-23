@@ -46,7 +46,6 @@ public class PreviewPhoto extends AppCompatActivity {
         Intent intent = getIntent();
         //get the message of the intent
         fileName = intent.getStringExtra(CameraPage.fileNameMsg);
-
         File imgFile = new  File(fileName);
         if(imgFile.exists()){
 
@@ -59,7 +58,9 @@ public class PreviewPhoto extends AppCompatActivity {
         };
         String url = "http://ec2-18-223-170-40.us-east-2.compute.amazonaws.com:8080/upload";
 
-        Log.e("face shape", faceShapeDetect(url, fileName));
+        Log.d("face shape", faceShapeDetect(url, imgFile));
+        Log.d("face shape", fileName);
+
     }
 
     private View.OnClickListener shareOnClickListener = new View.OnClickListener() {
@@ -91,7 +92,8 @@ public class PreviewPhoto extends AppCompatActivity {
             }
         }
     }
-    public  String faceShapeDetect(String url, String fileName) {
+    public  String faceShapeDetect(String url, File file) {
+
             try {
                 HttpClient httpclient = new DefaultHttpClient();
                 HttpPost httppost = new HttpPost(url);
@@ -99,7 +101,7 @@ public class PreviewPhoto extends AppCompatActivity {
 
                 MultipartEntityBuilder builder = MultipartEntityBuilder.create();
                 builder.addBinaryBody(
-                        "content", new File(fileName), ContentType.APPLICATION_OCTET_STREAM, fileName);
+                        "content", file, ContentType.MULTIPART_FORM_DATA, fileName);
                 HttpEntity multipart = builder.build();
 
                 httppost.setEntity(multipart);
