@@ -53,11 +53,10 @@ public class RecommendationPage extends AppCompatActivity {
     private void uploadFaceshape(String faceshape) {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        String userID = currentUser.getUid();
 
         if (currentUser != null) {
             faceShapeRef = FirebaseDatabase.getInstance().getReference("FaceShape");
-
+            String userID = currentUser.getUid();
             try {
                 JSONObject data = new JSONObject(faceshape);
                 FaceShape faceShape = new FaceShape(data.getString("shape"), data.getString("jawlines"));
