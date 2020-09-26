@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -30,6 +31,15 @@ import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.ar.sceneform.rendering.Renderable;
 import com.google.ar.sceneform.rendering.Texture;
 import com.google.ar.sceneform.ux.AugmentedFaceNode;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -174,6 +184,43 @@ public class CameraPage extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void faceShapeDetect(View view1) {
+        final String filename = generateFilename();
+        ArSceneView view = customArFragment.getArSceneView();
+
+        // Create a bitmap the size of the scene view.
+        final Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(),
+                Bitmap.Config.ARGB_8888);
+
+        // Create a handler thread to offload the processing of the image.
+        final HandlerThread handlerThread = new HandlerThread("PixelCopier");
+        handlerThread.start();
+        // Make the request to copy.
+        PixelCopy.request(view, bitmap, (copyResult) -> {
+            if (copyResult == PixelCopy.SUCCESS) {
+                try {
+                    saveBitmapToDisk(bitmap, filename);
+                } catch (IOException e) {
+                    Toast toast = Toast.makeText(this, e.toString(),
+                            Toast.LENGTH_LONG);
+                    toast.show();
+                    return;
+                }
+
+                //To preview the photo via an intent
+                Intent recomendationPage = new Intent(this, RecommendationPage.class);
+                // to put msg into intent
+                recomendationPage.putExtra(fileNameMsg, filename);
+                startActivity(recomendationPage);
+
+            } else {
+                Toast toast = Toast.makeText(this,
+                        "Failed to copyPixels: " + copyResult, Toast.LENGTH_LONG);
+                toast.show();
+            }
+            handlerThread.quitSafely();
+        }, new Handler(handlerThread.getLooper()));
+    }
 
     public void takePicture(View view1) {
         final String filename = generateFilename();
@@ -205,11 +252,11 @@ public class CameraPage extends AppCompatActivity {
                     Uri photoURI = FileProvider.getUriForFile(this,
                             this.getPackageName() + ".ar.codelab.name.provider",
                             photoFile);
+
                     Intent intent = new Intent(Intent.ACTION_VIEW, photoURI);
                     intent.setDataAndType(photoURI, "image/*");
                     intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                     startActivity(intent);
-
                 });
                 snackbar.show();
 
@@ -252,7 +299,6 @@ public class CameraPage extends AppCompatActivity {
             //Log.e("Hello", "Hello world")
         }
     }
-
 
     //This code no longer need
 //    public void viewFolderImg(View v) {

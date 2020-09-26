@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "159054957458",
+    "firebase_url": "https://arfashion-4fa5f.firebaseio.com",
+    "project_id": "arfashion-4fa5f",
+    "storage_bucket": "arfashion-4fa5f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:159054957458:android:7d01858c8e3b7903d6cf4b",
+        "android_client_info": {
+          "package_name": "com.example.twoscreenapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "159054957458-gqd0m279co5h25gnk08vsptd2o7icb19.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxfes97-liEpVV92m0h3K5sVqlokrxxiU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "159054957458-gqd0m279co5h25gnk08vsptd2o7icb19.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

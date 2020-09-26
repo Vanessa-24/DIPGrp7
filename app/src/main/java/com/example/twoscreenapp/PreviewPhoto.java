@@ -13,6 +13,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -26,13 +32,16 @@ import java.io.File;
 import java.io.FileInputStream;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.util.EntityUtils;
-
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class PreviewPhoto extends AppCompatActivity {
 
-    Button sharebtn;
-    Bitmap myBitmap;
-    String fileName;
+    private Button sharebtn;
+    private Bitmap myBitmap;
+    private String fileName;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,21 +55,20 @@ public class PreviewPhoto extends AppCompatActivity {
         Intent intent = getIntent();
         //get the message of the intent
         fileName = intent.getStringExtra(CameraPage.fileNameMsg);
-        File imgFile = new  File(fileName);
-        if(imgFile.exists()){
-
+        File imgFile = new File(fileName);
+        if (imgFile.exists()) {
             myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
 
             ImageView myImage = findViewById(R.id.previewPhoto);
             //Place the image
             myImage.setImageBitmap(myBitmap);
+        }
+        ;
 
-        };
-        String url = "http://ec2-18-223-170-40.us-east-2.compute.amazonaws.com:8080/upload";
-
-        Log.d("face shape", faceShapeDetect(url, imgFile));
-        Log.d("face shape", fileName);
-
+//        String url = "http://ec2-18-223-170-40.us-east-2.compute.amazonaws.com:8080/upload";
+//        String result = faceShapeDetect(url, imgFile);
+//        Log.d("face shape", result);
+//        uploadFaceshape(result);
     }
 
     private View.OnClickListener shareOnClickListener = new View.OnClickListener() {
@@ -92,30 +100,48 @@ public class PreviewPhoto extends AppCompatActivity {
             }
         }
     }
-    public  String faceShapeDetect(String url, File file) {
 
-            try {
-                HttpClient httpclient = new DefaultHttpClient();
-                HttpPost httppost = new HttpPost(url);
+//    public  String faceShapeDetect(String url, File file) {
+//
+//            try {
+//                HttpClient httpclient = new DefaultHttpClient();
+//                HttpPost httppost = new HttpPost(url);
+//
+//                MultipartEntityBuilder builder = MultipartEntityBuilder.create();
+//                builder.addBinaryBody(
+//                        "content", file, ContentType.MULTIPART_FORM_DATA, fileName);
+//                HttpEntity multipart = builder.build();
+//
+//                httppost.setEntity(multipart);
+//                HttpResponse response = httpclient.execute(httppost);
+//
+//
+//                HttpEntity entity = response.getEntity();
+//                String responseString = EntityUtils.toString(entity, "UTF-8");
+//                return responseString;
+//
+//            } catch (Exception e) {
+//                // show error
+//                Log.e("face shape err", e + "");
+//            }
+//            return "";
+//    }
 
-
-                MultipartEntityBuilder builder = MultipartEntityBuilder.create();
-                builder.addBinaryBody(
-                        "content", file, ContentType.MULTIPART_FORM_DATA, fileName);
-                HttpEntity multipart = builder.build();
-
-                httppost.setEntity(multipart);
-                HttpResponse response = httpclient.execute(httppost);
-
-
-                HttpEntity entity = response.getEntity();
-                String responseString = EntityUtils.toString(entity, "UTF-8");
-                return responseString;
-
-            } catch (Exception e) {
-                // show error
-                Log.e("face shape err", e + "");
-            }
-            return "";
-    }
+//    private void uploadFaceshape(String faceshape) {
+//        FirebaseUser currentUser = mAuth.getCurrentUser();
+//        String userID = currentUser.getUid();
+//        if (currentUser != null) {
+//            faceShapeRef = FirebaseDatabase.getInstance().getReference("FaceShape");
+//
+//            try {
+//                JSONObject data = new JSONObject(faceshape);
+//                FaceShape faceShape = new FaceShape(data.getString("shape"), data.getString("jawlines"));
+//                faceShapeRef.child(userID).setValue(faceShape);
+//                Toast.makeText(PreviewPhoto.this, "Save face shape to clould successfully", Toast.LENGTH_SHORT).show();
+//            } catch (JSONException e) {
+////                e.printStackTrace();
+//                Log.e("Upload data", "Failed" + e.getMessage());
+//            }
+//        }
+//    }
 }

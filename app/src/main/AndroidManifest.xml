@@ -4,7 +4,6 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
 
-
     <uses-feature
         android:name="android.hardware.camera.ar"
         android:required="true" />
@@ -22,7 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".PreviewPhoto"></activity>
+        <activity android:name=".RecommendationPage"></activity>
+        <activity android:name=".PreviewPhoto" />
         <activity
             android:name=".CameraPage"
             android:parentActivityName=".MainActivity" />
@@ -47,8 +47,10 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/paths" />
         </provider>
-        <uses-library android:name="org.apache.http.legacy" android:required="false" />
 
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
     </application>
 
 </manifest>
