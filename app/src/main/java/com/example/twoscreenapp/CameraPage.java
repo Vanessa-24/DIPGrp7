@@ -184,6 +184,7 @@ public class CameraPage extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //same as take picture func (just jump to different page - recommendation page)
     public void faceShapeDetect(View view1) {
         final String filename = generateFilename();
         ArSceneView view = customArFragment.getArSceneView();

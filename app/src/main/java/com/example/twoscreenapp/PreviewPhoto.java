@@ -63,12 +63,6 @@ public class PreviewPhoto extends AppCompatActivity {
             //Place the image
             myImage.setImageBitmap(myBitmap);
         }
-        ;
-
-//        String url = "http://ec2-18-223-170-40.us-east-2.compute.amazonaws.com:8080/upload";
-//        String result = faceShapeDetect(url, imgFile);
-//        Log.d("face shape", result);
-//        uploadFaceshape(result);
     }
 
     private View.OnClickListener shareOnClickListener = new View.OnClickListener() {
