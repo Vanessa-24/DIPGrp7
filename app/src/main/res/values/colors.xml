@@ -6,5 +6,7 @@
     <color name="colorlight">#80FFFFFF</color>
     <color name="colordefault">#CCFFFFFF</color>
     <color name="colorpressed">#F2FFFFFF</color>
+    <color name="purple">#6C0093</color>
+    <color name="purple_light">#8F75B1</color>
 
 </resources>
