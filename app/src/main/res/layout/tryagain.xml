@@ -8,7 +8,7 @@
     android:background="#ADD8E6">
 
     <ImageButton
-        android:id="@+id/imageButton6"
+        android:id="@+id/backButton3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
