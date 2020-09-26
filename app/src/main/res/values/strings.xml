@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TwoScreenApp</string>
+    <string name="sign_up"><u>SIGN UP</u></string>
 </resources>
