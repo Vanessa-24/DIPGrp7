@@ -2,6 +2,9 @@ package com.example.twoscreenapp;
 
 public class FaceShape {
     private String faceShape, jawlines;
+    public static boolean gotFaceShapeInfo = false;
+    // to get the response from the rec page and the string of the res file of the object
+    public static String publicFaceShape, publicSetResDir;
 
     public FaceShape(String faceShape, String jawlines) {
         this.faceShape = faceShape;
