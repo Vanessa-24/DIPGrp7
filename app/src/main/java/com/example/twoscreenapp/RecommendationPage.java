@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +48,7 @@ public class RecommendationPage extends AppCompatActivity {
 //        result = faceShapeDetect(URL, fileName);
 
         faceShapeRes = findViewById(R.id.msg2);
+
         new AsyncTaskRunner().execute(URL, fileName);
     }
 
@@ -83,6 +85,8 @@ public class RecommendationPage extends AppCompatActivity {
 
             HttpEntity entity = response.getEntity();
             String responseString = EntityUtils.toString(entity, "UTF-8");
+            // below the getresultstring is to get the response and pass the data to elsewhere
+            getResultString(responseString);
             return responseString;
 
         } catch (Exception e) {
@@ -122,5 +126,45 @@ public class RecommendationPage extends AppCompatActivity {
                     "Extracting ...");
         }
 
+    }
+
+    public void getResultString(String text){
+        boolean yesno = true;
+        // {"squared", "round", "triangle", "diamond", "rectangular", "oblong"});
+        if(text.contains("squared")){
+            FaceShape.publicFaceShape = "squared";
+            // then can change the the res raw obj file dir name here, to make it less messy over at the camera page.
+            // not sure can or not, as the directory not so easy to set it into variable ???
+        }
+        else if(text.contains("round")){
+            FaceShape.publicFaceShape = "round";
+        }
+        else if(text.contains("triangle")){
+            FaceShape.publicFaceShape = "triangle";
+        }
+        else if(text.contains("diamond")){
+            FaceShape.publicFaceShape = "diamond";
+        }
+        else if(text.contains("rectangular")){
+            FaceShape.publicFaceShape = "rectangular";
+        }
+        else if(text.contains("oblong")){
+            FaceShape.publicFaceShape = "oblong";
+        }
+        else {
+            FaceShape.publicFaceShape = "error is it??!?";
+            yesno = false;
+        }
+
+        if (yesno){
+            FaceShape.gotFaceShapeInfo = true;
+
+        }
+    }
+
+    public void viewRec(View view){
+        Intent intents = new Intent(this, CameraPage.class);
+        // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intents);
     }
 }

@@ -7,6 +7,7 @@ import androidx.core.content.FileProvider;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -53,8 +54,10 @@ import java.util.Iterator;
 public class CameraPage extends AppCompatActivity {
     public static final String fileNameMsg = "PhotoTaken";
 
+
     private ModelRenderable modelRenderable;
     private ModelRenderable modelRenderable1;
+
     private Texture texture;
     private boolean isAdded = false;
     private boolean trigger1 = false;
@@ -82,17 +85,52 @@ public class CameraPage extends AppCompatActivity {
 
         customArFragment = (CustomArFragment) getSupportFragmentManager().findFragmentById(R.id.arFragment);
 
-        //Load models
-        //R.raw.fox_face will go to res/raw/fox_face
-        // to render the 3d object. load 3d content into sceneform
-        ModelRenderable.builder()
-                .setSource(this, R.raw.aviators2)
-                .build()
-                .thenAccept(renderable -> {
-                    modelRenderable = renderable;
-                    modelRenderable.setShadowCaster(false);
-                    modelRenderable.setShadowReceiver(false);
-                });
+        if (FaceShape.gotFaceShapeInfo == false){
+            FaceShape.publicFaceShape = "others";
+        }
+
+        if(FaceShape.publicFaceShape.equals("oblong")){
+
+            // publicSetResDir = "R.raw.aviators2";
+            // Resources res = publicSetResDir;
+            //Load models
+            //R.raw.fox_face will go to res/raw/fox_face
+            // to render the 3d object. load 3d content into sceneform
+            ModelRenderable.builder()
+                    .setSource(this, R.raw.aviators2)
+                    .build()
+                    .thenAccept(renderable -> {
+                        modelRenderable = renderable;
+                        modelRenderable.setShadowCaster(false);
+                        modelRenderable.setShadowReceiver(false);
+                    });
+
+        }
+        else if(FaceShape.publicFaceShape.equals("squared")){
+            // load model if...
+            ModelRenderable.builder()
+                    .setSource(this, R.raw.redsunglasses)
+                    .build()
+                    .thenAccept(renderable -> {
+                        modelRenderable = renderable;
+                        modelRenderable.setShadowCaster(false);
+                        modelRenderable.setShadowReceiver(false);
+                    });
+        }
+
+        else {
+            // if doesn't fit any, maybe just use 1 default obj maybe...
+            // and load model
+            ModelRenderable.builder()
+                    .setSource(this, R.raw.fox_face1)
+                    .build()
+                    .thenAccept(renderable -> {
+                        modelRenderable = renderable;
+                        modelRenderable.setShadowCaster(false);
+                        modelRenderable.setShadowReceiver(false);
+                    });
+        }
+
         ModelRenderable.builder()
                 .setSource(this, R.raw.cap2)
                 .build()
@@ -221,6 +259,7 @@ public class CameraPage extends AppCompatActivity {
             }
             handlerThread.quitSafely();
         }, new Handler(handlerThread.getLooper()));
+
     }
 
     public void takePicture(View view1) {

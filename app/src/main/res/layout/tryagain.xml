@@ -19,7 +19,7 @@
         app:srcCompat="@drawable/backbutton" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/errorImg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -30,19 +30,22 @@
         app:layout_constraintVertical_bias="0.499"
         app:srcCompat="@drawable/error" />
 
-    <TextView
-        android:id="@+id/textView2"
+    <Button
+        android:id="@+id/tryagainbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:background="#00000000"
         android:fontFamily="@font/nunitolight"
         android:text="Try again"
         android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="#FDFDFD"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toBottomOf="@+id/errorImg" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
