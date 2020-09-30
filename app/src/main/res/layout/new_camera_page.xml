@@ -29,7 +29,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.934"
-        app:srcCompat="@drawable/ic_happy" />
+        app:srcCompat="@drawable/ic_sunglasses" />
 
     <ImageButton
         android:id="@+id/imageButton3"
