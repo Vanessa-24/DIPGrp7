@@ -57,7 +57,6 @@ import java.util.Iterator;
 public class CameraPage extends AppCompatActivity {
     public static final String fileNameMsg = "PhotoTaken";
 
-
     private ModelRenderable modelRenderable;
     private ModelRenderable modelRenderable1;
 
@@ -67,8 +66,9 @@ public class CameraPage extends AppCompatActivity {
     private boolean trigger2 = false;
     private CustomArFragment customArFragment;
     private ImageView imageView;
-
-    private BottomSheetBehavior mBottomSheetBehavior;
+//    private View bottomSheet, product;
+//
+//    private BottomSheetBehavior mBottomSheetBehavior;
 
     private Button hat, glass;
     private ImageView greybox;
@@ -83,18 +83,39 @@ public class CameraPage extends AppCompatActivity {
         // Bottom 2 line of code needed to allow the sharing of the image to work
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
+//
+//        bottomSheet = findViewById(R.id.productBottomSheet);
+//        mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
+//        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
 
-        View bottomSheet = findViewById(R.id.productBottomSheet);
-        mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
+//        mBottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+//            @Override
+//            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+//                // React to state change
+//                Log.e("onStateChanged", "onStateChanged:" + newState);
+//                if (newState == BottomSheetBehavior.STATE_EXPANDED) {
+//                    // Hide your state here.
+//                }
+//            }
+//
+//            @Override
+//            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+//                // React to dragging events
+//                Log.e("onSlide", "onSlide");
+//            }
+//        });
 
-        ImageButton buttonExpand = findViewById(R.id.productsBtn);
 
-        buttonExpand.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-            }
-        });
+//        ImageButton buttonExpand = findViewById(R.id.productsBtn);
+//
+//        buttonExpand.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+//            }
+//        });
+
+//        product = findViewById(R.id.productBottomSheet);
 
         hat = findViewById(R.id.button);
         glass = findViewById(R.id.button3);
@@ -133,9 +154,7 @@ public class CameraPage extends AppCompatActivity {
                         modelRenderable.setShadowCaster(false);
                         modelRenderable.setShadowReceiver(false);
                     });
-        }
-
-        else {
+        } else {
             // if doesn't fit any, maybe just use 1 default obj maybe...
             // and load model
             ModelRenderable.builder()
@@ -238,6 +257,10 @@ public class CameraPage extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
+//    public void toggleProduct(View view){
+//        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+//    }
 
     //same as take picture func (just jump to different page - recommendation page)
     public void faceShapeDetect(View view1) {
