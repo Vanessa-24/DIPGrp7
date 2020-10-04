@@ -20,10 +20,13 @@ import android.view.PixelCopy;
 import android.view.View;
 
 import android.widget.Button;
+import android.view.View;
 
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.ar.core.AugmentedFace;
 import com.google.ar.core.Frame;
@@ -65,6 +68,8 @@ public class CameraPage extends AppCompatActivity {
     private CustomArFragment customArFragment;
     private ImageView imageView;
 
+    private BottomSheetBehavior mBottomSheetBehavior;
+
     private Button hat, glass;
     private ImageView greybox;
     private boolean visible = false;
@@ -78,6 +83,30 @@ public class CameraPage extends AppCompatActivity {
         // Bottom 2 line of code needed to allow the sharing of the image to work
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
+
+        View bottomSheet = findViewById(R.id.productBottomSheet);
+        mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
+
+        ImageButton buttonExpand = findViewById(R.id.productsBtn);
+
+        buttonExpand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            }
+        });
+
+
+//        //Modal Bottom sheet where the product catalogue is triggered
+//        ImageButton OpenBottomSheet = findViewById(R.id.productsBtn);
+//        OpenBottomSheet.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v)
+//            {
+//                BottomSheetDialog bottomSheet = new BottomSheetDialog();
+//                bottomSheet.show(getSupportFragmentManager(), "ModalBottomSheet");
+//            }
+//        });
 
         hat = findViewById(R.id.button);
         glass = findViewById(R.id.button3);
