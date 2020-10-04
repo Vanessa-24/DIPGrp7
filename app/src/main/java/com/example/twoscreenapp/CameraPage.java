@@ -66,9 +66,9 @@ public class CameraPage extends AppCompatActivity {
     private boolean trigger2 = false;
     private CustomArFragment customArFragment;
     private ImageView imageView;
-    private View bottomSheet, product;
-
-    private BottomSheetBehavior mBottomSheetBehavior;
+//    private View bottomSheet, product;
+//
+//    private BottomSheetBehavior mBottomSheetBehavior;
 
     private Button hat, glass;
     private ImageView greybox;
@@ -83,10 +83,10 @@ public class CameraPage extends AppCompatActivity {
         // Bottom 2 line of code needed to allow the sharing of the image to work
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
-
-        bottomSheet = findViewById(R.id.productBottomSheet);
-        mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
-        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+//
+//        bottomSheet = findViewById(R.id.productBottomSheet);
+//        mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
+//        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
 
 //        mBottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
 //            @Override
@@ -115,7 +115,7 @@ public class CameraPage extends AppCompatActivity {
 //            }
 //        });
 
-        product = findViewById(R.id.productBottomSheet);
+//        product = findViewById(R.id.productBottomSheet);
 
 
 //        //Modal Bottom sheet where the product catalogue is triggered
@@ -166,9 +166,7 @@ public class CameraPage extends AppCompatActivity {
                         modelRenderable.setShadowCaster(false);
                         modelRenderable.setShadowReceiver(false);
                     });
-        }
-
-        else {
+        } else {
             // if doesn't fit any, maybe just use 1 default obj maybe...
             // and load model
             ModelRenderable.builder()
@@ -272,9 +270,9 @@ public class CameraPage extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void toggleProduct(View view){
-        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-    }
+//    public void toggleProduct(View view){
+//        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+//    }
 
     //same as take picture func (just jump to different page - recommendation page)
     public void faceShapeDetect(View view1) {
