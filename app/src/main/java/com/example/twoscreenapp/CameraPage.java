@@ -96,18 +96,6 @@ public class CameraPage extends AppCompatActivity {
             }
         });
 
-
-//        //Modal Bottom sheet where the product catalogue is triggered
-//        ImageButton OpenBottomSheet = findViewById(R.id.productsBtn);
-//        OpenBottomSheet.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v)
-//            {
-//                BottomSheetDialog bottomSheet = new BottomSheetDialog();
-//                bottomSheet.show(getSupportFragmentManager(), "ModalBottomSheet");
-//            }
-//        });
-
         hat = findViewById(R.id.button);
         glass = findViewById(R.id.button3);
         greybox = findViewById(R.id.imageView);
