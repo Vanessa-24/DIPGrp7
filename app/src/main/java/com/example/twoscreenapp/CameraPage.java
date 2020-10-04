@@ -20,10 +20,13 @@ import android.view.PixelCopy;
 import android.view.View;
 
 import android.widget.Button;
+import android.view.View;
 
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.ar.core.AugmentedFace;
 import com.google.ar.core.Frame;
@@ -54,7 +57,6 @@ import java.util.Iterator;
 public class CameraPage extends AppCompatActivity {
     public static final String fileNameMsg = "PhotoTaken";
 
-
     private ModelRenderable modelRenderable;
     private ModelRenderable modelRenderable1;
 
@@ -64,6 +66,9 @@ public class CameraPage extends AppCompatActivity {
     private boolean trigger2 = false;
     private CustomArFragment customArFragment;
     private ImageView imageView;
+    private View bottomSheet, product;
+
+    private BottomSheetBehavior mBottomSheetBehavior;
 
     private Button hat, glass;
     private ImageView greybox;
@@ -78,6 +83,51 @@ public class CameraPage extends AppCompatActivity {
         // Bottom 2 line of code needed to allow the sharing of the image to work
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
+
+        bottomSheet = findViewById(R.id.productBottomSheet);
+        mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
+        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+
+//        mBottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+//            @Override
+//            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+//                // React to state change
+//                Log.e("onStateChanged", "onStateChanged:" + newState);
+//                if (newState == BottomSheetBehavior.STATE_EXPANDED) {
+//                    // Hide your state here.
+//                }
+//            }
+//
+//            @Override
+//            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+//                // React to dragging events
+//                Log.e("onSlide", "onSlide");
+//            }
+//        });
+
+
+//        ImageButton buttonExpand = findViewById(R.id.productsBtn);
+//
+//        buttonExpand.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+//            }
+//        });
+
+        product = findViewById(R.id.productBottomSheet);
+
+
+//        //Modal Bottom sheet where the product catalogue is triggered
+//        ImageButton OpenBottomSheet = findViewById(R.id.productsBtn);
+//        OpenBottomSheet.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v)
+//            {
+//                BottomSheetDialog bottomSheet = new BottomSheetDialog();
+//                bottomSheet.show(getSupportFragmentManager(), "ModalBottomSheet");
+//            }
+//        });
 
         hat = findViewById(R.id.button);
         glass = findViewById(R.id.button3);
@@ -220,6 +270,10 @@ public class CameraPage extends AppCompatActivity {
     public void back(View view){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+    }
+
+    public void toggleProduct(View view){
+        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
     }
 
     //same as take picture func (just jump to different page - recommendation page)
