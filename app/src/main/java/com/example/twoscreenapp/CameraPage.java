@@ -154,11 +154,25 @@ public class CameraPage extends AppCompatActivity {
                         modelRenderable.setShadowCaster(false);
                         modelRenderable.setShadowReceiver(false);
                     });
-        } else {
+        }
+
+        else if(FaceShape.publicFaceShape.equals("rectangle")){
+            // load model if...
+            ModelRenderable.builder()
+                    .setSource(this, R.raw.spec_rectanglefacea)
+                    .build()
+                    .thenAccept(renderable -> {
+                        modelRenderable = renderable;
+                        modelRenderable.setShadowCaster(false);
+                        modelRenderable.setShadowReceiver(false);
+                    });
+        }
+
+        else {
             // if doesn't fit any, maybe just use 1 default obj maybe...
             // and load model
             ModelRenderable.builder()
-                    .setSource(this, R.raw.fox_face1)
+                    .setSource(this, R.raw.spec_rectanglefacea)
                     .build()
                     .thenAccept(renderable -> {
                         modelRenderable = renderable;
