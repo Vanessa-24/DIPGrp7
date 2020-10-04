@@ -1,0 +1,67 @@
+{
+  animations: [
+    {
+      clips: [
+        {
+          name: 'Take 001',
+          runtime_name: 'spec_triangleface_a',
+        },
+      ],
+      path: 'sampledata/spec_triangleface_a.fbx',
+    },
+  ],
+  materials: [
+    {
+      name: 'phongE1',
+      parameters: [
+        {
+          baseColor: [
+            0.5,
+            1,
+            1,
+            1,
+          ],
+        },
+        {
+          baseColorMap: null,
+        },
+        {
+          normalMap: null,
+        },
+        {
+          interpolatedColor: null,
+        },
+        {
+          metallic: 0,
+        },
+        {
+          metallicMap: null,
+        },
+        {
+          roughness: 1,
+        },
+        {
+          roughnessMap: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/fbx_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+      'BoneIndices',
+      'BoneWeights',
+    ],
+    collision: {},
+    file: 'sampledata/spec_triangleface_a.fbx',
+    name: 'spec_triangleface_a',
+    recenter: 'root',
+  },
+  version: '0.54:2',
+}

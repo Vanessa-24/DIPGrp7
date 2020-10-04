@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">159054957458-gqd0m279co5h25gnk08vsptd2o7icb19.apps.googleusercontent.com</string>
+    <string name="firebase_database_url" translatable="false">https://arfashion-4fa5f.firebaseio.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">159054957458</string>
+    <string name="google_api_key" translatable="false">AIzaSyAxfes97-liEpVV92m0h3K5sVqlokrxxiU</string>
+    <string name="google_app_id" translatable="false">1:159054957458:android:7d01858c8e3b7903d6cf4b</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAxfes97-liEpVV92m0h3K5sVqlokrxxiU</string>
+    <string name="google_storage_bucket" translatable="false">arfashion-4fa5f.appspot.com</string>
+    <string name="project_id" translatable="false">arfashion-4fa5f</string>
+</resources>
