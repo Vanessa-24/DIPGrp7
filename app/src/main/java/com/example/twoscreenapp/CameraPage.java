@@ -74,7 +74,7 @@ public class CameraPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_camera_page);
+        setContentView(R.layout.new_camera_page);
         // Bottom 2 line of code needed to allow the sharing of the image to work
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
