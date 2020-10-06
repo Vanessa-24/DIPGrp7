@@ -34,7 +34,7 @@ public class RecommendationPage extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference faceShapeRef;
     private TextView faceShapeRes;
-    private static final String URL = "http://ec2-18-223-170-40.us-east-2.compute.amazonaws.com:8080/upload";
+    private static final String URL = "http://ec2-3-137-162-216.us-east-2.compute.amazonaws.com:8080/upload";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +72,8 @@ public class RecommendationPage extends AppCompatActivity {
 
     public String faceShapeDetect(String url, String fileName) {
         try {
+//            Log.d("success", "sending request");
+
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost(url);
 
@@ -87,6 +89,7 @@ public class RecommendationPage extends AppCompatActivity {
             String responseString = EntityUtils.toString(entity, "UTF-8");
             // below the getresultstring is to get the response and pass the data to elsewhere
             getResultString(responseString);
+//            Log.d("success", "get result");
             return responseString;
 
         } catch (Exception e) {
