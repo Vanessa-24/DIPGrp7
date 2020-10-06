@@ -117,18 +117,6 @@ public class CameraPage extends AppCompatActivity {
 
 //        product = findViewById(R.id.productBottomSheet);
 
-
-//        //Modal Bottom sheet where the product catalogue is triggered
-//        ImageButton OpenBottomSheet = findViewById(R.id.productsBtn);
-//        OpenBottomSheet.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v)
-//            {
-//                BottomSheetDialog bottomSheet = new BottomSheetDialog();
-//                bottomSheet.show(getSupportFragmentManager(), "ModalBottomSheet");
-//            }
-//        });
-
         hat = findViewById(R.id.button);
         glass = findViewById(R.id.button3);
         greybox = findViewById(R.id.imageView);
@@ -166,11 +154,25 @@ public class CameraPage extends AppCompatActivity {
                         modelRenderable.setShadowCaster(false);
                         modelRenderable.setShadowReceiver(false);
                     });
-        } else {
+        }
+
+        else if(FaceShape.publicFaceShape.equals("rectangle")){
+            // load model if...
+            ModelRenderable.builder()
+                    .setSource(this, R.raw.spec_rectanglefacea)
+                    .build()
+                    .thenAccept(renderable -> {
+                        modelRenderable = renderable;
+                        modelRenderable.setShadowCaster(false);
+                        modelRenderable.setShadowReceiver(false);
+                    });
+        }
+
+        else {
             // if doesn't fit any, maybe just use 1 default obj maybe...
             // and load model
             ModelRenderable.builder()
-                    .setSource(this, R.raw.fox_face1)
+                    .setSource(this, R.raw.spec_rectanglefacea)
                     .build()
                     .thenAccept(renderable -> {
                         modelRenderable = renderable;
