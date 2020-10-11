@@ -5,7 +5,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -16,14 +19,17 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.StrictMode;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.PixelCopy;
 import android.view.View;
+
 
 import android.widget.Button;
 import android.view.View;
 
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -251,6 +257,34 @@ public class CameraPage extends AppCompatActivity {
         if (!trigger1) {
             //augmentedFaceNodes[0].setFaceMeshTexture(null);
             augmentedFaceNodes[0].setFaceRegionsRenderable(null);
+            try {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(CameraPage.this);
+                View layout= null;
+                LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                layout = inflater.inflate(R.layout.rating, null);
+                final RatingBar ratingBar = (RatingBar)layout.findViewById(R.id.ratingBar);
+                builder.setTitle("Rate Us");
+                builder.setMessage("Thank you for rating us , it will help us to provide you the best service .");
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Float value = ratingBar.getRating();
+                        Toast.makeText(CameraPage.this,"Rating is : "+value,Toast.LENGTH_LONG).show();
+                    }
+                });
+                builder.setNegativeButton("No,Thanks", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.setCancelable(false);
+                builder.setView(layout);
+                builder.show();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } else {
             augmentedFaceNodes[0].setFaceRegionsRenderable(modelRenderable);
             //augmentedFaceNodes[0].setFaceMeshTexture(texture);
