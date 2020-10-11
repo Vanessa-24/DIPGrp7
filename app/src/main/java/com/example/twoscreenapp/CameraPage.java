@@ -278,42 +278,8 @@ public class CameraPage extends AppCompatActivity {
 
     //same as take picture func (just jump to different page - recommendation page)
     public void faceShapeDetect(View view1) {
-        final String filename = generateFilename();
-        ArSceneView view = customArFragment.getArSceneView();
-
-        // Create a bitmap the size of the scene view.
-        final Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(),
-                Bitmap.Config.ARGB_8888);
-
-        // Create a handler thread to offload the processing of the image.
-        final HandlerThread handlerThread = new HandlerThread("PixelCopier");
-        handlerThread.start();
-        // Make the request to copy.
-        PixelCopy.request(view, bitmap, (copyResult) -> {
-            if (copyResult == PixelCopy.SUCCESS) {
-                try {
-                    saveBitmapToDisk(bitmap, filename);
-                } catch (IOException e) {
-                    Toast toast = Toast.makeText(this, e.toString(),
-                            Toast.LENGTH_LONG);
-                    toast.show();
-                    return;
-                }
-
-                //To preview the photo via an intent
-                Intent recomendationPage = new Intent(this, RecommendationPage.class);
-                // to put msg into intent
-                recomendationPage.putExtra(fileNameMsg, filename);
-                startActivity(recomendationPage);
-
-            } else {
-                Toast toast = Toast.makeText(this,
-                        "Failed to copyPixels: " + copyResult, Toast.LENGTH_LONG);
-                toast.show();
-            }
-            handlerThread.quitSafely();
-        }, new Handler(handlerThread.getLooper()));
-
+        Intent intent = new Intent(this, ScanPage.class);
+        startActivity(intent);
     }
 
     public void takePicture(View view1) {
