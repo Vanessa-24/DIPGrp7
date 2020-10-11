@@ -186,6 +186,7 @@ public class CameraPage extends AppCompatActivity {
 
     //same as take picture func (just jump to different page - recommendation page)
     public void faceShapeDetect(View view1) {
+
         final String filename = generateFilename();
         ArSceneView view = customArFragment.getArSceneView();
 
@@ -221,7 +222,13 @@ public class CameraPage extends AppCompatActivity {
             }
             handlerThread.quitSafely();
         }, new Handler(handlerThread.getLooper()));
+
+
+            Intent intent = new Intent(this, ScanPage.class);
+            startActivity(intent);
+
     }
+
 
     public void takePicture(View view1) {
         final String filename = generateFilename();
@@ -275,12 +282,14 @@ public class CameraPage extends AppCompatActivity {
             handlerThread.quitSafely();
         }, new Handler(handlerThread.getLooper()));
     }
+
     private String generateFilename() {
         String date =
                 new SimpleDateFormat("yyyyMMddHHmmss", java.util.Locale.getDefault()).format(new Date());
         return Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_PICTURES) + File.separator + "Sceneform/" + date + "_screenshot.jpg";
     }
+
     private void saveBitmapToDisk(Bitmap bitmap, String filename) throws IOException {
 
         File out = new File(filename);
