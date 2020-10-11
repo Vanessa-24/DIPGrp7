@@ -265,7 +265,7 @@ public class CameraPage extends AppCompatActivity {
                 layout = inflater.inflate(R.layout.rating, null);
                 final RatingBar ratingBar = (RatingBar)layout.findViewById(R.id.ratingBar);
                 builder.setTitle("Rate Us");
-                builder.setMessage("Thank you for rating us , it will help us to provide you the best service .");
+                builder.setMessage("Thank you for rating us , IT IS DAMN HARD TO USE GIT AND GITHUB .");
                 builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Float value = ratingBar.getRating();
