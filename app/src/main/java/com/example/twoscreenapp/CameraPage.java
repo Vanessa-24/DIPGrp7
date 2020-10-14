@@ -3,7 +3,12 @@ package com.example.twoscreenapp;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.FileProvider;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -23,9 +28,7 @@ import android.view.LayoutInflater;
 import android.view.PixelCopy;
 import android.view.View;
 
-
 import android.widget.Button;
-import android.view.View;
 
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -34,6 +37,7 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.tabs.TabLayout;
 import com.google.ar.core.AugmentedFace;
 import com.google.ar.core.Frame;
 import com.google.ar.sceneform.ArSceneView;
@@ -60,6 +64,9 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CameraPage extends AppCompatActivity {
     public static final String fileNameMsg = "PhotoTaken";
 
@@ -72,8 +79,18 @@ public class CameraPage extends AppCompatActivity {
     private boolean trigger2 = false;
     private CustomArFragment customArFragment;
     private ImageView imageView;
+
+    private CoordinatorLayout mbottomSheet;
+    private BottomSheetBehavior mBottomSheetBehavior;
+
+    private ViewPager viewPager;
+    private TabLayout tabLayout;
+
+    private ProductsFragment productsFragment;
+    private RecommendationsFragment recommendationsFragment;
+    private LikesFragment likesFragment;
+
 //    private View bottomSheet, product;
-//
 //    private BottomSheetBehavior mBottomSheetBehavior;
 
     private Button hat, glass;
@@ -89,37 +106,87 @@ public class CameraPage extends AppCompatActivity {
         // Bottom 2 line of code needed to allow the sharing of the image to work
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
-//
-//        bottomSheet = findViewById(R.id.productBottomSheet);
-//        mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
+
+        mbottomSheet = findViewById(R.id.new_bottom_sheet);
+        mBottomSheetBehavior = BottomSheetBehavior.from(mbottomSheet);
 //        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
 
-//        mBottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+        ImageButton buttonExpand = findViewById(R.id.imageButton2);
+
+
+//      Bottom Sheet Layout
+
+        buttonExpand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            }
+        });
+
+        //      Tabs Layout
+        viewPager = findViewById(R.id.view_pager);
+        tabLayout = findViewById(R.id.tab_layout);
+
+        productsFragment = new ProductsFragment();
+        recommendationsFragment = new RecommendationsFragment();
+        likesFragment = new LikesFragment();
+
+        tabLayout.setupWithViewPager(viewPager);
+
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), 0);
+        viewPagerAdapter.addFragment(productsFragment, "Products");
+        viewPagerAdapter.addFragment(recommendationsFragment, "Recommendations");
+        viewPagerAdapter.addFragment(likesFragment, "Likes");
+        viewPager.setAdapter(viewPagerAdapter);
+
+//        private class ViewPagerAdapter extends FragmentPagerAdapter {
+//
+//            private List<Fragment> fragments = new ArrayList<>();
+//            private List<String> fragmentTitle = new ArrayList<>();
+//
+//            public ViewPagerAdapter(@NonNull FragmentManager fm, int behavior) {
+//                super(fm, behavior);
+//            }
+//
+//            public void addFragment(Fragment fragment, String title) {
+//                fragments.add(fragment);
+//                fragmentTitle.add(title);
+//            }
+//
+//            @NonNull
 //            @Override
-//            public void onStateChanged(@NonNull View bottomSheet, int newState) {
-//                // React to state change
-//                Log.e("onStateChanged", "onStateChanged:" + newState);
-//                if (newState == BottomSheetBehavior.STATE_EXPANDED) {
-//                    // Hide your state here.
-//                }
+//            public Fragment getItem(int position) {
+//                return fragments.get(position);
 //            }
 //
 //            @Override
-//            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-//                // React to dragging events
-//                Log.e("onSlide", "onSlide");
+//            public int getCount() {
+//                return fragments.size();
 //            }
-//        });
-
-
-//        ImageButton buttonExpand = findViewById(R.id.productsBtn);
 //
-//        buttonExpand.setOnClickListener(new View.OnClickListener() {
+//            @Nullable
 //            @Override
-//            public void onClick(View view) {
-//                mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+//            public CharSequence getPageTitle(int position) {
+//                return fragmentTitle.get(position);
 //            }
-//        });
+//        }
+
+////        mBottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+////            @Override
+////            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+////                // React to state change
+////                Log.e("onStateChanged", "onStateChanged:" + newState);
+////                if (newState == BottomSheetBehavior.STATE_EXPANDED) {
+////                    // Hide your state here.
+////                }
+////            }
+////
+////            @Override
+////            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+////                // React to dragging events
+////                Log.e("onSlide", "onSlide");
+////            }
+////        });
 
 //        product = findViewById(R.id.productBottomSheet);
 

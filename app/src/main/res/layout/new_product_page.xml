@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="500dp"
+    android:orientation="vertical"
+    android:id="@+id/new_bottom_sheet"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="0dp">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#b19cd9"
+                app:tabTextAppearance="@style/MyCustomTabText"
+                app:tabTextColor="#ffffff"
+                app:tabSelectedTextColor="#6C0093"
+                app:tabIndicatorColor="#6C0093">
+
+            </com.google.android.material.tabs.TabLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:orientation="vertical"-->
+<!--    android:id="@+id/new_bottom_sheet"-->
+<!--    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"-->
+<!--    app:behavior_hideable="true"-->
+<!--    app:behavior_peekHeight="0dp"-->
+<!--    >-->
+
+<!--    <RelativeLayout-->
+<!--        android:background = "#DDA0DD"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="64dp">-->
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textAppearance="@style/TextAppearance.AppCompat.Headline"-->
+<!--            android:text="Peek Height"-->
+<!--            android:layout_centerInParent="true"/>-->
+
+<!--    </RelativeLayout>-->
+
+<!--    <RelativeLayout-->
+<!--        android:background = "#FFFACD"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="550dp">-->
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textAppearance="@style/TextAppearance.AppCompat.Headline"-->
+<!--            android:text="Bottom Sheet Content"-->
+<!--            android:layout_centerInParent="true"/>-->
+
+<!--    </RelativeLayout>-->
+
+<!--</LinearLayout>-->
+
