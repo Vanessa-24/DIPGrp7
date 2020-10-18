@@ -35,7 +35,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:background="#0000"
-            android:onClick="trigger1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/cameraButton"
             app:layout_constraintHorizontal_bias="0.435"
@@ -43,6 +42,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.953"
             app:srcCompat="@drawable/btn_sunglasses" />
+
+<!--        android:onClick="trigger1"-->
 
         <ImageButton
             android:id="@+id/imageButton3"
@@ -71,6 +72,7 @@
             app:srcCompat="@drawable/ic_circle" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--    <include layout="@layout/product"/>-->
+    <include layout="@layout/new_product_page" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
