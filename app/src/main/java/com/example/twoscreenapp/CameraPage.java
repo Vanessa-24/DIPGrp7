@@ -171,14 +171,14 @@ public class CameraPage extends AppCompatActivity {
 
         productsFragment = new ProductsFragment();
         recommendationsFragment = new RecommendationsFragment();
-        likesFragment = new LikesFragment();
+        //likesFragment = new LikesFragment();
 
         tabLayout.setupWithViewPager(viewPager);
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), 0);
         viewPagerAdapter.addFragment(productsFragment, "Products");
         viewPagerAdapter.addFragment(recommendationsFragment, "Recommendations");
-        viewPagerAdapter.addFragment(likesFragment, "Likes");
+       // viewPagerAdapter.addFragment(likesFragment, "Likes");
         viewPager.setAdapter(viewPagerAdapter);
 
 //        private class ViewPagerAdapter extends FragmentPagerAdapter {
