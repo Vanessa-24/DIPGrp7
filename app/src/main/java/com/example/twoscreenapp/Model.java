@@ -9,20 +9,23 @@ import com.google.ar.sceneform.rendering.ModelRenderable;
 public class Model extends AppCompatActivity {
     private String colour;
     private String shape;
-    private int modelId;
+    private String modelsfb_name;
+    private ModelRenderable modelRenderable;
     /*
         String imageSel= "background"
         imageView1.setBackgroundResource(R.raw.imageSel);
         -->
         int rawId = getResources().getIdentifier(background, "raw", getPackageName());
         imageView1.setBackgroundResource(rawId);
+        getResources().getIdentifier("aviators2", "raw", getPackageName())
 
      */
 
-    public Model(String colour, String shape, String modelfbx_name){
+    public Model(String colour, String shape, String modelsfb_name){
         this.colour = colour;
         this.shape = shape;
-        this.modelId = getResources().getIdentifier(modelfbx_name, "raw", getPackageName());
+        this.modelsfb_name = modelsfb_name;
+
     }
 
     public String getColour(){
@@ -33,8 +36,8 @@ public class Model extends AppCompatActivity {
         return shape;
     }
 
-    public int getModelId(){
-        return modelId;
+    public String getModelsfb_name(){
+        return modelsfb_name;
     }
 
     public void setColour(String colour) {
@@ -43,20 +46,19 @@ public class Model extends AppCompatActivity {
     public void setShape(String shape){
         this.shape = shape;
     }
-    public void setModelId(String modelfbx_name){
-        this.modelId = getResources().getIdentifier(modelfbx_name, "raw", getPackageName());
+    public void setModelsfb_name(String modelsfb_name){
+        this.modelsfb_name = modelsfb_name;
     }
 
-    public void renderModel(Model model) {
-        ModelRenderable modelRenderable;
+    /*public void renderModel() {
         ModelRenderable.builder()
-                .setSource(this, model.getModelId())
+                .setSource(this, getResources().getIdentifier(this.modelsfb_name, "raw", getPackageName()))
                 .build()
                 .thenAccept(renderable -> {
                     modelRenderable = renderable;
                     modelRenderable.setShadowCaster(false);
                     modelRenderable.setShadowReceiver(false);
                 });
-    }
+    }*/
 
 }

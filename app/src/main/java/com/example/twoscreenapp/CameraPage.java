@@ -56,11 +56,14 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
-public class CameraPage extends AppCompatActivity {
+public class CameraPage<oblong> extends AppCompatActivity {
     public static final String fileNameMsg = "PhotoTaken";
 
     private ModelRenderable modelRenderable;
@@ -72,6 +75,32 @@ public class CameraPage extends AppCompatActivity {
     private boolean trigger2 = false;
     private CustomArFragment customArFragment;
     private ImageView imageView;
+
+
+    private Model m1 = new Model("black","round", "aviators2");
+    private Model m2 = new Model("red","cat", "redsunglasses");
+    private Model m3 = new Model("purple","rectangle", "spec_rectanglefacea");
+    private List<Model> oblong=new ArrayList<Model>(){{
+        add(m1);
+    }};
+    private List<Model> squared=new ArrayList<Model>(){{
+        add(m2);
+    }};
+    private List<Model> rectangle=new ArrayList<Model>(){{
+        add(m3);
+    }};
+    private List<Model> others=new ArrayList<Model>(){{
+        add(m3);
+    }};
+
+    private HashMap<String, List<Model>> matching = new HashMap<String, List<Model>>();
+
+    private List<Model> toRender = new ArrayList<Model>();
+
+
+
+
+
 //    private View bottomSheet, product;
 //
 //    private BottomSheetBehavior mBottomSheetBehavior;
@@ -89,6 +118,14 @@ public class CameraPage extends AppCompatActivity {
         // Bottom 2 line of code needed to allow the sharing of the image to work
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
+
+
+        matching.put("oblong",oblong);
+        matching.put("squared",squared);
+        matching.put("rectangle",rectangle);
+        matching.put("others",others);
+
+
 //
 //        bottomSheet = findViewById(R.id.productBottomSheet);
 //        mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
@@ -133,7 +170,20 @@ public class CameraPage extends AppCompatActivity {
             FaceShape.publicFaceShape = "others";
         }
 
-        if(FaceShape.publicFaceShape.equals("oblong")){
+
+        toRender = matching.get(FaceShape.publicFaceShape);
+        for (int i = 0; i < toRender.size(); i++) {
+            ModelRenderable.builder()
+                    .setSource(this, getResources().getIdentifier(toRender.get(i).getModelsfb_name(), "raw", getPackageName()))
+                    .build()
+                    .thenAccept(renderable -> {
+                        modelRenderable = renderable;
+                        modelRenderable.setShadowCaster(false);
+                        modelRenderable.setShadowReceiver(false);
+                    });
+        }
+
+         /*if(FaceShape.publicFaceShape.equals("oblong")){
 
             // publicSetResDir = "R.raw.aviators2";
             // Resources res = publicSetResDir;
@@ -177,6 +227,7 @@ public class CameraPage extends AppCompatActivity {
         else {
             // if doesn't fit any, maybe just use 1 default obj maybe...
             // and load model
+             String name = "spec_rectanglefacea";
             ModelRenderable.builder()
                     .setSource(this, R.raw.spec_rectanglefacea)
                     .build()
@@ -185,7 +236,7 @@ public class CameraPage extends AppCompatActivity {
                         modelRenderable.setShadowCaster(false);
                         modelRenderable.setShadowReceiver(false);
                     });
-        }
+        }*/
 
         ModelRenderable.builder()
                 .setSource(this, R.raw.cap2)
