@@ -23,6 +23,7 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".RecommendationPage"></activity>
         <activity android:name=".PreviewPhoto" />
+        <activity android:name=".ScanPage" />
         <activity
             android:name=".CameraPage"
             android:parentActivityName=".MainActivity" />
