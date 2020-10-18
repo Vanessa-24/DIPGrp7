@@ -245,7 +245,8 @@ public class CameraPage extends AppCompatActivity {
 
         toRender = matching.get(FaceShape.publicFaceShape);
         for (int i = 0; i < toRender.size(); i++) {
-            ModelRenderable.builder()
+           // toRender.get(i).renderModel();
+           ModelRenderable.builder()
                     .setSource(this, getResources().getIdentifier(toRender.get(i).getModelsfb_name(), "raw", getPackageName()))
                     .build()
                     .thenAccept(renderable -> {
@@ -550,6 +551,8 @@ public class CameraPage extends AppCompatActivity {
             //Log.e("Hello", "Hello world")
         }
     }
+
+
 
     //This code no longer need
 //    public void viewFolderImg(View v) {

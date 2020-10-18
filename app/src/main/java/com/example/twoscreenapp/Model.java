@@ -10,6 +10,7 @@ public class Model extends AppCompatActivity {
     private String colour;
     private String shape;
     private String modelsfb_name;
+
     private ModelRenderable modelRenderable;
     /*
         String imageSel= "background"
@@ -52,7 +53,7 @@ public class Model extends AppCompatActivity {
 
     /*public void renderModel() {
         ModelRenderable.builder()
-                .setSource(this, getResources().getIdentifier(this.modelsfb_name, "raw", getPackageName()))
+                .setSource(super.getContext(), getResources().getIdentifier(this.modelsfb_name, "raw", getPackageName()))
                 .build()
                 .thenAccept(renderable -> {
                     modelRenderable = renderable;
