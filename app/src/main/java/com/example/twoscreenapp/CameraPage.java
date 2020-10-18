@@ -116,7 +116,7 @@ public class CameraPage extends AppCompatActivity {
 
     private ProductsFragment productsFragment;
     private RecommendationsFragment recommendationsFragment;
-    private LikesFragment likesFragment;
+   // private LikesFragment likesFragment;
 
 
 //    private View bottomSheet, product;
