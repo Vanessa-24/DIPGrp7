@@ -37,7 +37,7 @@ import org.json.JSONObject;
 
 public class PreviewPhoto extends AppCompatActivity {
 
-    private Button sharebtn;
+    private ImageButton sharebtn, shopbtn;
     private Bitmap myBitmap;
     private String fileName;
 
@@ -46,11 +46,16 @@ public class PreviewPhoto extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_preview_photo);
+        setContentView(R.layout.last_page);
 
         sharebtn = findViewById(R.id.share);
         // Assign the button to the share btn on the xml then set listener
         sharebtn.setOnClickListener(shareOnClickListener);
+
+        shopbtn = findViewById(R.id.shop);
+        // Assign the button to the share btn on the xml then set listener
+        shopbtn.setOnClickListener(shopOnClickListener);
+
 
         Intent intent = getIntent();
         //get the message of the intent
@@ -94,6 +99,23 @@ public class PreviewPhoto extends AppCompatActivity {
             }
         }
     }
+
+    private View.OnClickListener shopOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            shopButtonClicked();
+        }
+    };
+
+    private void shopButtonClicked() {
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        String url;
+        url = "https://world.taobao.com/";
+        i.setData(Uri.parse(url));
+        startActivity(i);
+    }
+
+
 
 //    public  String faceShapeDetect(String url, File file) {
 //

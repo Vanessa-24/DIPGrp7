@@ -122,7 +122,7 @@ public class CameraPage extends AppCompatActivity {
 
     private ProductsFragment productsFragment;
     private RecommendationsFragment recommendationsFragment;
-    private LikesFragment likesFragment;
+   // private LikesFragment likesFragment;
 
 //    private View bottomSheet, product;
 //    private BottomSheetBehavior mBottomSheetBehavior;
@@ -176,14 +176,14 @@ public class CameraPage extends AppCompatActivity {
 
         productsFragment = new ProductsFragment();
         recommendationsFragment = new RecommendationsFragment();
-        likesFragment = new LikesFragment();
+        //likesFragment = new LikesFragment();
 
         tabLayout.setupWithViewPager(viewPager);
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), 0);
         viewPagerAdapter.addFragment(productsFragment, "Products");
         viewPagerAdapter.addFragment(recommendationsFragment, "Recommendations");
-        viewPagerAdapter.addFragment(likesFragment, "Likes");
+       // viewPagerAdapter.addFragment(likesFragment, "Likes");
         viewPager.setAdapter(viewPagerAdapter);
 
 //        private class ViewPagerAdapter extends FragmentPagerAdapter {
@@ -491,6 +491,10 @@ public class CameraPage extends AppCompatActivity {
             handlerThread.quitSafely();
         }, new Handler(handlerThread.getLooper()));
 
+
+        //this will never be called because of my line 481
+//        Intent intent = new Intent(this, ScanPage.class);
+//        startActivity(intent);
     }
 
     public void takePicture(View view1) {
