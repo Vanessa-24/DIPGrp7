@@ -61,52 +61,52 @@ dependencies {
 
 }
 
-sceneform.asset('sampledata/m21.fbx',
+sceneform.asset('sampledata/m31.fbx',
         'default',
-        'sampledata/m21.sfa',
-        'src/main/res/raw/m21')
+        'sampledata/m31.sfa',
+        'src/main/res/raw/m31')
 
-sceneform.asset('sampledata/m22.fbx',
+sceneform.asset('sampledata/m32.fbx',
         'default',
-        'sampledata/m22.sfa',
-        'src/main/res/raw/m22')
+        'sampledata/m32.sfa',
+        'src/main/res/raw/m32')
 
-sceneform.asset('sampledata/m23.fbx',
+sceneform.asset('sampledata/m33.fbx',
         'default',
-        'sampledata/m23.sfa',
-        'src/main/res/raw/m23')
+        'sampledata/m33.sfa',
+        'src/main/res/raw/m33')
 
-sceneform.asset('sampledata/m24.fbx',
+sceneform.asset('sampledata/m34.fbx',
         'default',
-        'sampledata/m24.sfa',
-        'src/main/res/raw/m24')
+        'sampledata/m34.sfa',
+        'src/main/res/raw/m34')
 
-sceneform.asset('sampledata/m25.fbx',
+sceneform.asset('sampledata/m35.fbx',
         'default',
-        'sampledata/m25.sfa',
-        'src/main/res/raw/m25')
+        'sampledata/m35.sfa',
+        'src/main/res/raw/m35')
 
-sceneform.asset('sampledata/m26.fbx',
+sceneform.asset('sampledata/m36.fbx',
         'default',
-        'sampledata/m26.sfa',
-        'src/main/res/raw/m26')
+        'sampledata/m36.sfa',
+        'src/main/res/raw/m36')
 
-sceneform.asset('sampledata/m27.fbx',
+sceneform.asset('sampledata/m37.fbx',
         'default',
-        'sampledata/m27.sfa',
-        'src/main/res/raw/m27')
+        'sampledata/m37.sfa',
+        'src/main/res/raw/m37')
 
-sceneform.asset('sampledata/m28.fbx',
+sceneform.asset('sampledata/m38.fbx',
         'default',
-        'sampledata/m28.sfa',
-        'src/main/res/raw/m28')
+        'sampledata/m38.sfa',
+        'src/main/res/raw/m38')
 
-sceneform.asset('sampledata/m29.fbx',
+sceneform.asset('sampledata/m39.fbx',
         'default',
-        'sampledata/m29.sfa',
-        'src/main/res/raw/m29')
+        'sampledata/m39.sfa',
+        'src/main/res/raw/m39')
 
-sceneform.asset('sampledata/m30.fbx',
+sceneform.asset('sampledata/m40.fbx',
         'default',
-        'sampledata/m30.sfa',
-        'src/main/res/raw/m30')
+        'sampledata/m40.sfa',
+        'src/main/res/raw/m40')
