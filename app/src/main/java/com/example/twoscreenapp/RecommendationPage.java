@@ -211,9 +211,7 @@ public class RecommendationPage extends AppCompatActivity {
 
 
         Log.i("Body", "" + recoModels);
-//        Gson g = new Gson();
-//        TopModels msg = g.fromJson(recoModels, TopModels.class);
-//        Log.i("Body", "" + g.toJson(msg));
+
 
     }
     public void sendUserdata(String userId, String faceShape, Map<String, String> ratings) {
@@ -266,7 +264,14 @@ public class RecommendationPage extends AppCompatActivity {
                 in.close();
 
                 recoModels = responseBody.toString();
+                Gson g = new Gson();
+                TopModels msg = g.fromJson(recoModels, TopModels.class);
 
+                //get all recommend models here
+                //inside msg.getTopModels() is an array of string
+                for (int i = 0; i < msg.getTopModels().length; i ++) {
+                    Log.d("model", msg.getTopModels()[i]);
+                }
                 conn.disconnect();
             } catch (Exception e) {
                 e.printStackTrace();
