@@ -13,8 +13,11 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -27,14 +30,23 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.lang.reflect.Array;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RecommendationPage extends AppCompatActivity {
     private String fileName, result;
     private FirebaseAuth mAuth;
-    private DatabaseReference faceShapeRef;
+    private DatabaseReference databaseReference;
     private TextView faceShapeRes;
-    private static final String URL = "http://ec2-3-137-162-216.us-east-2.compute.amazonaws.com:8080/upload";
+    private static final String faceShape_URL = "http://ec2-3-137-222-9.us-east-2.compute.amazonaws.com:8080/upload";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +61,7 @@ public class RecommendationPage extends AppCompatActivity {
 
         faceShapeRes = findViewById(R.id.msg2);
 
-        new AsyncTaskRunner().execute(URL, fileName);
+        new AsyncTaskRunner().execute(faceShape_URL, fileName);
     }
 
     private void uploadFaceshape(String faceshape) {
@@ -57,12 +69,12 @@ public class RecommendationPage extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
         if (currentUser != null) {
-            faceShapeRef = FirebaseDatabase.getInstance().getReference("FaceShape");
+            databaseReference = FirebaseDatabase.getInstance().getReference();
             String userID = currentUser.getUid();
             try {
                 JSONObject data = new JSONObject(faceshape);
-                FaceShape faceShape = new FaceShape(data.getString("shape"), data.getString("jawlines"));
-                faceShapeRef.child(userID).setValue(faceShape);
+//                FaceShape faceShape = new FaceShape(data.getString("shape"), data.getString("jawlines"));
+                databaseReference.child(userID).child("faceShape").child("face").setValue(data.getString("faceShape"));
                 Toast.makeText(RecommendationPage.this, "Save face shape to clould successfully", Toast.LENGTH_SHORT).show();
             } catch (JSONException e) {
                 Log.e("Upload data", "Failed" + e.getMessage());
@@ -169,5 +181,96 @@ public class RecommendationPage extends AppCompatActivity {
         Intent intents = new Intent(this, CameraPage.class);
         // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intents);
+    }
+
+    public void getRec(View v) {
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        final String[] responseBody = new String[1]; //get the recommendation model here
+
+        if (currentUser != null) {
+            String userID = currentUser.getUid();
+            databaseReference = FirebaseDatabase.getInstance().getReference(userID);
+
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    HashMap<String, Map<String, String>> temp = (HashMap<String, Map<String, String>>) dataSnapshot.getValue();
+//                    temp.getClass();
+                    String faceShape = temp.get("faceShape").get("face");
+
+                    Map<String, String> ratings = temp.get("ratings");
+                    responseBody[0] = sendUserdata(userID, faceShape, ratings);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    System.out.println("The read failed: " + databaseError.getCode());
+                }
+            });
+        }
+
+
+    }
+    public String sendUserdata(String userId, String faceShape, Map<String, String> ratings) {
+        final String[] response = new String[1];
+        Thread thread = new Thread(() -> {
+            try {
+                java.net.URL url = new URL("http://ec2-3-137-222-9.us-east-2.compute.amazonaws.com:8080/reco");
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+                conn.setRequestProperty("Accept","application/json");
+                conn.setDoOutput(true);
+                conn.setDoInput(true);
+
+                JSONObject tempRate = new JSONObject();
+                for (Map.Entry<String, String> entry : ratings.entrySet()) {
+                    tempRate.put(entry.getKey(), entry.getValue());
+                }
+
+                JSONObject jsonParam = new JSONObject();
+
+                jsonParam.put("userId", userId);
+                jsonParam.put("ratings", tempRate);
+                jsonParam.put("faceShape", faceShape);
+
+                Log.i("JSON", jsonParam.toString());
+                DataOutputStream os = new DataOutputStream(conn.getOutputStream());
+                //os.writeBytes(URLEncoder.encode(jsonParam.toString(), "UTF-8"));
+                os.writeBytes(jsonParam.toString());
+
+                os.flush();
+                os.close();
+
+                int responseCode = conn.getResponseCode();
+                InputStream inputStream;
+
+                if (200 <= responseCode && responseCode <= 299) {
+                    inputStream = conn.getInputStream();
+                } else {
+                    inputStream = conn.getErrorStream();
+                }
+                BufferedReader in = new BufferedReader(new InputStreamReader(inputStream));
+
+                StringBuilder responseBody = new StringBuilder(); //response body
+                String currentLine;
+
+                while ((currentLine = in.readLine()) != null)
+                    responseBody.append(currentLine);
+
+                in.close();
+
+                response[0] = responseBody.toString();
+                Log.i("BODY" , response[0]);
+
+                conn.disconnect();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+        thread.start();
+        return response[0];
     }
 }
