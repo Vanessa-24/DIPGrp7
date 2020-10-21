@@ -12,7 +12,7 @@
   ],
   materials: [
     {
-      name: 'lambert1',
+      name: 'lambert3',
       parameters: [
         {
           baseColor: [

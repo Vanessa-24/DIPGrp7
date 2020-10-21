@@ -172,7 +172,7 @@ public class CameraPage extends AppCompatActivity {
             // if doesn't fit any, maybe just use 1 default obj maybe...
             // and load model
             ModelRenderable.builder()
-                    .setSource(this, R.raw.m26)
+                    .setSource(this, R.raw.m27)
                     .build()
                     .thenAccept(renderable -> {
                         modelRenderable = renderable;
