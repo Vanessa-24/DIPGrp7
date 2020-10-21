@@ -61,10 +61,10 @@ dependencies {
 
 }
 
-sceneform.asset('sampledata/m27.fbx',
+sceneform.asset('sampledata/m32.fbx',
         'default',
-        'sampledata/m27.sfa',
-        'src/main/res/raw/m27')
+        'sampledata/m32.sfa',
+        'src/main/res/raw/m32')
 
 
 
