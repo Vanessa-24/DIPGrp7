@@ -211,9 +211,9 @@ public class RecommendationPage extends AppCompatActivity {
 
 
         Log.i("Body", "" + recoModels);
-        Gson g = new Gson();
-        TopModels msg = g.fromJson(recoModels, TopModels.class);
-        Log.i("Body", "" + g.toJson(msg));
+//        Gson g = new Gson();
+//        TopModels msg = g.fromJson(recoModels, TopModels.class);
+//        Log.i("Body", "" + g.toJson(msg));
 
     }
     public void sendUserdata(String userId, String faceShape, Map<String, String> ratings) {
