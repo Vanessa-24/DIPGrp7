@@ -66,13 +66,5 @@ sceneform.asset('sampledata/m13.fbx',
         'sampledata/m13.sfa',
         'src/main/res/raw/m13')
 
-sceneform.asset('sampledata/m14.fbx',
-        'default',
-        'sampledata/m14.sfa',
-        'src/main/res/raw/m14')
 
-sceneform.asset('sampledata/m19.fbx',
-        'default',
-        'sampledata/m19.sfa',
-        'src/main/res/raw/m19')
 
