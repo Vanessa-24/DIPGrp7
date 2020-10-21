@@ -70,6 +70,11 @@ public class PreviewPhoto extends AppCompatActivity {
         }
     }
 
+    public void back(View view){
+        Intent intent = new Intent(this, CameraPage.class);
+        startActivity(intent);
+    }
+
     private View.OnClickListener shareOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {

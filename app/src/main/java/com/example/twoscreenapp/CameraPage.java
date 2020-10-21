@@ -154,7 +154,9 @@ public class CameraPage extends AppCompatActivity {
 //        mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
 
         mbottomSheet = findViewById(R.id.new_bottom_sheet);
+        mbottomSheet.setVisibility(View.GONE);
         mBottomSheetBehavior = BottomSheetBehavior.from(mbottomSheet);
+
 
 //        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
 
@@ -166,6 +168,7 @@ public class CameraPage extends AppCompatActivity {
         buttonExpand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mbottomSheet.setVisibility(View.VISIBLE);
                 mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
             }
         });
