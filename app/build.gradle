@@ -61,7 +61,52 @@ dependencies {
 
 }
 
-sceneform.asset('sampledata/spec_rectanglefaceA.fbx',
+sceneform.asset('sampledata/m1.fbx',
         'default',
-        'sampledata/spec_rectanglefaceA.sfa',
-        'src/main/res/raw/spec_rectanglefacea')
+        'sampledata/m1.sfa',
+        'src/main/res/raw/m1')
+
+sceneform.asset('sampledata/m2.fbx',
+        'default',
+        'sampledata/m2.sfa',
+        'src/main/res/raw/m2')
+
+sceneform.asset('sampledata/m3.fbx',
+        'default',
+        'sampledata/m3.sfa',
+        'src/main/res/raw/m3')
+
+sceneform.asset('sampledata/m4.fbx',
+        'default',
+        'sampledata/m4.sfa',
+        'src/main/res/raw/m4')
+
+sceneform.asset('sampledata/m5.fbx',
+        'default',
+        'sampledata/m5.sfa',
+        'src/main/res/raw/m5')
+
+sceneform.asset('sampledata/m6.fbx',
+        'default',
+        'sampledata/m6.sfa',
+        'src/main/res/raw/m6')
+
+sceneform.asset('sampledata/m7.fbx',
+        'default',
+        'sampledata/m7.sfa',
+        'src/main/res/raw/m7')
+
+sceneform.asset('sampledata/m8.fbx',
+        'default',
+        'sampledata/m8.sfa',
+        'src/main/res/raw/m8')
+
+sceneform.asset('sampledata/m9.fbx',
+        'default',
+        'sampledata/m9.sfa',
+        'src/main/res/raw/m9')
+
+sceneform.asset('sampledata/m10.fbx',
+        'default',
+        'sampledata/m10.sfa',
+        'src/main/res/raw/m10')
