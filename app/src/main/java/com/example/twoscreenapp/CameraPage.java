@@ -251,7 +251,7 @@ public class CameraPage extends AppCompatActivity {
         toRender = matching.get(FaceShape.publicFaceShape);
         for (int i = 0; i < toRender.size(); i++) {
            // toRender.get(i).renderModel();
-            currentModelName = toRender.get(i).getModelsfb_name();
+            currentModelName = toRender.get(i).getModelsfb_name(); // right now hard code
            ModelRenderable.builder()
                     .setSource(this, getResources().getIdentifier(toRender.get(i).getModelsfb_name(), "raw", getPackageName()))
                     .build()

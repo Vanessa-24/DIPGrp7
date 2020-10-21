@@ -18,6 +18,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -35,7 +37,6 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
@@ -47,7 +48,7 @@ public class RecommendationPage extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private TextView faceShapeRes;
     private static final String faceShape_URL = "http://ec2-3-137-222-9.us-east-2.compute.amazonaws.com:8080/upload";
-
+    private String recoModels;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +62,7 @@ public class RecommendationPage extends AppCompatActivity {
 
         faceShapeRes = findViewById(R.id.msg2);
 
-        new AsyncTaskRunner().execute(faceShape_URL, fileName);
+//        new AsyncTaskRunner().execute(faceShape_URL, fileName);
     }
 
     private void uploadFaceshape(String faceshape) {
@@ -183,11 +184,9 @@ public class RecommendationPage extends AppCompatActivity {
         startActivity(intents);
     }
 
-    public void getRec(View v) {
+    public void getRec(View v) throws JSONException {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        final String[] responseBody = new String[1]; //get the recommendation model here
-
         if (currentUser != null) {
             String userID = currentUser.getUid();
             databaseReference = FirebaseDatabase.getInstance().getReference(userID);
@@ -200,7 +199,7 @@ public class RecommendationPage extends AppCompatActivity {
                     String faceShape = temp.get("faceShape").get("face");
 
                     Map<String, String> ratings = temp.get("ratings");
-                    responseBody[0] = sendUserdata(userID, faceShape, ratings);
+                    sendUserdata(userID, faceShape, ratings);
                 }
 
                 @Override
@@ -211,8 +210,13 @@ public class RecommendationPage extends AppCompatActivity {
         }
 
 
+        Log.i("Body", "" + recoModels);
+        Gson g = new Gson();
+        TopModels msg = g.fromJson(recoModels, TopModels.class);
+        Log.i("Body", "" + g.toJson(msg));
+
     }
-    public String sendUserdata(String userId, String faceShape, Map<String, String> ratings) {
+    public void sendUserdata(String userId, String faceShape, Map<String, String> ratings) {
         final String[] response = new String[1];
         Thread thread = new Thread(() -> {
             try {
@@ -261,8 +265,7 @@ public class RecommendationPage extends AppCompatActivity {
 
                 in.close();
 
-                response[0] = responseBody.toString();
-                Log.i("BODY" , response[0]);
+                recoModels = responseBody.toString();
 
                 conn.disconnect();
             } catch (Exception e) {
@@ -271,6 +274,5 @@ public class RecommendationPage extends AppCompatActivity {
         });
 
         thread.start();
-        return response[0];
     }
 }
