@@ -6,148 +6,155 @@
     android:layout_height="match_parent"
     tools:context=".ProductsFragment">
 
-    <!-- Update blank fragment layout -->
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#FFFACD">
 
-        <ImageButton
-            android:id="@+id/glasses1Btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:background="#0000"
-            android:onClick="trigger1"
-            android:src="@drawable/ic_sunglasses1"
-            app:layout_constraintEnd_toStartOf="@+id/glasses2Btn"
-            app:layout_constraintHorizontal_bias="0.4"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <!-- Update blank fragment layout -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:padding="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <ImageButton
-            android:id="@+id/glasses2Btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:layout_marginEnd="45dp"
-            android:background="#0000"
-            android:src="@drawable/ic_sunglasses3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <ImageButton
+                android:id="@+id/glasses1Btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
-        <ImageButton
-            android:id="@+id/glasses3Btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="45dp"
-            android:layout_marginTop="60dp"
-            android:background="#0000"
-            android:src="@drawable/ic_sunglasses4"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/glasses1Btn" />
+                android:background="#0000"
+                android:onClick="trigger1"
+                android:src="@drawable/ic_sunglasses1"
+                app:layout_constraintEnd_toStartOf="@+id/glasses2Btn"
+                app:layout_constraintHorizontal_bias="0.4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/glasses4Btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:background="#0000"
-            android:src="@drawable/ic_group_6"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.634"
-            app:layout_constraintStart_toEndOf="@+id/glasses3Btn"
-            app:layout_constraintTop_toBottomOf="@+id/glasses2Btn" />
+            <ImageButton
+                android:id="@+id/glasses2Btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="35dp"
+                android:background="#0000"
+                android:src="@drawable/ic_sunglasses3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/glasses5Btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="45dp"
-            android:layout_marginTop="60dp"
-            android:background="#0000"
-            android:src="@drawable/ic_sunglasses1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/glasses3Btn" />
+            <ImageButton
+                android:id="@+id/glasses3Btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="60dp"
+                android:background="#0000"
+                android:src="@drawable/ic_sunglasses4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/glasses1Btn" />
 
-        <ImageButton
-            android:id="@+id/glasses6Btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:layout_marginEnd="45dp"
-            android:background="#0000"
-            android:src="@drawable/ic_sunglasses3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/glasses4Btn" />
+            <ImageButton
+                android:id="@+id/glasses4Btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+                android:background="#0000"
+                android:src="@drawable/ic_group_6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.554"
+                app:layout_constraintStart_toEndOf="@+id/glasses3Btn"
+                app:layout_constraintTop_toBottomOf="@+id/glasses2Btn" />
 
-        <ImageButton
-            android:id="@+id/glasses7Btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="45dp"
-            android:layout_marginTop="60dp"
-            android:background="#0000"
-            android:src="@drawable/ic_sunglasses4"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/glasses5Btn" />
+            <ImageButton
+                android:id="@+id/glasses5Btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="60dp"
+                android:background="#0000"
+                android:src="@drawable/ic_sunglasses1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/glasses3Btn" />
 
-        <ImageButton
-            android:id="@+id/glasses8Btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:layout_marginEnd="45dp"
-            android:background="#0000"
-            android:src="@drawable/ic_sunglasses3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/glasses6Btn" />
+            <ImageButton
+                android:id="@+id/glasses6Btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="56dp"
+                android:layout_marginEnd="35dp"
+                android:background="#0000"
+                android:src="@drawable/ic_sunglasses3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/glasses5Btn"
+                app:layout_constraintTop_toBottomOf="@+id/glasses4Btn" />
 
-        <ImageButton
-            android:id="@+id/glasses9Btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="45dp"
-            android:layout_marginTop="60dp"
-            android:background="#0000"
-            android:src="@drawable/ic_group_6"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/glasses7Btn" />
+            <ImageButton
+                android:id="@+id/glasses7Btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="60dp"
+                android:background="#0000"
+                android:src="@drawable/ic_sunglasses4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/glasses5Btn" />
 
-        <ImageButton
-            android:id="@+id/glasses10Btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:layout_marginEnd="45dp"
-            android:background="#0000"
-            android:src="@drawable/ic_sunglasses1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/glasses8Btn" />
+            <ImageButton
+                android:id="@+id/glasses8Btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+                android:layout_marginEnd="35dp"
+                android:background="#0000"
+                android:src="@drawable/ic_sunglasses3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/glasses6Btn" />
 
-        <ImageButton
-            android:id="@+id/glasses11Btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="45dp"
-            android:layout_marginTop="60dp"
-            android:background="#0000"
-            android:src="@drawable/ic_sunglasses3"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/glasses9Btn" />
+            <ImageButton
+                android:id="@+id/glasses9Btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="60dp"
+                android:background="#0000"
+                android:src="@drawable/ic_group_6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/glasses7Btn" />
 
-        <ImageButton
-            android:id="@+id/glasses12Btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:layout_marginEnd="45dp"
-            android:background="#0000"
-            android:src="@drawable/ic_sunglasses4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/glasses10Btn" />
+            <ImageButton
+                android:id="@+id/glasses10Btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+                android:layout_marginEnd="35dp"
+                android:background="#0000"
+                android:src="@drawable/ic_sunglasses1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/glasses8Btn" />
 
+            <ImageButton
+                android:id="@+id/glasses11Btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="60dp"
+                android:background="#0000"
+                android:src="@drawable/ic_sunglasses3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/glasses9Btn" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageButton
+                android:id="@+id/glasses12Btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+                android:layout_marginEnd="35dp"
+                android:background="#0000"
+                android:src="@drawable/ic_sunglasses4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/glasses10Btn" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </FrameLayout>
