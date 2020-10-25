@@ -43,12 +43,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RecommendationPage extends AppCompatActivity {
+    public static String[] pub_result;
     private String fileName, result;
     private FirebaseAuth mAuth;
     private DatabaseReference databaseReference;
     private TextView faceShapeRes;
     private static final String faceShape_URL = "http://ec2-3-137-222-9.us-east-2.compute.amazonaws.com:8080/upload";
     private String recoModels;
+
+    private Model m1 = new Model("black","round", "aviators2");
+    private Model m2 = new Model("red","cat", "redsunglasses");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +67,7 @@ public class RecommendationPage extends AppCompatActivity {
 
         faceShapeRes = findViewById(R.id.msg2);
 
-//        new AsyncTaskRunner().execute(faceShape_URL, fileName);
+       new AsyncTaskRunner().execute(faceShape_URL, fileName);
     }
 
     private void uploadFaceshape(String faceshape) {
@@ -185,6 +190,12 @@ public class RecommendationPage extends AppCompatActivity {
     }
 
     public void getRec(View v) throws JSONException {
+        pub_result = new String[4];
+        pub_result[0] = "m1";
+        pub_result[1] = "m2";
+        pub_result[2] = "m3";
+        pub_result[3] = "m4";
+
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
@@ -199,7 +210,7 @@ public class RecommendationPage extends AppCompatActivity {
                     String faceShape = temp.get("faceShape").get("face");
 
                     Map<String, String> ratings = temp.get("ratings");
-                    sendUserdata(userID, faceShape, ratings);
+                    pub_result = sendUserdata(userID, faceShape, ratings);
                 }
 
                 @Override
@@ -207,6 +218,11 @@ public class RecommendationPage extends AppCompatActivity {
                     System.out.println("The read failed: " + databaseError.getCode());
                 }
             });
+            /*Bundle b = new Bundle();
+            b.putStringArray("result", pub_result);*/
+            Intent intents = new Intent(this, CameraPage.class);
+            /*intents.putExtras(b);*/
+            startActivity(intents);
         }
 
 
@@ -214,8 +230,9 @@ public class RecommendationPage extends AppCompatActivity {
 
 
     }
-    public void sendUserdata(String userId, String faceShape, Map<String, String> ratings) {
+    public String[] sendUserdata(String userId, String faceShape, Map<String, String> ratings) {
         final String[] response = new String[1];
+        final String[] result = {"m1","m2","m3","m4"};
         Thread thread = new Thread(() -> {
             try {
                 java.net.URL url = new URL("http://ec2-3-137-222-9.us-east-2.compute.amazonaws.com:8080/reco");
@@ -279,5 +296,6 @@ public class RecommendationPage extends AppCompatActivity {
         });
 
         thread.start();
+        return result;
     }
 }

@@ -114,6 +114,11 @@ public class CameraPage extends AppCompatActivity {
     private HashMap<String, List<Model>> matching = new HashMap<String, List<Model>>();
     private List<Model> toRender = new ArrayList<Model>();
 
+    private ImageButton imagebtn1;
+    private ImageButton imagebtn2;
+    private ImageButton imagebtn3;
+    private ImageButton imagebtn4;
+
     private CoordinatorLayout mbottomSheet;
     private BottomSheetBehavior mBottomSheetBehavior;
 
@@ -147,6 +152,10 @@ public class CameraPage extends AppCompatActivity {
         matching.put("squared",squared);
         matching.put("rectangle",rectangle);
         matching.put("others",others);
+
+
+
+
 
 
 //
@@ -249,6 +258,9 @@ public class CameraPage extends AppCompatActivity {
         if (FaceShape.gotFaceShapeInfo == false){
             FaceShape.publicFaceShape = "others";
         }
+
+
+
 
 
         toRender = matching.get(FaceShape.publicFaceShape);
@@ -382,6 +394,45 @@ public class CameraPage extends AppCompatActivity {
             hat.setVisibility(View.GONE);
             glass.setVisibility(View.GONE);
             greybox.setVisibility(View.GONE);
+        }
+    }
+
+    public void TestReco(View v) {
+        if(RecommendationPage.pub_result != null) {
+            imagebtn1 = findViewById(R.id.Model1);
+            imagebtn2 = findViewById(R.id.Model2);
+            imagebtn3 = findViewById(R.id.Model3);
+            imagebtn4 = findViewById(R.id.Model4);
+            for (int i =0; i < RecommendationPage.pub_result.length;i++) {
+                imagebtn1.setImageResource(R.drawable.ic_sunglasses1);
+                imagebtn2.setImageResource(R.drawable.ic_sunglasses3);
+                imagebtn3.setImageResource(R.drawable.ic_sunglasses4);
+                imagebtn4.setImageResource(R.drawable.btn_sunglasses);
+            }
+        }
+        else{
+            Log.d("pub_result", "Is length 0");
+        }
+        //imagebtn2 = findViewById(R.id.Model2);
+        trigger2 = !trigger2;
+        //Model m2 = new Model("red","cat", "redsunglasses");
+        ModelRenderable.builder()
+                .setSource(this, getResources().getIdentifier(m2.getModelsfb_name(), "raw", getPackageName()))
+                .build()
+                .thenAccept(renderable -> {
+                    modelRenderable = renderable;
+                    modelRenderable.setShadowCaster(false);
+                    modelRenderable.setShadowReceiver(false);
+                });
+        //imagebtn2.setImageResource(R.drawable.ic_sunglasses3);
+
+        if (!trigger2) {
+            //augmentedFaceNodes[0].setFaceMeshTexture(null);
+            augmentedFaceNodes[0].setFaceRegionsRenderable(null);
+
+        } else {
+            augmentedFaceNodes[0].setFaceRegionsRenderable(modelRenderable);
+            //augmentedFaceNodes[0].setFaceMeshTexture(texture);
         }
     }
 
