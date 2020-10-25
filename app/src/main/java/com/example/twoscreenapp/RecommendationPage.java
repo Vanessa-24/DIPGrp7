@@ -224,10 +224,10 @@ public class RecommendationPage extends AppCompatActivity {
                 }
             });
             /*Bundle b = new Bundle();
-            b.putStringArray("result", pub_result);*/
+            b.putStringArray("result", pub_result);*//*
             Intent intents = new Intent(this, CameraPage.class);
-            /*intents.putExtras(b);*/
-            startActivity(intents);
+            *//*intents.putExtras(b);*//*
+            startActivity(intents);*/
         }
 
 
@@ -298,9 +298,12 @@ public class RecommendationPage extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+
         });
 
         thread.start();
+
         return result;
     }
 }
