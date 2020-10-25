@@ -201,7 +201,7 @@ public class RecommendationPage extends AppCompatActivity {
             String userID = currentUser.getUid();
             databaseReference = FirebaseDatabase.getInstance().getReference(userID);
 
-            databaseReference.addValueEventListener(new ValueEventListener() {
+            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     HashMap<String, Map<String, String>> temp = (HashMap<String, Map<String, String>>) dataSnapshot.getValue();
@@ -286,6 +286,8 @@ public class RecommendationPage extends AppCompatActivity {
                 in.close();
 
                 recoModels = responseBody.toString();
+                Log.d("model", recoModels);
+
                 Gson g = new Gson();
                 TopModels msg = g.fromJson(recoModels, TopModels.class);
 
@@ -293,11 +295,15 @@ public class RecommendationPage extends AppCompatActivity {
 
                 //get all recommend models here
                 //inside msg.getTopModels() is an array of string
-                for (int i = 0; i < msg.getTopModels().length; i ++) {
+                for (int i = 0; i <= msg.getTopModels().length; i ++) {
                     if (i <= 4) //becz we hardcode 4 models now
+                    {
                         pub_result[i] = msg.getTopModels()[i];
+                    }
                     Log.d("model", msg.getTopModels()[i]);
                 }
+                Log.d("modelssssss", msg.getTopModels()[0] + msg.getTopModels()[1] + msg.getTopModels()[2] + msg.getTopModels()[3] + msg.getTopModels()[4]);
+
 
                 getResult = true;
 

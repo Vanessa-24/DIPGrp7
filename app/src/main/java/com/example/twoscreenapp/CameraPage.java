@@ -436,7 +436,7 @@ public class CameraPage extends AppCompatActivity {
                     if (rating != 0)
                         saveRating(currentModelName, rating);
 
-                    Log.d("rating", ratings);
+                    Log.d("rating", "" + rating);
                     //result.setText(ratings);
                     Toast.makeText(CameraPage.this, "Rating is : " + ratings, Toast.LENGTH_LONG).show();
                 }
