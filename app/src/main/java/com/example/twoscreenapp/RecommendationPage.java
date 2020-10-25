@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,6 +55,8 @@ public class RecommendationPage extends AppCompatActivity {
     private Model m1 = new Model("black","round", "aviators2");
     private Model m2 = new Model("red","cat", "redsunglasses");
 
+    private ImageView imageView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +69,7 @@ public class RecommendationPage extends AppCompatActivity {
 //        result = faceShapeDetect(URL, fileName);
 
         faceShapeRes = findViewById(R.id.msg2);
+        imageView = findViewById(R.id.verifiedImg);
 
        new AsyncTaskRunner().execute(faceShape_URL, fileName);
     }
@@ -81,7 +85,7 @@ public class RecommendationPage extends AppCompatActivity {
                 JSONObject data = new JSONObject(faceshape);
 //                FaceShape faceShape = new FaceShape(data.getString("shape"), data.getString("jawlines"));
                 databaseReference.child(userID).child("faceShape").child("face").setValue(data.getString("faceShape"));
-                Toast.makeText(RecommendationPage.this, "Save face shape to clould successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RecommendationPage.this, "Save face shape to cloud successfully", Toast.LENGTH_SHORT).show();
             } catch (JSONException e) {
                 Log.e("Upload data", "Failed" + e.getMessage());
             }
@@ -151,6 +155,7 @@ public class RecommendationPage extends AppCompatActivity {
 
     public void getResultString(String text){
         boolean yesno = true;
+        imageView.setVisibility(View.VISIBLE);
         // {"squared", "round", "triangle", "diamond", "rectangular", "oblong"});
         if(text.contains("squared")){
             FaceShape.publicFaceShape = "squared";
