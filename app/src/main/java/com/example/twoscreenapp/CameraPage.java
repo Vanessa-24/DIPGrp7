@@ -1,21 +1,14 @@
 package com.example.twoscreenapp;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.FileProvider;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -47,19 +40,11 @@ import com.google.ar.sceneform.rendering.Texture;
 import com.google.ar.sceneform.ux.AugmentedFaceNode;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -70,13 +55,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
-import java.util.ArrayList;
-import java.util.List;
-import org.json.JSONException;
-import org.json.JSONObject;
+import java.util.Map;
 
 public class CameraPage extends AppCompatActivity {
 
@@ -84,6 +65,8 @@ public class CameraPage extends AppCompatActivity {
     private String currentModelName = "";
     private FirebaseAuth mAuth;
     private DatabaseReference ref;
+    private DatabaseReference databaseReference;
+
 
     private ModelRenderable modelRenderable;
     private ModelRenderable modelRenderable1;
@@ -428,46 +411,36 @@ public class CameraPage extends AppCompatActivity {
         }
     }
 
-    public void trigger1(View v) {
-        trigger1 = !trigger1;
-        if (!trigger1) {
-            //augmentedFaceNodes[0].setFaceMeshTexture(null);
-            augmentedFaceNodes[0].setFaceRegionsRenderable(null);
-            try {
+    public void helperRateModel(String currentModelName) {
+        try {
+            AlertDialog.Builder builder = new AlertDialog.Builder(CameraPage.this);
+            View layout = null;
+            LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            layout = inflater.inflate(R.layout.rating, null);
+            final RatingBar ratingBar = (RatingBar) layout.findViewById(R.id.ratingBar);
+            builder.setTitle("Rate Us");
+            builder.setMessage("Please rate this model so that we can provide better recommendation for you.");
+            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    Float value = ratingBar.getRating();
+                    saveRating(currentModelName, value);
+                    Toast.makeText(CameraPage.this, "Rating is : " + value, Toast.LENGTH_LONG).show();
+                }
+            });
+            builder.setNegativeButton("No,Thanks", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            builder.setCancelable(false);
+            builder.setView(layout);
+            builder.show();
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(CameraPage.this);
-                View layout= null;
-                LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                layout = inflater.inflate(R.layout.rating, null);
-                final RatingBar ratingBar = (RatingBar)layout.findViewById(R.id.ratingBar);
-                builder.setTitle("Rate Us");
-                builder.setMessage("Please rate this model so that we can provide better recommendation for you.");
-                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        Float value = ratingBar.getRating();
-                        saveRating(currentModelName, value);
-                        Toast.makeText(CameraPage.this,"Rating is : "+value,Toast.LENGTH_LONG).show();
-                    }
-                });
-                builder.setNegativeButton("No,Thanks", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                builder.setCancelable(false);
-                builder.setView(layout);
-                builder.show();
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            augmentedFaceNodes[0].setFaceRegionsRenderable(modelRenderable);
-            //augmentedFaceNodes[0].setFaceMeshTexture(texture);
+        } catch ( Exception e ) {
+            e.printStackTrace();
         }
     }
-
     private void saveRating(String modelName, Float value) {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -477,6 +450,42 @@ public class CameraPage extends AppCompatActivity {
             String userID = currentUser.getUid();
             ref.child(userID).child("ratings").child(modelName).setValue(value);
             Toast.makeText(this, "Save rating to clould successfully", Toast.LENGTH_SHORT).show();
+        }
+    }
+    private void rateModel(String modelName) {
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            String userID = currentUser.getUid();
+            databaseReference = FirebaseDatabase.getInstance().getReference(userID);
+
+            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    HashMap<String, Map<String, String>> temp = (HashMap<String, Map<String, String>>) dataSnapshot.getValue();
+                    Map<String, String> ratings = temp.get("ratings");
+                    if (! ratings.containsKey(modelName)) {
+                        helperRateModel(modelName);
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    System.out.println("The read failed: " + databaseError.getCode());
+                }
+            });
+        }
+
+    }
+    public void trigger1(View v) {
+        trigger1 = !trigger1;
+        if (!trigger1) {
+            //augmentedFaceNodes[0].setFaceMeshTexture(null);
+            augmentedFaceNodes[0].setFaceRegionsRenderable(null);
+            rateModel("currentModel"); //if not have this model rating, then rate
+        } else {
+            augmentedFaceNodes[0].setFaceRegionsRenderable(modelRenderable);
+            //augmentedFaceNodes[0].setFaceMeshTexture(texture);
         }
     }
 
