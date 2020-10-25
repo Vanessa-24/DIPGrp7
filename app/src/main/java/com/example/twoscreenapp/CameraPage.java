@@ -78,6 +78,10 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
+import com.example.twoscreenapp.DialogCallback;
+import com.example.twoscreenapp.GlobalUtils;
+
 public class CameraPage extends AppCompatActivity {
 
     public static final String fileNameMsg = "PhotoTaken";
@@ -428,12 +432,24 @@ public class CameraPage extends AppCompatActivity {
         }
     }
 
+
+
+
+
     public void trigger1(View v) {
         trigger1 = !trigger1;
         if (!trigger1) {
             //augmentedFaceNodes[0].setFaceMeshTexture(null);
             augmentedFaceNodes[0].setFaceRegionsRenderable(null);
-            try {
+            GlobalUtils.showDialog(this, new DialogCallback() {
+                @Override
+                public void callback(String ratings) {
+                    Log.d("rating", ratings);
+                    //result.setText(ratings);
+                    Toast.makeText(CameraPage.this,"Rating is : "+ratings,Toast.LENGTH_LONG).show();
+                }
+            });
+           /* try {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(CameraPage.this);
                 View layout= null;
@@ -461,7 +477,7 @@ public class CameraPage extends AppCompatActivity {
 
             } catch (Exception e) {
                 e.printStackTrace();
-            }
+            }*/
         } else {
             augmentedFaceNodes[0].setFaceRegionsRenderable(modelRenderable);
             //augmentedFaceNodes[0].setFaceMeshTexture(texture);
