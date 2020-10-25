@@ -291,11 +291,11 @@ public class RecommendationPage extends AppCompatActivity {
                 Gson g = new Gson();
                 TopModels msg = g.fromJson(recoModels, TopModels.class);
 
-                pub_result = new String[4];
+                pub_result = new String[5];
 
                 //get all recommend models here
                 //inside msg.getTopModels() is an array of string
-                for (int i = 0; i <= msg.getTopModels().length; i ++) {
+                for (int i = 0; i < msg.getTopModels().length; i ++) {
                     if (i <= 4) //becz we hardcode 4 models now
                     {
                         pub_result[i] = msg.getTopModels()[i];

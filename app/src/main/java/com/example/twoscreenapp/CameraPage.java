@@ -106,6 +106,10 @@ public class CameraPage extends AppCompatActivity {
     private ImageButton imagebtn2;
     private ImageButton imagebtn3;
     private ImageButton imagebtn4;
+    private ImageButton imagebtn5;
+    private String recoId;
+    private boolean first_reco = true;
+    private String prevId;
 
     private CoordinatorLayout mbottomSheet;
     private BottomSheetBehavior mBottomSheetBehavior;
@@ -377,23 +381,111 @@ public class CameraPage extends AppCompatActivity {
     }
 
     public void TestReco(View v) {
-        if(RecommendationPage.pub_result != null) {
+        if(RecommendationPage.pub_result != null && first_reco) {
             imagebtn1 = findViewById(R.id.Model1);
             imagebtn2 = findViewById(R.id.Model2);
             imagebtn3 = findViewById(R.id.Model3);
             imagebtn4 = findViewById(R.id.Model4);
+            imagebtn5 = findViewById(R.id.Model5);
             for (int i =0; i < RecommendationPage.pub_result.length;i++) {
-                imagebtn1.setImageResource(R.drawable.ic_sunglasses1);
-                imagebtn2.setImageResource(R.drawable.ic_sunglasses3);
-                imagebtn3.setImageResource(R.drawable.ic_sunglasses4);
-                imagebtn4.setImageResource(R.drawable.btn_sunglasses);
+                imagebtn1.setImageResource(getResources().getIdentifier(RecommendationPage.pub_result[0], "drawable", getPackageName()));
+                imagebtn2.setImageResource(getResources().getIdentifier(RecommendationPage.pub_result[1], "drawable", getPackageName()));
+                imagebtn3.setImageResource(getResources().getIdentifier(RecommendationPage.pub_result[2], "drawable", getPackageName()));
+                imagebtn4.setImageResource(getResources().getIdentifier(RecommendationPage.pub_result[3], "drawable", getPackageName()));
+                imagebtn5.setImageResource(getResources().getIdentifier(RecommendationPage.pub_result[4], "drawable", getPackageName()));
                 Log.d("insideTestReco", RecommendationPage.pub_result[i]);
             }
+            first_reco = false;
         }
         else{
             Log.d("pub_result", "Is length 0");
         }
-        //imagebtn2 = findViewById(R.id.Model2);
+        recoId = getResources().getResourceEntryName(v.getId());
+        if(prevId!= null) {
+            if(recoId.equals(prevId)) {
+                trigger2 = !trigger2;
+            }
+            else{
+                Log.d("diff", "Set as true");
+                trigger2 = true;
+            }
+        }else{
+            prevId = recoId;
+        }
+        recoId = getResources().getResourceEntryName(v.getId());
+        Log.d("id", recoId);
+        if (recoId.equals("Model1")) {
+            Log.d("Model1 Func", "here");
+            ModelRenderable.builder()
+                    .setSource(this, getResources().getIdentifier(RecommendationPage.pub_result[0], "raw", getPackageName()))
+                    .build()
+                    .thenAccept(renderable -> {
+                        modelRenderable = renderable;
+                        modelRenderable.setShadowCaster(false);
+                        modelRenderable.setShadowReceiver(false);
+                    });
+        } else if (recoId.equals("Model2")) {
+            ModelRenderable.builder()
+                    .setSource(this, getResources().getIdentifier(RecommendationPage.pub_result[1], "raw", getPackageName()))
+                    .build()
+                    .thenAccept(renderable -> {
+                        modelRenderable = renderable;
+                        modelRenderable.setShadowCaster(false);
+                        modelRenderable.setShadowReceiver(false);
+                    });
+        }else if (recoId.equals("Model3")) {
+            ModelRenderable.builder()
+                    .setSource(this, getResources().getIdentifier(RecommendationPage.pub_result[2], "raw", getPackageName()))
+                    .build()
+                    .thenAccept(renderable -> {
+                        modelRenderable = renderable;
+                        modelRenderable.setShadowCaster(false);
+                        modelRenderable.setShadowReceiver(false);
+                    });
+        }else if (recoId.equals("Model4")) {
+            ModelRenderable.builder()
+                    .setSource(this, getResources().getIdentifier(RecommendationPage.pub_result[3], "raw", getPackageName()))
+                    .build()
+                    .thenAccept(renderable -> {
+                        modelRenderable = renderable;
+                        modelRenderable.setShadowCaster(false);
+                        modelRenderable.setShadowReceiver(false);
+                    });
+        }else if (recoId == "Model5") {
+            ModelRenderable.builder()
+                    .setSource(this, getResources().getIdentifier(RecommendationPage.pub_result[4], "raw", getPackageName()))
+                    .build()
+                    .thenAccept(renderable -> {
+                        modelRenderable = renderable;
+                        modelRenderable.setShadowCaster(false);
+                        modelRenderable.setShadowReceiver(false);
+                    });
+        } else {
+            Log.d("Else Func", "here");
+            ModelRenderable.builder()
+                    .setSource(this, getResources().getIdentifier(RecommendationPage.pub_result[4], "raw", getPackageName()))
+                    .build()
+                    .thenAccept(renderable -> {
+                        modelRenderable = renderable;
+                        modelRenderable.setShadowCaster(false);
+                        modelRenderable.setShadowReceiver(false);
+                    });
+        }
+        if (!trigger2) {
+            //augmentedFaceNodes[0].setFaceMeshTexture(null);
+            augmentedFaceNodes[0].setFaceRegionsRenderable(null);
+
+        } else {
+            augmentedFaceNodes[0].setFaceRegionsRenderable(modelRenderable);
+            //augmentedFaceNodes[0].setFaceMeshTexture(texture);
+        }
+        prevId = recoId;
+
+
+
+
+
+        /*//imagebtn2 = findViewById(R.id.Model2);
         trigger2 = !trigger2;
         //Model m2 = new Model("red","cat", "redsunglasses");
         ModelRenderable.builder()
@@ -413,7 +505,7 @@ public class CameraPage extends AppCompatActivity {
         } else {
             augmentedFaceNodes[0].setFaceRegionsRenderable(modelRenderable);
             //augmentedFaceNodes[0].setFaceMeshTexture(texture);
-        }
+        }*/
     }
 
     public void helperRateModel(String currentModelName) {
@@ -492,7 +584,7 @@ public class CameraPage extends AppCompatActivity {
         if (!trigger1) {
             //augmentedFaceNodes[0].setFaceMeshTexture(null);
             augmentedFaceNodes[0].setFaceRegionsRenderable(null);
-            rateModel("currentModel"); //if not have this model rating, then rate
+            rateModel("m1"); //if not have this model rating, then rate
         } else {
             augmentedFaceNodes[0].setFaceRegionsRenderable(modelRenderable);
             //augmentedFaceNodes[0].setFaceMeshTexture(texture);
