@@ -418,30 +418,29 @@ public class CameraPage extends AppCompatActivity {
 
     public void helperRateModel(String currentModelName) {
         try {
-            AlertDialog.Builder builder = new AlertDialog.Builder(CameraPage.this);
-            View layout = null;
-            LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            layout = inflater.inflate(R.layout.rating, null);
-            final RatingBar ratingBar = (RatingBar) layout.findViewById(R.id.ratingBar);
-            builder.setTitle("Rate Us");
-            builder.setMessage("Please rate this model so that we can provide better recommendation for you.");
-            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    Float value = ratingBar.getRating();
-                    saveRating(currentModelName, value);
-                    Toast.makeText(CameraPage.this, "Rating is : " + value, Toast.LENGTH_LONG).show();
-                }
-            });
-            builder.setNegativeButton("No,Thanks", new DialogInterface.OnClickListener() {
+            GlobalUtils.showDialog(this, new DialogCallback() {
                 @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
+                public void callback(String ratings) {
+                    float rating = 0;
+                    if (ratings == "Bad") {
+                        rating =  2;
+                    } else if (ratings == "Good") {
+                        rating =  4;
+                    } else if (ratings =="Great") {
+                        rating =  5;
+                    }else if (ratings =="Okay") {
+                        rating =  3;
+                    }else if (ratings =="Terrible") {
+                        rating =  1;
+                    }
+                    if (rating != 0)
+                        saveRating(currentModelName, rating);
+
+                    Log.d("rating", ratings);
+                    //result.setText(ratings);
+                    Toast.makeText(CameraPage.this, "Rating is : " + ratings, Toast.LENGTH_LONG).show();
                 }
             });
-            builder.setCancelable(false);
-            builder.setView(layout);
-            builder.show();
-
         } catch ( Exception e ) {
             e.printStackTrace();
         }
@@ -470,9 +469,14 @@ public class CameraPage extends AppCompatActivity {
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     HashMap<String, Map<String, String>> temp = (HashMap<String, Map<String, String>>) dataSnapshot.getValue();
                     Map<String, String> ratings = temp.get("ratings");
-                    if (! ratings.containsKey(modelName)) {
+                    if (ratings != null) {
+                        if (! ratings.containsKey(modelName)) {
+                            helperRateModel(modelName);
+                        }
+                    } else {
                         helperRateModel(modelName);
                     }
+
                 }
 
                 @Override

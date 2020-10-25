@@ -30,6 +30,7 @@ public class GlobalUtils {
         TextView btn_done = (TextView)dialog.findViewById(R.id.btn_done);
         SmileRating smileRating = (SmileRating)dialog.findViewById(R.id.smile_rating);
 
+        rating = "";// reset rating
         smileRating.setOnSmileySelectionListener(new SmileRating.OnSmileySelectionListener() {
             @Override
             public void onSmileySelected(int smiley, boolean reselected) {
