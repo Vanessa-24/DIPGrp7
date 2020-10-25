@@ -323,7 +323,7 @@ public class CameraPage extends AppCompatActivity {
             // and load model
              String name = "spec_rectanglefacea";
             ModelRenderable.builder()
-                    .setSource(this, R.raw.spec_rectanglefacea)
+                    .setSource(this, R.raw.m32)
                     .build()
                     .thenAccept(renderable -> {
                         modelRenderable = renderable;

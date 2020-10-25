@@ -65,7 +65,4 @@ dependencies {
 
 }
 
-sceneform.asset('sampledata/spec_rectanglefaceA.fbx',
-        'default',
-        'sampledata/spec_rectanglefaceA.sfa',
-        'src/main/res/raw/spec_rectanglefacea')
+
