@@ -19,7 +19,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -43,13 +42,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RecommendationPage extends AppCompatActivity {
-    public static String[] pub_result;
+    public static String[] pub_result = null;
     private String fileName, result;
     private FirebaseAuth mAuth;
     private DatabaseReference databaseReference;
     private TextView faceShapeRes;
     private static final String faceShape_URL = "http://ec2-3-137-222-9.us-east-2.compute.amazonaws.com:8080/upload";
     private String recoModels;
+    private boolean getResult = false;
 
     private Model m1 = new Model("black","round", "aviators2");
     private Model m2 = new Model("red","cat", "redsunglasses");
@@ -67,7 +67,7 @@ public class RecommendationPage extends AppCompatActivity {
 
         faceShapeRes = findViewById(R.id.msg2);
 
-       new AsyncTaskRunner().execute(faceShape_URL, fileName);
+//       new AsyncFaceShapedDetect().execute(faceShape_URL, fileName);
     }
 
     private void uploadFaceshape(String faceshape) {
@@ -117,7 +117,7 @@ public class RecommendationPage extends AppCompatActivity {
         return "";
     }
 
-    private class AsyncTaskRunner extends AsyncTask<String, String, String> {
+    private class AsyncFaceShapedDetect extends AsyncTask<String, String, String> {
 
         private String res;
         ProgressDialog progressDialog;
@@ -146,7 +146,6 @@ public class RecommendationPage extends AppCompatActivity {
                     "Face shape",
                     "Extracting ...");
         }
-
     }
 
     public void getResultString(String text){
@@ -190,11 +189,6 @@ public class RecommendationPage extends AppCompatActivity {
     }
 
     public void getRec(View v) throws JSONException {
-        pub_result = new String[4];
-        pub_result[0] = "m1";
-        pub_result[1] = "m2";
-        pub_result[2] = "m3";
-        pub_result[3] = "m4";
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -210,7 +204,12 @@ public class RecommendationPage extends AppCompatActivity {
                     String faceShape = temp.get("faceShape").get("face");
 
                     Map<String, String> ratings = temp.get("ratings");
-                    pub_result = sendUserdata(userID, faceShape, ratings);
+
+                    try {
+                        sendUserdata(userID, faceShape, ratings);
+                    } catch ( InterruptedException e ) {
+                        e.printStackTrace();
+                    }
                 }
 
                 @Override
@@ -223,14 +222,15 @@ public class RecommendationPage extends AppCompatActivity {
             Intent intents = new Intent(this, CameraPage.class);
             *//*intents.putExtras(b);*//*
             startActivity(intents);*/
+
+
         }
 
 
         Log.i("Body", "" + recoModels);
-
-
     }
-    public String[] sendUserdata(String userId, String faceShape, Map<String, String> ratings) {
+
+    public String[] sendUserdata(String userId, String faceShape, Map<String, String> ratings) throws InterruptedException {
         final String[] response = new String[1];
         final String[] result = {"m1","m2","m3","m4"};
         Thread thread = new Thread(() -> {
@@ -284,12 +284,21 @@ public class RecommendationPage extends AppCompatActivity {
                 Gson g = new Gson();
                 TopModels msg = g.fromJson(recoModels, TopModels.class);
 
+                pub_result = new String[4];
+
                 //get all recommend models here
                 //inside msg.getTopModels() is an array of string
                 for (int i = 0; i < msg.getTopModels().length; i ++) {
+                    if (i <= 4) //becz we hardcode 4 models now
+                        pub_result[i] = msg.getTopModels()[i];
                     Log.d("model", msg.getTopModels()[i]);
                 }
+
+                getResult = true;
+
                 conn.disconnect();
+
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -298,7 +307,9 @@ public class RecommendationPage extends AppCompatActivity {
         });
 
         thread.start();
-
+        thread.join();
+        Intent intents = new Intent(this, CameraPage.class);
+        startActivity(intents);
         return result;
     }
 }

@@ -26,7 +26,6 @@ public class Model extends AppCompatActivity {
         this.colour = colour;
         this.shape = shape;
         this.modelsfb_name = modelsfb_name;
-
     }
 
     public String getColour(){

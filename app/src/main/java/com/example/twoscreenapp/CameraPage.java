@@ -146,16 +146,10 @@ public class CameraPage extends AppCompatActivity {
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
 
-
-
         matching.put("oblong",oblong);
         matching.put("squared",squared);
         matching.put("rectangle",rectangle);
         matching.put("others",others);
-
-
-
-
 
 
 //
@@ -258,9 +252,6 @@ public class CameraPage extends AppCompatActivity {
         if (FaceShape.gotFaceShapeInfo == false){
             FaceShape.publicFaceShape = "others";
         }
-
-
-
 
 
         toRender = matching.get(FaceShape.publicFaceShape);
@@ -408,6 +399,7 @@ public class CameraPage extends AppCompatActivity {
                 imagebtn2.setImageResource(R.drawable.ic_sunglasses3);
                 imagebtn3.setImageResource(R.drawable.ic_sunglasses4);
                 imagebtn4.setImageResource(R.drawable.btn_sunglasses);
+                Log.d("insideTestReco", RecommendationPage.pub_result[i]);
             }
         }
         else{
