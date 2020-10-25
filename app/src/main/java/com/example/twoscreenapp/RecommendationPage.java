@@ -55,7 +55,7 @@ public class RecommendationPage extends AppCompatActivity {
     private Model m1 = new Model("black","round", "aviators2");
     private Model m2 = new Model("red","cat", "redsunglasses");
 
-    private ImageView imageView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,9 +69,9 @@ public class RecommendationPage extends AppCompatActivity {
 //        result = faceShapeDetect(URL, fileName);
 
         faceShapeRes = findViewById(R.id.msg2);
-        imageView = findViewById(R.id.verifiedImg);
 
-//       new AsyncFaceShapedDetect().execute(faceShape_URL, fileName);
+
+       new AsyncFaceShapedDetect().execute(faceShape_URL, fileName);
     }
 
     private void uploadFaceshape(String faceshape) {
@@ -154,7 +154,7 @@ public class RecommendationPage extends AppCompatActivity {
 
     public void getResultString(String text){
         boolean yesno = true;
-        imageView.setVisibility(View.VISIBLE);
+
         // {"squared", "round", "triangle", "diamond", "rectangular", "oblong"});
         if(text.contains("squared")){
             FaceShape.publicFaceShape = "squared";
