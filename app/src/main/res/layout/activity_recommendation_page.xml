@@ -4,37 +4,52 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context=".RecommendationPage">
 
-    <TextView
-        android:id="@+id/msg1"
-        android:text="Not sure what showing here "
+    <ImageView
+        android:id="@+id/verifiedImg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/googleSignIn"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/msg2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:srcCompat="@drawable/verified"
+        android:visibility="invisible"
+        tools:visibility="visible"/>
 
     <TextView
         android:id="@+id/msg2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="face result"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="50dp"
+        android:fontFamily="@font/nunitolight"
+        android:text="Your face shape is"
+        android:textAlignment="center"
+        android:textColor="#FDFDFD"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/viewrecobtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/msg1" />
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button8"
+        android:id="@+id/viewrecobtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="120dp"
-        android:layout_marginBottom="264dp"
+        android:layout_marginBottom="230dp"
+        android:background="#84719B"
+        android:fontFamily="@font/nunitobold"
+        android:gravity="center"
         android:onClick="getRec"
-        android:text="view recommended"
+        android:padding="10dp"
+        android:text="Recommendations"
+        android:textColor="#FDFDFD"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
 
 
