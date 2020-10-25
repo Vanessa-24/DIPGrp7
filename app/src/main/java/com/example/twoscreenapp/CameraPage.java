@@ -59,6 +59,10 @@ import java.util.List;
 
 import java.util.Map;
 
+
+import com.example.twoscreenapp.DialogCallback;
+import com.example.twoscreenapp.GlobalUtils;
+
 public class CameraPage extends AppCompatActivity {
 
     public static final String fileNameMsg = "PhotoTaken";
@@ -75,6 +79,7 @@ public class CameraPage extends AppCompatActivity {
     private boolean isAdded = false;
     private boolean trigger1 = false;
     private boolean trigger2 = false;
+    private boolean changeModel = false;
     private CustomArFragment customArFragment;
 
 
@@ -441,6 +446,7 @@ public class CameraPage extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
     private void saveRating(String modelName, Float value) {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -498,6 +504,44 @@ public class CameraPage extends AppCompatActivity {
             augmentedFaceNodes[1].setFaceRegionsRenderable(modelRenderable1);
         }
     }
+
+    public void loadMdl(View v) {
+        // int mdlClicked = v.getId();
+        String mdlClicked = getResources().getResourceEntryName(v.getId());
+        // String mdlName = mdlClicked.substring(mdlClicked.lastIndexOf("/") + 9);
+        changeModel = !changeModel;
+        int idr = 0;
+        if (!changeModel) {
+            // augmentedFaceNodes[0].setFaceMeshTexture(null);
+            augmentedFaceNodes[0].setFaceRegionsRenderable(null);
+            // modelRenderable = null;
+            rateModel(mdlClicked);
+        }
+        else {
+
+            try {
+                idr = R.raw.class.getField(mdlClicked).getInt(null);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
+            }
+
+            ModelRenderable.builder()
+                    .setSource(this, idr)
+                    .build()
+                    .thenAccept(renderable -> {
+                        modelRenderable = renderable;
+                        modelRenderable.setShadowCaster(false);
+                        modelRenderable.setShadowReceiver(false);
+                    });
+
+            augmentedFaceNodes[0].setFaceRegionsRenderable(modelRenderable);
+
+        }
+    }
+
+
 
     public void back(View view){
         Intent intent = new Intent(this, MainActivity.class);
