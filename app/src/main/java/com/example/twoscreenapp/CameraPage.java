@@ -45,6 +45,10 @@ import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.ar.sceneform.rendering.Renderable;
 import com.google.ar.sceneform.rendering.Texture;
 import com.google.ar.sceneform.ux.AugmentedFaceNode;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -54,6 +58,8 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -69,10 +75,15 @@ import java.util.List;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class CameraPage extends AppCompatActivity {
 
     public static final String fileNameMsg = "PhotoTaken";
+    private String currentModelName = "";
+    private FirebaseAuth mAuth;
+    private DatabaseReference ref;
 
     private ModelRenderable modelRenderable;
     private ModelRenderable modelRenderable1;
@@ -82,8 +93,6 @@ public class CameraPage extends AppCompatActivity {
     private boolean trigger1 = false;
     private boolean trigger2 = false;
     private CustomArFragment customArFragment;
-    private ImageView imageView;
-
 
 
     private Model m1 = new Model("black","round", "aviators2");
@@ -103,10 +112,7 @@ public class CameraPage extends AppCompatActivity {
     }};
 
     private HashMap<String, List<Model>> matching = new HashMap<String, List<Model>>();
-
     private List<Model> toRender = new ArrayList<Model>();
-
-
 
     private CoordinatorLayout mbottomSheet;
     private BottomSheetBehavior mBottomSheetBehavior;
@@ -116,8 +122,7 @@ public class CameraPage extends AppCompatActivity {
 
     private ProductsFragment productsFragment;
     private RecommendationsFragment recommendationsFragment;
-    private LikesFragment likesFragment;
-
+   // private LikesFragment likesFragment;
 
 //    private View bottomSheet, product;
 //    private BottomSheetBehavior mBottomSheetBehavior;
@@ -149,7 +154,9 @@ public class CameraPage extends AppCompatActivity {
 //        mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
 
         mbottomSheet = findViewById(R.id.new_bottom_sheet);
+        mbottomSheet.setVisibility(View.GONE);
         mBottomSheetBehavior = BottomSheetBehavior.from(mbottomSheet);
+
 
 //        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
 
@@ -161,6 +168,7 @@ public class CameraPage extends AppCompatActivity {
         buttonExpand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mbottomSheet.setVisibility(View.VISIBLE);
                 mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
             }
         });
@@ -171,14 +179,14 @@ public class CameraPage extends AppCompatActivity {
 
         productsFragment = new ProductsFragment();
         recommendationsFragment = new RecommendationsFragment();
-        likesFragment = new LikesFragment();
+        //likesFragment = new LikesFragment();
 
         tabLayout.setupWithViewPager(viewPager);
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), 0);
         viewPagerAdapter.addFragment(productsFragment, "Products");
         viewPagerAdapter.addFragment(recommendationsFragment, "Recommendations");
-        viewPagerAdapter.addFragment(likesFragment, "Likes");
+       // viewPagerAdapter.addFragment(likesFragment, "Likes");
         viewPager.setAdapter(viewPagerAdapter);
 
 //        private class ViewPagerAdapter extends FragmentPagerAdapter {
@@ -246,6 +254,7 @@ public class CameraPage extends AppCompatActivity {
         toRender = matching.get(FaceShape.publicFaceShape);
         for (int i = 0; i < toRender.size(); i++) {
            // toRender.get(i).renderModel();
+            currentModelName = toRender.get(i).getModelsfb_name(); // right now hard code
            ModelRenderable.builder()
                     .setSource(this, getResources().getIdentifier(toRender.get(i).getModelsfb_name(), "raw", getPackageName()))
                     .build()
@@ -393,6 +402,7 @@ public class CameraPage extends AppCompatActivity {
                 builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Float value = ratingBar.getRating();
+                        saveRating(currentModelName, value);
                         Toast.makeText(CameraPage.this,"Rating is : "+value,Toast.LENGTH_LONG).show();
                     }
                 });
@@ -412,6 +422,18 @@ public class CameraPage extends AppCompatActivity {
         } else {
             augmentedFaceNodes[0].setFaceRegionsRenderable(modelRenderable);
             //augmentedFaceNodes[0].setFaceMeshTexture(texture);
+        }
+    }
+
+    private void saveRating(String modelName, Float value) {
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if (currentUser != null) {
+            ref = FirebaseDatabase.getInstance().getReference();
+            String userID = currentUser.getUid();
+            ref.child(userID).child("ratings").child(modelName).setValue(value);
+            Toast.makeText(this, "Save rating to clould successfully", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -441,7 +463,7 @@ public class CameraPage extends AppCompatActivity {
 
         // Create a bitmap the size of the scene view.
         final Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(),
-                Bitmap.Config.ARGB_8888);
+                Bitmap.Config.RGB_565);
 
         // Create a handler thread to offload the processing of the image.
         final HandlerThread handlerThread = new HandlerThread("PixelCopier");
@@ -472,6 +494,10 @@ public class CameraPage extends AppCompatActivity {
             handlerThread.quitSafely();
         }, new Handler(handlerThread.getLooper()));
 
+
+        //this will never be called because of my line 481
+//        Intent intent = new Intent(this, ScanPage.class);
+//        startActivity(intent);
     }
 
     public void takePicture(View view1) {
