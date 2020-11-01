@@ -337,8 +337,8 @@ public class CameraPage extends AppCompatActivity {
 
         //OnUpdateListener --> Interface definition for a callback to be invoked once per frame immediately before the scene is updated
         customArFragment.getArSceneView().getScene().addOnUpdateListener(frameTime -> {
-            if(modelRenderable == null || modelRenderable1 == null)
-                return;
+            /*if(modelRenderable == null || modelRenderable1 == null)
+                return;*/
             Frame frame = customArFragment.getArSceneView().getArFrame();
             Collection<AugmentedFace> augmentedFaces = frame.getUpdatedTrackables(AugmentedFace.class);
 
@@ -368,7 +368,7 @@ public class CameraPage extends AppCompatActivity {
         });
     }
 
-    public void visibleFilterButtons(View v) {
+   /* public void visibleFilterButtons(View v) {
         visible = !visible;
         if (visible) {
             hat.setVisibility(View.VISIBLE);
@@ -379,7 +379,7 @@ public class CameraPage extends AppCompatActivity {
             glass.setVisibility(View.GONE);
             greybox.setVisibility(View.GONE);
         }
-    }
+    }*/
 
     public void TestReco(View v) {
         if(RecommendationPage.pub_result != null && first_reco) {
@@ -604,6 +604,10 @@ public class CameraPage extends AppCompatActivity {
 
     public void loadMdl(View v) {
         // int mdlClicked = v.getId();
+        if (augmentedFaceNodes[0] == null) {
+            Log.d("debug", "facenode is null");
+        }
+
         String mdlClicked = getResources().getResourceEntryName(v.getId());
         // String mdlName = mdlClicked.substring(mdlClicked.lastIndexOf("/") + 9);
         changeModel = !changeModel;
