@@ -23,6 +23,7 @@ public class RecommendationsFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    public View mView;
 
     public RecommendationsFragment() {
         // Required empty public constructor
@@ -59,6 +60,8 @@ public class RecommendationsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_recommendations, container, false);
+        super.onCreateView(inflater, container, savedInstanceState);
+        mView = inflater.inflate(R.layout.fragment_recommendations, container, false);
+        return mView;
     }
 }
