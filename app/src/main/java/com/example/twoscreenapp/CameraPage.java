@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -623,6 +624,7 @@ public class CameraPage extends AppCompatActivity {
                 e.printStackTrace();
             }
 
+
             ModelRenderable.builder()
                     .setSource(this, idr)
                     .build()
@@ -632,7 +634,16 @@ public class CameraPage extends AppCompatActivity {
                         modelRenderable.setShadowReceiver(false);
                     });
 
-            augmentedFaceNodes[0].setFaceRegionsRenderable(modelRenderable);
+            new CountDownTimer(100,10){
+                public void onFinish(){
+                    augmentedFaceNodes[0].setFaceRegionsRenderable(modelRenderable);
+                }
+                public void onTick(long millisUntilFinished){
+
+                }
+            }.start();
+
+
 
         }
     }
