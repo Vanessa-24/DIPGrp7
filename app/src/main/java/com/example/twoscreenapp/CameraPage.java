@@ -37,7 +37,7 @@ import com.google.ar.core.Frame;
 import com.google.ar.sceneform.ArSceneView;
 import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.ar.sceneform.rendering.Renderable;
-import com.google.ar.sceneform.rendering.Texture;
+/*import com.google.ar.sceneform.rendering.Texture;*/
 import com.google.ar.sceneform.ux.AugmentedFaceNode;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -76,7 +76,7 @@ public class CameraPage extends AppCompatActivity {
     private ModelRenderable modelRenderable;
     private ModelRenderable modelRenderable1;
 
-    private Texture texture;
+  /*  private Texture texture;*/
     private boolean isAdded = false;
     private boolean trigger1 = false;
     private boolean trigger2 = false;
@@ -236,8 +236,8 @@ public class CameraPage extends AppCompatActivity {
 
 //        product = findViewById(R.id.productBottomSheet);
 
-        hat = findViewById(R.id.button);
-        glass = findViewById(R.id.button3);
+/*        hat = findViewById(R.id.button);
+        glass = findViewById(R.id.button3);*/
         greybox = findViewById(R.id.imageView);
 
         customArFragment = (CustomArFragment) getSupportFragmentManager().findFragmentById(R.id.arFragment);
@@ -247,7 +247,7 @@ public class CameraPage extends AppCompatActivity {
         }
 
 
-        toRender = matching.get(FaceShape.publicFaceShape);
+/*        toRender = matching.get(FaceShape.publicFaceShape);
         for (int i = 0; i < toRender.size(); i++) {
            // toRender.get(i).renderModel();
             currentModelName = toRender.get(i).getModelsfb_name(); // right now hard code
@@ -259,7 +259,7 @@ public class CameraPage extends AppCompatActivity {
                         modelRenderable.setShadowCaster(false);
                         modelRenderable.setShadowReceiver(false);
                     });
-        }
+        }*/
 
          /*if(FaceShape.publicFaceShape.equals("oblong")){
 
@@ -316,19 +316,19 @@ public class CameraPage extends AppCompatActivity {
                     });
         }*/
 
-        ModelRenderable.builder()
+        /*ModelRenderable.builder()
                 .setSource(this, R.raw.cap2)
                 .build()
                 .thenAccept(renderable -> {
                     modelRenderable1 = renderable;
                     modelRenderable1.setShadowCaster(false);
                     modelRenderable1.setShadowReceiver(false);
-                });
-        // Load the face mesh texture.
+                });*/
+        /*// Load the face mesh texture.
         Texture.builder()
                 .setSource(this, R.drawable.fox_face_mesh_texture)
                 .build()
-                .thenAccept(texture -> this.texture = texture);
+                .thenAccept(texture -> this.texture = texture);*/
 
 //<----------------------------------------------------------------------------------------------------->
         // This is important to make sure that the camera stream renders first so that
@@ -337,7 +337,7 @@ public class CameraPage extends AppCompatActivity {
 
         //OnUpdateListener --> Interface definition for a callback to be invoked once per frame immediately before the scene is updated
         customArFragment.getArSceneView().getScene().addOnUpdateListener(frameTime -> {
-            if(modelRenderable == null || texture == null|| modelRenderable1 == null)
+            if(modelRenderable == null || modelRenderable1 == null)
                 return;
             Frame frame = customArFragment.getArSceneView().getArFrame();
             Collection<AugmentedFace> augmentedFaces = frame.getUpdatedTrackables(AugmentedFace.class);
@@ -595,7 +595,7 @@ public class CameraPage extends AppCompatActivity {
     public void trigger2(View v) {
         trigger2 = !trigger2;
         if (!trigger2) {
-            augmentedFaceNodes[1].setFaceMeshTexture(null);
+            /*augmentedFaceNodes[1].setFaceMeshTexture(null);*/
             augmentedFaceNodes[1].setFaceRegionsRenderable(null);
         } else {
             augmentedFaceNodes[1].setFaceRegionsRenderable(modelRenderable1);
