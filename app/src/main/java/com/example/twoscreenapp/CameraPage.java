@@ -538,6 +538,8 @@ public class CameraPage extends AppCompatActivity {
     }
 
     public void loadMdl(String mdlClicked) {
+        if (augmentedFaceNodes[0] == null)
+            return ;
 
         int currentId = 0;
         try {
