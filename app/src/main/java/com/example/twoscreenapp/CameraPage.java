@@ -761,4 +761,6 @@ public class CameraPage extends AppCompatActivity {
 //        intent.setDataAndType(selectedUri, "resource/folder");
 //        startActivity(intent);
 //    }
+
+
 }
