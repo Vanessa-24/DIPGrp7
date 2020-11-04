@@ -54,9 +54,6 @@ public class RecommendationPage extends AppCompatActivity {
     private String recoModels;
     private boolean getResult = false;
 
-    private Model m1 = new Model("black","round", "aviators2");
-    private Model m2 = new Model("red","cat", "redsunglasses");
-
 
 
     @Override
@@ -68,7 +65,6 @@ public class RecommendationPage extends AppCompatActivity {
         //get the message of the intent
         fileName = intent.getStringExtra(CameraPage.fileNameMsg);
         Log.d("debugFace", fileName);
-//        result = faceShapeDetect(URL, fileName);
 
         faceShapeRes = findViewById(R.id.msg2);
 
@@ -96,7 +92,6 @@ public class RecommendationPage extends AppCompatActivity {
 
     public String faceShapeDetect(String url, String fileName) {
         try {
-//            Log.d("success", "sending request");
 
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost(url);
@@ -113,7 +108,6 @@ public class RecommendationPage extends AppCompatActivity {
             String responseString = EntityUtils.toString(entity, "UTF-8");
             // below the getresultstring is to get the response and pass the data to elsewhere
             getResultString(responseString);
-//            Log.d("success", "get result");
             return responseString;
 
         } catch (Exception e) {
@@ -132,8 +126,6 @@ public class RecommendationPage extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             res = faceShapeDetect(params[0], params[1]);
-//            Log.d("debugFace", res);
-//            result = res;
             Log.d("do in bg", res);
 
             return res;
@@ -160,7 +152,6 @@ public class RecommendationPage extends AppCompatActivity {
     public void getResultString(String text){
         boolean yesno = true;
 
-        // {"squared", "round", "triangle", "diamond", "rectangular", "oblong"});
         if(text.contains("squared")){
             FaceShape.publicFaceShape = "squared";
             // then can change the the res raw obj file dir name here, to make it less messy over at the camera page.
@@ -227,11 +218,6 @@ public class RecommendationPage extends AppCompatActivity {
                     System.out.println("The read failed: " + databaseError.getCode());
                 }
             });
-            /*Bundle b = new Bundle();
-            b.putStringArray("result", pub_result);*//*
-            Intent intents = new Intent(this, CameraPage.class);
-            *//*intents.putExtras(b);*//*
-            startActivity(intents);*/
 
         } else {
             Toast.makeText(this, "You need to sign-in", Toast.LENGTH_SHORT).show();
