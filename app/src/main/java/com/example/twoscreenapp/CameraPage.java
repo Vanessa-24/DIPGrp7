@@ -356,8 +356,7 @@ public class CameraPage extends AppCompatActivity {
 
         //OnUpdateListener --> Interface definition for a callback to be invoked once per frame immediately before the scene is updated
         customArFragment.getArSceneView().getScene().addOnUpdateListener(frameTime -> {
-//            if(modelRenderable == null || modelRenderable1 == null)
-//                return;
+
             Frame frame = customArFragment.getArSceneView().getArFrame();
             Collection<AugmentedFace> augmentedFaces = frame.getUpdatedTrackables(AugmentedFace.class);
 
@@ -386,11 +385,7 @@ public class CameraPage extends AppCompatActivity {
             }
         });
 
-//        generateImgModelsFromReco(viewPagerAdapter.getItem(1).getView());
 
-//        generateImgModelsFromReco();
-
-    }
 
     public void TestReco(View v) {
         if(RecommendationPage.pub_result == null)
@@ -532,6 +527,10 @@ public class CameraPage extends AppCompatActivity {
 
     public void loadMdl(View v) {
         // int mdlClicked = v.getId();
+        if (augmentedFaceNodes[0] == null) {
+            Log.d("debug", "facenode is null");
+        }
+
         String mdlClicked = getResources().getResourceEntryName(v.getId());
         // String mdlName = mdlClicked.substring(mdlClicked.lastIndexOf("/") + 9);
         loadMdl(mdlClicked); //helper function
