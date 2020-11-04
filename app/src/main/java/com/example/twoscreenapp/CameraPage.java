@@ -340,8 +340,11 @@ public class CameraPage extends AppCompatActivity {
     }
 
     public void loadMdl( String mdlClicked) {
-        if (augmentedFaceNodes[0] == null)
+        if (augmentedFaceNodes[0] == null){
+            Toast.makeText(getApplicationContext(), "Face not detected!", Toast.LENGTH_LONG).show();
             return;
+        }
+
 
         int currentId = 0;
         try {
