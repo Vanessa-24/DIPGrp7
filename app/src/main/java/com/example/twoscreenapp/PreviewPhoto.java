@@ -86,11 +86,6 @@ public class PreviewPhoto extends AppCompatActivity {
         Intent i = new Intent(Intent.ACTION_SEND);
 
         i.setType("image/*");
-        // ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            /*compress(Bitmap.CompressFormat.PNG, 100, stream);
-            byte[] bytes = stream.toByteArray();*/
-
-        // String fileName = i.getStringExtra(CameraPage.fileNameMsg);
 
         File imgFile1 = new  File(fileName);
         // the code to try to share the image
@@ -119,50 +114,4 @@ public class PreviewPhoto extends AppCompatActivity {
         i.setData(Uri.parse(url));
         startActivity(i);
     }
-
-
-
-//    public  String faceShapeDetect(String url, File file) {
-//
-//            try {
-//                HttpClient httpclient = new DefaultHttpClient();
-//                HttpPost httppost = new HttpPost(url);
-//
-//                MultipartEntityBuilder builder = MultipartEntityBuilder.create();
-//                builder.addBinaryBody(
-//                        "content", file, ContentType.MULTIPART_FORM_DATA, fileName);
-//                HttpEntity multipart = builder.build();
-//
-//                httppost.setEntity(multipart);
-//                HttpResponse response = httpclient.execute(httppost);
-//
-//
-//                HttpEntity entity = response.getEntity();
-//                String responseString = EntityUtils.toString(entity, "UTF-8");
-//                return responseString;
-//
-//            } catch (Exception e) {
-//                // show error
-//                Log.e("face shape err", e + "");
-//            }
-//            return "";
-//    }
-
-//    private void uploadFaceshape(String faceshape) {
-//        FirebaseUser currentUser = mAuth.getCurrentUser();
-//        String userID = currentUser.getUid();
-//        if (currentUser != null) {
-//            faceShapeRef = FirebaseDatabase.getInstance().getReference("FaceShape");
-//
-//            try {
-//                JSONObject data = new JSONObject(faceshape);
-//                FaceShape faceShape = new FaceShape(data.getString("shape"), data.getString("jawlines"));
-//                faceShapeRef.child(userID).setValue(faceShape);
-//                Toast.makeText(PreviewPhoto.this, "Save face shape to clould successfully", Toast.LENGTH_SHORT).show();
-//            } catch (JSONException e) {
-////                e.printStackTrace();
-//                Log.e("Upload data", "Failed" + e.getMessage());
-//            }
-//        }
-//    }
 }
