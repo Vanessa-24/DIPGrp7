@@ -84,6 +84,6 @@
         android:onClick="back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/backbutton" />
+        app:srcCompat="@drawable/ic_return" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
