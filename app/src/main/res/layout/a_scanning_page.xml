@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:id="@+id/arFragment"
         android:name="com.example.twoscreenapp.CustomArFragment"
-        tools:layout="@layout/activity_camera_page" />
+        tools:layout="@layout/new_camera_page" />
 
     <ImageView
         android:id="@+id/previewPhoto"
