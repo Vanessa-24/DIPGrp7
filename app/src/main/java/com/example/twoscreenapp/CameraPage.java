@@ -24,6 +24,7 @@ import android.view.View;
 
 import android.widget.Button;
 
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -108,9 +109,9 @@ public class CameraPage extends AppCompatActivity {
     private ImageButton imagebtn3;
     private ImageButton imagebtn4;
     private ImageButton imagebtn5;
-    private String recoId;
+    private String crrntRecoId, prevId;
+    private int previousId = -1;
     private boolean first_reco = true;
-    private String prevId;
 
     private CoordinatorLayout mbottomSheet;
     private BottomSheetBehavior mBottomSheetBehavior;
@@ -132,6 +133,20 @@ public class CameraPage extends AppCompatActivity {
     private AugmentedFaceNode[] augmentedFaceNodes = new AugmentedFaceNode[2];
 
     @Override
+    protected void onStart() {
+        // this purpose is to reset all variable when coming back from reco page
+        super.onStart();
+        trigger2 = false;
+        previousId = -1;
+        first_reco = true;
+        if (augmentedFaceNodes[0] != null) {
+            augmentedFaceNodes[0].setFaceRegionsRenderable(null);
+        }
+        
+
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_camera_page);
@@ -148,7 +163,6 @@ public class CameraPage extends AppCompatActivity {
 //
 //        bottomSheet = findViewById(R.id.productBottomSheet);
 //        mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
-
         mbottomSheet = findViewById(R.id.new_bottom_sheet);
         mbottomSheet.setVisibility(View.GONE);
         mBottomSheetBehavior = BottomSheetBehavior.from(mbottomSheet);
@@ -166,6 +180,7 @@ public class CameraPage extends AppCompatActivity {
             public void onClick(View view) {
                 mbottomSheet.setVisibility(View.VISIBLE);
                 mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+
             }
         });
 
@@ -175,15 +190,19 @@ public class CameraPage extends AppCompatActivity {
 
         productsFragment = new ProductsFragment();
         recommendationsFragment = new RecommendationsFragment();
-        //likesFragment = new LikesFragment();
 
+
+        //likesFragment = new LikesFragment();
         tabLayout.setupWithViewPager(viewPager);
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), 0);
         viewPagerAdapter.addFragment(productsFragment, "Products");
         viewPagerAdapter.addFragment(recommendationsFragment, "Recommendations");
+
+
        // viewPagerAdapter.addFragment(likesFragment, "Likes");
         viewPager.setAdapter(viewPagerAdapter);
+
 
 //        private class ViewPagerAdapter extends FragmentPagerAdapter {
 //
@@ -337,8 +356,7 @@ public class CameraPage extends AppCompatActivity {
 
         //OnUpdateListener --> Interface definition for a callback to be invoked once per frame immediately before the scene is updated
         customArFragment.getArSceneView().getScene().addOnUpdateListener(frameTime -> {
-            /*if(modelRenderable == null || modelRenderable1 == null)
-                return;*/
+
             Frame frame = customArFragment.getArSceneView().getArFrame();
             Collection<AugmentedFace> augmentedFaces = frame.getUpdatedTrackables(AugmentedFace.class);
 
@@ -366,125 +384,32 @@ public class CameraPage extends AppCompatActivity {
                 isAdded = true;
             }
         });
-    }
 
-   /* public void visibleFilterButtons(View v) {
-        visible = !visible;
-        if (visible) {
-            hat.setVisibility(View.VISIBLE);
-            glass.setVisibility(View.VISIBLE);
-            greybox.setVisibility(View.VISIBLE);
-        } else {
-            hat.setVisibility(View.GONE);
-            glass.setVisibility(View.GONE);
-            greybox.setVisibility(View.GONE);
-        }
-    }*/
+
 
     public void TestReco(View v) {
-        if(RecommendationPage.pub_result != null && first_reco) {
-            imagebtn1 = findViewById(R.id.Model1);
-            imagebtn2 = findViewById(R.id.Model2);
-            imagebtn3 = findViewById(R.id.Model3);
-            imagebtn4 = findViewById(R.id.Model4);
-            imagebtn5 = findViewById(R.id.Model5);
-            for (int i =0; i < RecommendationPage.pub_result.length;i++) {
-                imagebtn1.setImageResource(getResources().getIdentifier(RecommendationPage.pub_result[0], "drawable", getPackageName()));
-                imagebtn2.setImageResource(getResources().getIdentifier(RecommendationPage.pub_result[1], "drawable", getPackageName()));
-                imagebtn3.setImageResource(getResources().getIdentifier(RecommendationPage.pub_result[2], "drawable", getPackageName()));
-                imagebtn4.setImageResource(getResources().getIdentifier(RecommendationPage.pub_result[3], "drawable", getPackageName()));
-                imagebtn5.setImageResource(getResources().getIdentifier(RecommendationPage.pub_result[4], "drawable", getPackageName()));
-                Log.d("insideTestReco", RecommendationPage.pub_result[i]);
-            }
-            first_reco = false;
-        }
-        else{
-            Log.d("pub_result", "Is length 0");
-        }
-        recoId = getResources().getResourceEntryName(v.getId());
-        if(prevId!= null) {
-            if(recoId.equals(prevId)) {
-                trigger2 = !trigger2;
-            }
-            else{
-                Log.d("diff", "Set as true");
-                trigger2 = true;
-            }
-        }else{
-            prevId = recoId;
-        }
-        recoId = getResources().getResourceEntryName(v.getId());
-        Log.d("id", recoId);
-        if (recoId.equals("Model1")) {
+        if(RecommendationPage.pub_result == null)
+            return;
+
+        crrntRecoId = getResources().getResourceEntryName(v.getId());
+
+        Log.d("id", crrntRecoId);
+
+        if (crrntRecoId.equals("Model1")) {
             Log.d("Model1 Func", "here");
-            ModelRenderable.builder()
-                    .setSource(this, getResources().getIdentifier(RecommendationPage.pub_result[0], "raw", getPackageName()))
-                    .build()
-                    .thenAccept(renderable -> {
-                        modelRenderable = renderable;
-                        modelRenderable.setShadowCaster(false);
-                        modelRenderable.setShadowReceiver(false);
-                    });
-        } else if (recoId.equals("Model2")) {
-            ModelRenderable.builder()
-                    .setSource(this, getResources().getIdentifier(RecommendationPage.pub_result[1], "raw", getPackageName()))
-                    .build()
-                    .thenAccept(renderable -> {
-                        modelRenderable = renderable;
-                        modelRenderable.setShadowCaster(false);
-                        modelRenderable.setShadowReceiver(false);
-                    });
-        }else if (recoId.equals("Model3")) {
-            ModelRenderable.builder()
-                    .setSource(this, getResources().getIdentifier(RecommendationPage.pub_result[2], "raw", getPackageName()))
-                    .build()
-                    .thenAccept(renderable -> {
-                        modelRenderable = renderable;
-                        modelRenderable.setShadowCaster(false);
-                        modelRenderable.setShadowReceiver(false);
-                    });
-        }else if (recoId.equals("Model4")) {
-            ModelRenderable.builder()
-                    .setSource(this, getResources().getIdentifier(RecommendationPage.pub_result[3], "raw", getPackageName()))
-                    .build()
-                    .thenAccept(renderable -> {
-                        modelRenderable = renderable;
-                        modelRenderable.setShadowCaster(false);
-                        modelRenderable.setShadowReceiver(false);
-                    });
-        }else if (recoId == "Model5") {
-            ModelRenderable.builder()
-                    .setSource(this, getResources().getIdentifier(RecommendationPage.pub_result[4], "raw", getPackageName()))
-                    .build()
-                    .thenAccept(renderable -> {
-                        modelRenderable = renderable;
-                        modelRenderable.setShadowCaster(false);
-                        modelRenderable.setShadowReceiver(false);
-                    });
+            loadMdl(RecommendationPage.pub_result[0]);
+        } else if (crrntRecoId.equals("Model2")) {
+            loadMdl(RecommendationPage.pub_result[1]);
+        }else if (crrntRecoId.equals("Model3")) {
+            loadMdl(RecommendationPage.pub_result[2]);
+        }else if (crrntRecoId.equals("Model4")) {
+            loadMdl(RecommendationPage.pub_result[3]);
+        }else if (crrntRecoId == "Model5") {
+            loadMdl(RecommendationPage.pub_result[4]);
         } else {
             Log.d("Else Func", "here");
-            ModelRenderable.builder()
-                    .setSource(this, getResources().getIdentifier(RecommendationPage.pub_result[4], "raw", getPackageName()))
-                    .build()
-                    .thenAccept(renderable -> {
-                        modelRenderable = renderable;
-                        modelRenderable.setShadowCaster(false);
-                        modelRenderable.setShadowReceiver(false);
-                    });
+            loadMdl(RecommendationPage.pub_result[4]);
         }
-        if (!trigger2) {
-            //augmentedFaceNodes[0].setFaceMeshTexture(null);
-            augmentedFaceNodes[0].setFaceRegionsRenderable(null);
-
-        } else {
-            augmentedFaceNodes[0].setFaceRegionsRenderable(modelRenderable);
-            //augmentedFaceNodes[0].setFaceMeshTexture(texture);
-        }
-        prevId = recoId;
-
-
-
-
 
         /*//imagebtn2 = findViewById(R.id.Model2);
         trigger2 = !trigger2;
@@ -569,7 +494,6 @@ public class CameraPage extends AppCompatActivity {
                     } else {
                         helperRateModel(modelName);
                     }
-
                 }
 
                 @Override
@@ -578,7 +502,6 @@ public class CameraPage extends AppCompatActivity {
                 }
             });
         }
-
     }
     public void trigger1(View v) {
         trigger1 = !trigger1;
@@ -610,59 +533,57 @@ public class CameraPage extends AppCompatActivity {
 
         String mdlClicked = getResources().getResourceEntryName(v.getId());
         // String mdlName = mdlClicked.substring(mdlClicked.lastIndexOf("/") + 9);
-        changeModel = !changeModel;
-        int idr = 0;
-        if (!changeModel) {
+        loadMdl(mdlClicked); //helper function
+    }
+
+    public void loadMdl(String mdlClicked) {
+        if (augmentedFaceNodes[0] == null)
+            return ;
+
+        int currentId = 0;
+        try {
+            currentId = R.raw.class.getField(mdlClicked).getInt(null);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
+
+        if (previousId == currentId) { //toggle currentModel
+            trigger2 = !trigger2;
+            if (!trigger2) {
+                rateModel(mdlClicked);
+            }
+        } else { //turn new model on
+            trigger2 = true;
+            rateModel(mdlClicked);
+        }
+        previousId = currentId;
+
+        if (!trigger2) {
             // augmentedFaceNodes[0].setFaceMeshTexture(null);
             augmentedFaceNodes[0].setFaceRegionsRenderable(null);
             // modelRenderable = null;
-            rateModel(mdlClicked);
-        }
-        else {
-
-            try {
-                idr = R.raw.class.getField(mdlClicked).getInt(null);
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
-            }
-
-
+        } else {
             ModelRenderable.builder()
-                    .setSource(this, idr)
+                    .setSource(this, currentId)
                     .build()
                     .thenAccept(renderable -> {
                         modelRenderable = renderable;
                         modelRenderable.setShadowCaster(false);
                         modelRenderable.setShadowReceiver(false);
-                    });
 
-            new CountDownTimer(100,10){
-                public void onFinish(){
+                    }).thenAccept(aVoid -> {
                     augmentedFaceNodes[0].setFaceRegionsRenderable(modelRenderable);
-                }
-                public void onTick(long millisUntilFinished){
-
-                }
-            }.start();
-
-
-
+                    });
         }
+
     }
-
-
 
     public void back(View view){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
-
-//    public void toggleProduct(View view){
-//        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-//    }
-
     //same as take picture func (just jump to different page - recommendation page)
     public void faceShapeDetect(View view1) {
         final String filename = generateFilename();

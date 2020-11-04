@@ -48,7 +48,9 @@ public class RecommendationPage extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference databaseReference;
     private TextView faceShapeRes;
+
     private static final String faceShape_URL = "http://ec2-3-15-150-137.us-east-2.compute.amazonaws.com:8080/upload";
+
     private String recoModels;
     private boolean getResult = false;
 
@@ -231,7 +233,8 @@ public class RecommendationPage extends AppCompatActivity {
             *//*intents.putExtras(b);*//*
             startActivity(intents);*/
 
-
+        } else {
+            Toast.makeText(this, "You need to sign-in", Toast.LENGTH_SHORT).show();
         }
 
 
