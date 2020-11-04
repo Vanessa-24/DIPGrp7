@@ -51,10 +51,11 @@ public class RecommendationPage extends AppCompatActivity {
     private static final String faceShape_URL = "http://ec2-3-15-150-137.us-east-2.compute.amazonaws.com:8080/upload";
     private String recoModels;
     private boolean getResult = false;
+    ImageView verifiedimage;
+    ImageView errorimage;
 
     private Model m1 = new Model("black","round", "aviators2");
     private Model m2 = new Model("red","cat", "redsunglasses");
-
 
 
     @Override
@@ -69,6 +70,9 @@ public class RecommendationPage extends AppCompatActivity {
 //        result = faceShapeDetect(URL, fileName);
 
         faceShapeRes = findViewById(R.id.msg2);
+
+        verifiedimage = findViewById(R.id.verifiedImg);
+        errorimage = findViewById(R.id.errorImg);
 
 
        new AsyncFaceShapedDetect().execute(faceShape_URL, fileName);
@@ -158,6 +162,8 @@ public class RecommendationPage extends AppCompatActivity {
     public void getResultString(String text){
         boolean yesno = true;
 
+        verifiedimage.setVisibility(View.VISIBLE);
+
         // {"squared", "round", "triangle", "diamond", "rectangular", "oblong"});
         if(text.contains("squared")){
             FaceShape.publicFaceShape = "squared";
@@ -180,6 +186,7 @@ public class RecommendationPage extends AppCompatActivity {
             FaceShape.publicFaceShape = "oblong";
         }
         else {
+            errorimage.setVisibility(View.VISIBLE);
             FaceShape.publicFaceShape = "error is it??!?";
             yesno = false;
         }
