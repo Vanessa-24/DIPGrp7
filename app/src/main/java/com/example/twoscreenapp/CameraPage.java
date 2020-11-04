@@ -180,6 +180,7 @@ public class CameraPage extends AppCompatActivity {
             public void onClick(View view) {
                 mbottomSheet.setVisibility(View.VISIBLE);
                 mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+
             }
         });
 
@@ -198,8 +199,10 @@ public class CameraPage extends AppCompatActivity {
         viewPagerAdapter.addFragment(productsFragment, "Products");
         viewPagerAdapter.addFragment(recommendationsFragment, "Recommendations");
 
+
        // viewPagerAdapter.addFragment(likesFragment, "Likes");
         viewPager.setAdapter(viewPagerAdapter);
+
 
 //        private class ViewPagerAdapter extends FragmentPagerAdapter {
 //
@@ -389,63 +392,9 @@ public class CameraPage extends AppCompatActivity {
 
     }
 
-    private void generateImgModelsFromReco(FrameLayout frameLayout) { //need to get ref frameLayout from reco fragmet
-        //this will generate image models returned from reco page
-
-
-
-        if (frameLayout == null) {
-            Log.e("err", "Cant find fragmentReco");
-            return;
-        }
-        if(RecommendationPage.pub_result != null) {
-            imagebtn1 = frameLayout.findViewById(R.id.Model1);
-            imagebtn2 = frameLayout.findViewById(R.id.Model2);
-            imagebtn3 = frameLayout.findViewById(R.id.Model3);
-            imagebtn4 = frameLayout.findViewById(R.id.Model4);
-            imagebtn5 = frameLayout.findViewById(R.id.Model5);
-            if (imagebtn1 == null) {
-                Log.e("err","Cant find");
-                return;
-            }
-            for (int i = 0; i < RecommendationPage.pub_result.length; i++) {
-                imagebtn1.setImageResource(getResources().getIdentifier(RecommendationPage.pub_result[0], "drawable", getPackageName()));
-                imagebtn2.setImageResource(getResources().getIdentifier(RecommendationPage.pub_result[1], "drawable", getPackageName()));
-                imagebtn3.setImageResource(getResources().getIdentifier(RecommendationPage.pub_result[2], "drawable", getPackageName()));
-                imagebtn4.setImageResource(getResources().getIdentifier(RecommendationPage.pub_result[3], "drawable", getPackageName()));
-                imagebtn5.setImageResource(getResources().getIdentifier(RecommendationPage.pub_result[4], "drawable", getPackageName()));
-                Log.d("insideTestReco", RecommendationPage.pub_result[i]);
-            }
-        } else {
-            Log.d("pub_result", "Is length 0");
-        }
-
-    }
-
-
     public void TestReco(View v) {
-        if(RecommendationPage.pub_result != null) {
-            if (first_reco) {
-                imagebtn1 = findViewById(R.id.Model1);
-                imagebtn2 = findViewById(R.id.Model2);
-                imagebtn3 = findViewById(R.id.Model3);
-                imagebtn4 = findViewById(R.id.Model4);
-                imagebtn5 = findViewById(R.id.Model5);
-                for (int i = 0; i < RecommendationPage.pub_result.length; i++) {
-                    imagebtn1.setImageResource(getResources().getIdentifier(RecommendationPage.pub_result[0], "drawable", getPackageName()));
-                    imagebtn2.setImageResource(getResources().getIdentifier(RecommendationPage.pub_result[1], "drawable", getPackageName()));
-                    imagebtn3.setImageResource(getResources().getIdentifier(RecommendationPage.pub_result[2], "drawable", getPackageName()));
-                    imagebtn4.setImageResource(getResources().getIdentifier(RecommendationPage.pub_result[3], "drawable", getPackageName()));
-                    imagebtn5.setImageResource(getResources().getIdentifier(RecommendationPage.pub_result[4], "drawable", getPackageName()));
-                    Log.d("insideTestReco", RecommendationPage.pub_result[i]);
-                }
-                first_reco = false;
-            }
-        }
-        else{
-            Log.d("pub_result", "Is length 0");
+        if(RecommendationPage.pub_result == null)
             return;
-        }
 
         crrntRecoId = getResources().getResourceEntryName(v.getId());
 
@@ -550,7 +499,6 @@ public class CameraPage extends AppCompatActivity {
                     } else {
                         helperRateModel(modelName);
                     }
-
                 }
 
                 @Override
@@ -559,7 +507,6 @@ public class CameraPage extends AppCompatActivity {
                 }
             });
         }
-
     }
     public void trigger1(View v) {
         trigger1 = !trigger1;
@@ -631,8 +578,6 @@ public class CameraPage extends AppCompatActivity {
         }
 
     }
-
-
 
     public void back(View view){
         Intent intent = new Intent(this, MainActivity.class);

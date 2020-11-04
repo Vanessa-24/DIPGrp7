@@ -233,7 +233,8 @@ public class RecommendationPage extends AppCompatActivity {
             *//*intents.putExtras(b);*//*
             startActivity(intents);*/
 
-
+        } else {
+            Toast.makeText(this, "You need to sign-in", Toast.LENGTH_SHORT).show();
         }
 
 
