@@ -8,5 +8,6 @@
     <color name="colorpressed">#F2FFFFFF</color>
     <color name="purple">#6C0093</color>
     <color name="purple_light">#8F75B1</color>
+    <color name="fragment_background">#D3FFFFFF</color>
 
 </resources>
