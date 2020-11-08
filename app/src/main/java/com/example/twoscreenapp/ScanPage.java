@@ -49,8 +49,6 @@ public class ScanPage extends AppCompatActivity {
         startActivity(intent);
     }
 
-
-
     //same as take picture func (just jump to different page - recommendation page)
     public void faceShapeDetect(View view1) {
         final String filename = generateFilename();
@@ -108,8 +106,6 @@ public class ScanPage extends AppCompatActivity {
         } catch (IOException ex) {
             ex.printStackTrace();
             throw new IOException("Failed to save bitmap to disk", ex);
-            //ex.printStackTrace();
-            //Log.e("Hello", "Hello world")
         }
     }
 

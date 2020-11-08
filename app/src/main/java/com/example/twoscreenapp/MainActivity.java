@@ -89,7 +89,6 @@ public class MainActivity extends AppCompatActivity {
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Log.w("SignIn with GG", "Google sign in failed", e);
-                // ...
             }
         }
     }
