@@ -12,13 +12,13 @@
   ],
   materials: [
     {
-      name: '_Metal_Frame_Reading_Glasses_V2_Max2011_iterations_2:_Metal_Fframe_Reading_Glasses1',
+      name: 'lambert4',
       parameters: [
         {
           baseColor: [
-            1,
-            0,
-            0,
+            0.44800000000000001,
+            0.27865600000000001,
+            0.44189800000000001,
             1,
           ],
         },
@@ -61,7 +61,7 @@
     collision: {},
     file: 'sampledata/m14.fbx',
     name: 'm14',
-    recenter: 'root',
+    recenter: {x:0.5,y:-0.2,z:0.7},
   },
   version: '0.54:2',
 }

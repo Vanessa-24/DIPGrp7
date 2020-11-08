@@ -53,7 +53,8 @@ public class RecommendationPage extends AppCompatActivity {
 
     private String recoModels;
     private boolean getResult = false;
-
+    ImageView verifiedimage;
+    ImageView errorimage;
 
 
     @Override
@@ -66,7 +67,10 @@ public class RecommendationPage extends AppCompatActivity {
         fileName = intent.getStringExtra(CameraPage.fileNameMsg);
         Log.d("debugFace", fileName);
 
-        faceShapeRes = findViewById(R.id.msg2);
+        faceShapeRes = findViewById(R.id.msg1);
+
+        verifiedimage = findViewById(R.id.verifiedImg);
+        errorimage = findViewById(R.id.errorImg);
 
 
        new AsyncFaceShapedDetect().execute(faceShape_URL, fileName);
@@ -136,10 +140,28 @@ public class RecommendationPage extends AppCompatActivity {
         protected void onPostExecute(String result) {
             // execution of result of Long time consuming operation
             progressDialog.dismiss();
-            faceShapeRes.setText(result);
+
+            // Set corresponding verified and error images
+
+            String[] faceShape = {"squared", "round", "triangle", "diamond", "rectangular", "oblong"};
+            String newRes = "";
+            for (int i = 0; i < faceShape.length; i ++) {
+                if (res.contains(faceShape[i])) {
+                    newRes = faceShape[i];
+                    break;
+                }
+
+            }
+
+            if (newRes == "") {
+                errorimage.setVisibility(View.VISIBLE);
+            } else {
+                verifiedimage.setVisibility(View.VISIBLE);
+            }
+
+            faceShapeRes.setText(newRes);
             uploadFaceshape(res);
         }
-
 
         @Override
         protected void onPreExecute() {
@@ -151,6 +173,9 @@ public class RecommendationPage extends AppCompatActivity {
 
     public void getResultString(String text){
         boolean yesno = true;
+
+
+        // {"squared", "round", "triangle", "diamond", "rectangular", "oblong"});
 
         if(text.contains("squared")){
             FaceShape.publicFaceShape = "squared";
@@ -179,7 +204,6 @@ public class RecommendationPage extends AppCompatActivity {
 
         if (yesno){
             FaceShape.gotFaceShapeInfo = true;
-
         }
     }
 

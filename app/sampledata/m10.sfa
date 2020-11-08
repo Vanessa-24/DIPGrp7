@@ -12,13 +12,13 @@
   ],
   materials: [
     {
-      name: 'phongE2',
+      name: 'phongE1',
       parameters: [
         {
           baseColor: [
-            0.331044,
-            0.34890100000000002,
-            0.56299999999999994,
+            0.270681,
+            0.16459199999999999,
+            0.32400000000000001,
             1,
           ],
         },
@@ -61,7 +61,7 @@
     collision: {},
     file: 'sampledata/m10.fbx',
     name: 'm10',
-    recenter: 'root',
+    recenter: {x:0.5,y:0,z:0.67},
   },
   version: '0.54:2',
 }

@@ -61,7 +61,7 @@
     collision: {},
     file: 'sampledata/m23.fbx',
     name: 'm23',
-    recenter: 'root',
+    recenter: {x:0.5,y:0,z:0.6},
   },
   version: '0.54:2',
 }

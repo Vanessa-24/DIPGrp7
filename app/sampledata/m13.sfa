@@ -12,7 +12,7 @@
   ],
   materials: [
     {
-      name: '_Metal_Frame_Reading_Glasses_V2_Max2011_iterations_2:_Metal_Fframe_Reading_Glasses1',
+      name: 'lambert2',
       parameters: [
         {
           baseColor: [
@@ -61,7 +61,7 @@
     collision: {},
     file: 'sampledata/m13.fbx',
     name: 'm13',
-    recenter: 'root',
+    recenter: {x:0.5,y:-0.2,z:0.7},
   },
   version: '0.54:2',
 }
