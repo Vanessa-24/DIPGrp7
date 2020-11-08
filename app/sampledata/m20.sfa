@@ -12,7 +12,7 @@
   ],
   materials: [
     {
-      name: 'lambert1',
+      name: 'lambert3',
       parameters: [
         {
           baseColor: [
@@ -50,13 +50,13 @@
       source: 'build/sceneform_sdk/default_materials/fbx_material.sfm',
     },
     {
-      name: 'blinn2',
+      name: 'blinn5',
       parameters: [
         {
           baseColor: [
-            0.28000000000000003,
+            0,
             1,
-            0.28000000000000003,
+            0,
             1,
           ],
         },

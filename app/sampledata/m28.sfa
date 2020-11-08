@@ -50,7 +50,7 @@
       source: 'build/sceneform_sdk/default_materials/fbx_material.sfm',
     },
     {
-      name: 'blinn2',
+      name: 'blinn5',
       parameters: [
         {
           baseColor: [
@@ -99,7 +99,7 @@
     collision: {},
     file: 'sampledata/m28.fbx',
     name: 'm28',
-    recenter: 'root',
+    recenter: {x:0.5,y:-0.1,z:0.55},
   },
   version: '0.54:2',
 }

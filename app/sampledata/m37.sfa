@@ -137,7 +137,7 @@
     collision: {},
     file: 'sampledata/m37.fbx',
     name: 'm37',
-    recenter: 'root',
+    recenter: {x:0.5,y:0.1,z:0.62},
   },
   version: '0.54:2',
 }

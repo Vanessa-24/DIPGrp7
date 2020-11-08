@@ -137,7 +137,7 @@
     collision: {},
     file: 'sampledata/m40.fbx',
     name: 'm40',
-    recenter: 'root',
+    recenter: {x:0.5,y:0.2,z:0.6},
   },
   version: '0.54:2',
 }
