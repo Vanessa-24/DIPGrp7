@@ -69,7 +69,7 @@ public class RecommendationPage extends AppCompatActivity {
         Log.d("debugFace", fileName);
 //        result = faceShapeDetect(URL, fileName);
 
-        faceShapeRes = findViewById(R.id.msg1);
+        faceShapeRes = findViewById(R.id.msg2);
 
         verifiedimage = findViewById(R.id.verifiedImg);
         errorimage = findViewById(R.id.errorImg);
