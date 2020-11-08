@@ -5,29 +5,23 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.FileProvider;
 import androidx.viewpager.widget.ViewPager;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.StrictMode;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.PixelCopy;
 import android.view.View;
 
 import android.widget.Button;
 
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -53,17 +47,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 
 import java.util.Map;
 
-
-import com.example.twoscreenapp.DialogCallback;
-import com.example.twoscreenapp.GlobalUtils;
 
 import static android.app.ProgressDialog.show;
 
@@ -86,14 +75,14 @@ public class CameraPage extends AppCompatActivity {
     private CustomArFragment customArFragment;
 
 
-
+    private int prevIView = -1, currentIView;
 
     private ImageButton imagebtn1;
     private ImageButton imagebtn2;
     private ImageButton imagebtn3;
     private ImageButton imagebtn4;
     private ImageButton imagebtn5;
-    private String crrntRecoId, prevId;
+    private String crrntRecoStringName, prevId;
     private int previousId = -1;
     private boolean first_reco = true;
 
@@ -216,24 +205,24 @@ public class CameraPage extends AppCompatActivity {
         if(RecommendationPage.pub_result == null)
             return;
 
-        crrntRecoId = getResources().getResourceEntryName(v.getId());
+        crrntRecoStringName = getResources().getResourceEntryName(v.getId());
+        int crrentClickedId = v.getId();
+        Log.d("id", crrntRecoStringName);
 
-        Log.d("id", crrntRecoId);
-
-        if (crrntRecoId.equals("Model1")) {
+        if (crrntRecoStringName.equals("Model1")) {
             Log.d("Model1 Func", "here");
-            loadMdl(RecommendationPage.pub_result[0]);
-        } else if (crrntRecoId.equals("Model2")) {
-            loadMdl(RecommendationPage.pub_result[1]);
-        }else if (crrntRecoId.equals("Model3")) {
-            loadMdl(RecommendationPage.pub_result[2]);
-        }else if (crrntRecoId.equals("Model4")) {
-            loadMdl(RecommendationPage.pub_result[3]);
-        }else if (crrntRecoId == "Model5") {
-            loadMdl(RecommendationPage.pub_result[4]);
+            loadMdl(RecommendationPage.pub_result[0], crrentClickedId);
+        } else if (crrntRecoStringName.equals("Model2")) {
+            loadMdl(RecommendationPage.pub_result[1], crrentClickedId);
+        }else if (crrntRecoStringName.equals("Model3")) {
+            loadMdl(RecommendationPage.pub_result[2], crrentClickedId);
+        }else if (crrntRecoStringName.equals("Model4")) {
+            loadMdl(RecommendationPage.pub_result[3], crrentClickedId);
+        }else if (crrntRecoStringName == "Model5") {
+            loadMdl(RecommendationPage.pub_result[4], crrentClickedId);
         } else {
             Log.d("Else Func", "here");
-            loadMdl(RecommendationPage.pub_result[4]);
+            loadMdl(RecommendationPage.pub_result[4], crrentClickedId);
         }
 
 
@@ -335,11 +324,12 @@ public class CameraPage extends AppCompatActivity {
         }
 
         String mdlClicked = getResources().getResourceEntryName(v.getId());
+        currentIView = v.getId();
 
-        loadMdl(mdlClicked); //helper function
+        loadMdl(mdlClicked, currentIView); //helper function
     }
 
-    public void loadMdl( String mdlClicked) {
+    public void loadMdl( String mdlClicked, int currentIViewID) {
         if (augmentedFaceNodes[0] == null){
             Toast.makeText(getApplicationContext(), "Face not detected!", Toast.LENGTH_LONG).show();
             return;
@@ -355,17 +345,33 @@ public class CameraPage extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        //update UI
+        if (prevIView != -1) {
+            ImageButton previousModel = findViewById(prevIView);
+            previousModel.setBackgroundColor(Color.parseColor("#ffffff")); //reflect old one off  in UI
+        }
+
+        ImageButton currentModel = findViewById(currentIViewID);
+        currentModel.setBackgroundColor(Color.parseColor("#b0b0b0")); //reflect old one off  in UI
+
+        prevIView = currentIView;
+
+
         if (previousId == currentId) { //toggle currentModel
             trigger2 = !trigger2;
             if (!trigger2) {
-                rateModel(mdlClicked);
+                rateModel(mdlClicked); //off the currentModel
             }
         } else { //turn new model on
             trigger2 = true;
-            rateModel(mdlClicked);
+            //old model should be off then rate it
+            if (previousId != -1) {
+                String previousModelName = getResources().getResourceEntryName(previousId);
+                rateModel(previousModelName);
+            }
         }
-        previousId = currentId;
 
+        previousId = currentId;
         if (!trigger2) {
             augmentedFaceNodes[0].setFaceRegionsRenderable(null);
         } else {
@@ -380,6 +386,7 @@ public class CameraPage extends AppCompatActivity {
                     }).thenAccept(aVoid -> {
                     augmentedFaceNodes[0].setFaceRegionsRenderable(modelRenderable);
                     });
+
         }
 
     }
