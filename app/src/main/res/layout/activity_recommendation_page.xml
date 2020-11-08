@@ -41,17 +41,19 @@
         android:text="face shape result"
         android:fontFamily="@font/nunitobold"
         android:textColor="#220033"
-        android:textSize="25sp"
+        android:gravity="center"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/getrecobtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/faceShapemsg" />
+        app:layout_constraintTop_toBottomOf="@+id/faceShapemsg"
+        />
 
     <TextView
         android:id="@+id/faceShapemsg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="280dp"
         android:fontFamily="@font/nunitolight"
         android:text="Your face shape is"
         android:textAlignment="center"

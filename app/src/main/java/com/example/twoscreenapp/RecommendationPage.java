@@ -148,6 +148,7 @@ public class RecommendationPage extends AppCompatActivity {
             progressDialog.dismiss();
             faceShapeRes.setText(result);
             uploadFaceshape(res);
+            verifiedimage.setVisibility(View.VISIBLE);
         }
 
 
@@ -161,8 +162,6 @@ public class RecommendationPage extends AppCompatActivity {
 
     public void getResultString(String text){
         boolean yesno = true;
-
-        verifiedimage.setVisibility(View.VISIBLE);
 
         // {"squared", "round", "triangle", "diamond", "rectangular", "oblong"});
         if(text.contains("squared")){
@@ -186,9 +185,9 @@ public class RecommendationPage extends AppCompatActivity {
             FaceShape.publicFaceShape = "oblong";
         }
         else {
-            errorimage.setVisibility(View.VISIBLE);
             FaceShape.publicFaceShape = "error is it??!?";
             yesno = false;
+            //errorimage.setVisibility(View.VISIBLE);
         }
 
         if (yesno){
