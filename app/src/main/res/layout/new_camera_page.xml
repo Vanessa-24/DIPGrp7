@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".CameraPage">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -14,7 +15,7 @@
             android:layout_height="match_parent"
             android:id="@+id/arFragment"
             android:name="com.example.twoscreenapp.CustomArFragment"
-            tools:layout="@layout/activity_camera_page" />
+            tools:layout="@layout/new_camera_page" />
 
         <ImageButton
             android:id="@+id/cameraButton"
@@ -72,7 +73,8 @@
             app:srcCompat="@drawable/ic_circle" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <include layout="@layout/new_product_page" />
+    <include
+        layout="@layout/new_product_page" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
