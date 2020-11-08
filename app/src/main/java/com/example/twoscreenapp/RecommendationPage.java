@@ -161,6 +161,7 @@ public class RecommendationPage extends AppCompatActivity {
 
             faceShapeRes.setText(newRes);
             uploadFaceshape(res);
+            verifiedimage.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -173,6 +174,9 @@ public class RecommendationPage extends AppCompatActivity {
 
     public void getResultString(String text){
         boolean yesno = true;
+
+
+//        verifiedimage.setVisibility(View.VISIBLE);
 
 
         // {"squared", "round", "triangle", "diamond", "rectangular", "oblong"});
