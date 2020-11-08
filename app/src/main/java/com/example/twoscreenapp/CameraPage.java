@@ -324,7 +324,6 @@ public class CameraPage extends AppCompatActivity {
         }
 
         String mdlClicked = getResources().getResourceEntryName(v.getId());
-
         currentIView = v.getId();
 
         loadMdl(mdlClicked, currentIView); //helper function
@@ -387,6 +386,7 @@ public class CameraPage extends AppCompatActivity {
                     }).thenAccept(aVoid -> {
                     augmentedFaceNodes[0].setFaceRegionsRenderable(modelRenderable);
                     });
+
         }
 
     }
