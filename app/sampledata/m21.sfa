@@ -60,7 +60,7 @@
     collision: {},
     file: 'sampledata/m21.fbx',
     name: 'm21',
-    recenter: 'root',
+    recenter: {x:0.5,y:0,z:0.6},
   },
   version: '0.54:2',
 }
