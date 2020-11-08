@@ -65,6 +65,8 @@ import java.util.Map;
 import com.example.twoscreenapp.DialogCallback;
 import com.example.twoscreenapp.GlobalUtils;
 
+import static android.app.ProgressDialog.show;
+
 public class CameraPage extends AppCompatActivity {
 
     public static final String fileNameMsg = "PhotoTaken";
@@ -77,7 +79,6 @@ public class CameraPage extends AppCompatActivity {
     private ModelRenderable modelRenderable;
     private ModelRenderable modelRenderable1;
 
-  /*  private Texture texture;*/
     private boolean isAdded = false;
     private boolean trigger1 = false;
     private boolean trigger2 = false;
@@ -85,24 +86,7 @@ public class CameraPage extends AppCompatActivity {
     private CustomArFragment customArFragment;
 
 
-    private Model m1 = new Model("black","round", "aviators2");
-    private Model m2 = new Model("red","cat", "redsunglasses");
-    private Model m3 = new Model("purple","rectangle", "spec_rectanglefacea");
-    private List<Model> oblong=new ArrayList<Model>(){{
-        add(m1);
-    }};
-    private List<Model> squared=new ArrayList<Model>(){{
-        add(m2);
-    }};
-    private List<Model> rectangle=new ArrayList<Model>(){{
-        add(m3);
-    }};
-    private List<Model> others=new ArrayList<Model>(){{
-        add(m3);
-    }};
 
-    private HashMap<String, List<Model>> matching = new HashMap<String, List<Model>>();
-    private List<Model> toRender = new ArrayList<Model>();
 
     private ImageButton imagebtn1;
     private ImageButton imagebtn2;
@@ -121,10 +105,6 @@ public class CameraPage extends AppCompatActivity {
 
     private ProductsFragment productsFragment;
     private RecommendationsFragment recommendationsFragment;
-   // private LikesFragment likesFragment;
-
-//    private View bottomSheet, product;
-//    private BottomSheetBehavior mBottomSheetBehavior;
 
     private Button hat, glass;
     private ImageView greybox;
@@ -154,21 +134,10 @@ public class CameraPage extends AppCompatActivity {
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
 
-        matching.put("oblong",oblong);
-        matching.put("squared",squared);
-        matching.put("rectangle",rectangle);
-        matching.put("others",others);
-
-
-//
-//        bottomSheet = findViewById(R.id.productBottomSheet);
-//        mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
         mbottomSheet = findViewById(R.id.new_bottom_sheet);
         mbottomSheet.setVisibility(View.GONE);
         mBottomSheetBehavior = BottomSheetBehavior.from(mbottomSheet);
 
-
-//        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
 
         ImageButton buttonExpand = findViewById(R.id.imageButton2);
 
@@ -191,163 +160,23 @@ public class CameraPage extends AppCompatActivity {
         productsFragment = new ProductsFragment();
         recommendationsFragment = new RecommendationsFragment();
 
-
-        //likesFragment = new LikesFragment();
         tabLayout.setupWithViewPager(viewPager);
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), 0);
         viewPagerAdapter.addFragment(productsFragment, "Products");
         viewPagerAdapter.addFragment(recommendationsFragment, "Recommendations");
 
-
-       // viewPagerAdapter.addFragment(likesFragment, "Likes");
         viewPager.setAdapter(viewPagerAdapter);
 
 
-//        private class ViewPagerAdapter extends FragmentPagerAdapter {
-//
-//            private List<Fragment> fragments = new ArrayList<>();
-//            private List<String> fragmentTitle = new ArrayList<>();
-//
-//            public ViewPagerAdapter(@NonNull FragmentManager fm, int behavior) {
-//                super(fm, behavior);
-//            }
-//
-//            public void addFragment(Fragment fragment, String title) {
-//                fragments.add(fragment);
-//                fragmentTitle.add(title);
-//            }
-//
-//            @NonNull
-//            @Override
-//            public Fragment getItem(int position) {
-//                return fragments.get(position);
-//            }
-//
-//            @Override
-//            public int getCount() {
-//                return fragments.size();
-//            }
-//
-//            @Nullable
-//            @Override
-//            public CharSequence getPageTitle(int position) {
-//                return fragmentTitle.get(position);
-//            }
-//        }
-
-////        mBottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
-////            @Override
-////            public void onStateChanged(@NonNull View bottomSheet, int newState) {
-////                // React to state change
-////                Log.e("onStateChanged", "onStateChanged:" + newState);
-////                if (newState == BottomSheetBehavior.STATE_EXPANDED) {
-////                    // Hide your state here.
-////                }
-////            }
-////
-////            @Override
-////            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-////                // React to dragging events
-////                Log.e("onSlide", "onSlide");
-////            }
-////        });
-
-//        product = findViewById(R.id.productBottomSheet);
-
-/*        hat = findViewById(R.id.button);
-        glass = findViewById(R.id.button3);*/
         greybox = findViewById(R.id.imageView);
 
         customArFragment = (CustomArFragment) getSupportFragmentManager().findFragmentById(R.id.arFragment);
 
-        if (FaceShape.gotFaceShapeInfo == false){
+        if (FaceShape.gotFaceShapeInfo == false) {
             FaceShape.publicFaceShape = "others";
         }
 
-
-/*        toRender = matching.get(FaceShape.publicFaceShape);
-        for (int i = 0; i < toRender.size(); i++) {
-           // toRender.get(i).renderModel();
-            currentModelName = toRender.get(i).getModelsfb_name(); // right now hard code
-           ModelRenderable.builder()
-                    .setSource(this, getResources().getIdentifier(toRender.get(i).getModelsfb_name(), "raw", getPackageName()))
-                    .build()
-                    .thenAccept(renderable -> {
-                        modelRenderable = renderable;
-                        modelRenderable.setShadowCaster(false);
-                        modelRenderable.setShadowReceiver(false);
-                    });
-        }*/
-
-         /*if(FaceShape.publicFaceShape.equals("oblong")){
-
-            // publicSetResDir = "R.raw.aviators2";
-            // Resources res = publicSetResDir;
-            //Load models
-            //R.raw.fox_face will go to res/raw/fox_face
-            // to render the 3d object. load 3d content into sceneform
-            ModelRenderable.builder()
-                    .setSource(this, R.raw.aviators2)
-                    .build()
-                    .thenAccept(renderable -> {
-                        modelRenderable = renderable;
-                        modelRenderable.setShadowCaster(false);
-                        modelRenderable.setShadowReceiver(false);
-                    });
-
-        }
-        else if(FaceShape.publicFaceShape.equals("squared")){
-            // load model if...
-            ModelRenderable.builder()
-                    .setSource(this, R.raw.redsunglasses)
-                    .build()
-                    .thenAccept(renderable -> {
-                        modelRenderable = renderable;
-                        modelRenderable.setShadowCaster(false);
-                        modelRenderable.setShadowReceiver(false);
-                    });
-        }
-
-        else if(FaceShape.publicFaceShape.equals("rectangle")){
-            // load model if...
-            ModelRenderable.builder()
-                    .setSource(this, R.raw.spec_rectanglefacea)
-                    .build()
-                    .thenAccept(renderable -> {
-                        modelRenderable = renderable;
-                        modelRenderable.setShadowCaster(false);
-                        modelRenderable.setShadowReceiver(false);
-                    });
-        }
-
-        else {
-            // if doesn't fit any, maybe just use 1 default obj maybe...
-            // and load model
-             String name = "spec_rectanglefacea";
-            ModelRenderable.builder()
-                    .setSource(this, R.raw.m32)
-                    .build()
-                    .thenAccept(renderable -> {
-                        modelRenderable = renderable;
-                        modelRenderable.setShadowCaster(false);
-                        modelRenderable.setShadowReceiver(false);
-                    });
-        }*/
-
-        /*ModelRenderable.builder()
-                .setSource(this, R.raw.cap2)
-                .build()
-                .thenAccept(renderable -> {
-                    modelRenderable1 = renderable;
-                    modelRenderable1.setShadowCaster(false);
-                    modelRenderable1.setShadowReceiver(false);
-                });*/
-        /*// Load the face mesh texture.
-        Texture.builder()
-                .setSource(this, R.drawable.fox_face_mesh_texture)
-                .build()
-                .thenAccept(texture -> this.texture = texture);*/
 
 //<----------------------------------------------------------------------------------------------------->
         // This is important to make sure that the camera stream renders first so that
@@ -360,23 +189,19 @@ public class CameraPage extends AppCompatActivity {
             Frame frame = customArFragment.getArSceneView().getArFrame();
             Collection<AugmentedFace> augmentedFaces = frame.getUpdatedTrackables(AugmentedFace.class);
 
-            for(AugmentedFace augmentedFace : augmentedFaces) {
+            for (AugmentedFace augmentedFace : augmentedFaces) {
                 //Do your rendering work with the face data
-                if(isAdded)
+                if (isAdded)
                     return;
                 // Create a face node and add it to the scene
-                //Create an AugmentedFaceNode with the given AugmentedFace.
+                // Create an AugmentedFaceNode with the given AugmentedFace.
                 AugmentedFaceNode augmentedFaceNode = new AugmentedFaceNode(augmentedFace);
                 augmentedFaceNode.setParent(customArFragment.getArSceneView().getScene());
-                //augmentedFaceNode.setFaceRegionsRenderable(modelRenderable);
                 //              Overylay the texture on face
-
-                //augmentedFaceNode.setFaceMeshTexture(texture);
 
                 AugmentedFaceNode augmentedFaceNode1 = new AugmentedFaceNode(augmentedFace);
                 augmentedFaceNode1.setParent(customArFragment.getArSceneView().getScene());
                 //Overlay the 3D assets on face
-                //augmentedFaceNode1.setFaceRegionsRenderable(modelRenderable1);
 
                 augmentedFaceNodes[0] = augmentedFaceNode;
                 augmentedFaceNodes[1] = augmentedFaceNode1;
@@ -385,7 +210,7 @@ public class CameraPage extends AppCompatActivity {
             }
         });
 
-
+    }
 
     public void TestReco(View v) {
         if(RecommendationPage.pub_result == null)
@@ -411,27 +236,7 @@ public class CameraPage extends AppCompatActivity {
             loadMdl(RecommendationPage.pub_result[4]);
         }
 
-        /*//imagebtn2 = findViewById(R.id.Model2);
-        trigger2 = !trigger2;
-        //Model m2 = new Model("red","cat", "redsunglasses");
-        ModelRenderable.builder()
-                .setSource(this, getResources().getIdentifier(m2.getModelsfb_name(), "raw", getPackageName()))
-                .build()
-                .thenAccept(renderable -> {
-                    modelRenderable = renderable;
-                    modelRenderable.setShadowCaster(false);
-                    modelRenderable.setShadowReceiver(false);
-                });
-        //imagebtn2.setImageResource(R.drawable.ic_sunglasses3);
 
-        if (!trigger2) {
-            //augmentedFaceNodes[0].setFaceMeshTexture(null);
-            augmentedFaceNodes[0].setFaceRegionsRenderable(null);
-
-        } else {
-            augmentedFaceNodes[0].setFaceRegionsRenderable(modelRenderable);
-            //augmentedFaceNodes[0].setFaceMeshTexture(texture);
-        }*/
     }
 
     public void helperRateModel(String currentModelName) {
@@ -518,7 +323,6 @@ public class CameraPage extends AppCompatActivity {
     public void trigger2(View v) {
         trigger2 = !trigger2;
         if (!trigger2) {
-            /*augmentedFaceNodes[1].setFaceMeshTexture(null);*/
             augmentedFaceNodes[1].setFaceRegionsRenderable(null);
         } else {
             augmentedFaceNodes[1].setFaceRegionsRenderable(modelRenderable1);
@@ -526,19 +330,21 @@ public class CameraPage extends AppCompatActivity {
     }
 
     public void loadMdl(View v) {
-        // int mdlClicked = v.getId();
         if (augmentedFaceNodes[0] == null) {
             Log.d("debug", "facenode is null");
         }
 
         String mdlClicked = getResources().getResourceEntryName(v.getId());
-        // String mdlName = mdlClicked.substring(mdlClicked.lastIndexOf("/") + 9);
+
         loadMdl(mdlClicked); //helper function
     }
 
-    public void loadMdl(String mdlClicked) {
-        if (augmentedFaceNodes[0] == null)
-            return ;
+    public void loadMdl( String mdlClicked) {
+        if (augmentedFaceNodes[0] == null){
+            Toast.makeText(getApplicationContext(), "Face not detected!", Toast.LENGTH_LONG).show();
+            return;
+        }
+
 
         int currentId = 0;
         try {
@@ -561,9 +367,7 @@ public class CameraPage extends AppCompatActivity {
         previousId = currentId;
 
         if (!trigger2) {
-            // augmentedFaceNodes[0].setFaceMeshTexture(null);
             augmentedFaceNodes[0].setFaceRegionsRenderable(null);
-            // modelRenderable = null;
         } else {
             ModelRenderable.builder()
                     .setSource(this, currentId)
@@ -622,10 +426,6 @@ public class CameraPage extends AppCompatActivity {
             handlerThread.quitSafely();
         }, new Handler(handlerThread.getLooper()));
 
-
-        //this will never be called because of my line 481
-//        Intent intent = new Intent(this, ScanPage.class);
-//        startActivity(intent);
     }
 
     public void takePicture(View view1) {
@@ -701,20 +501,6 @@ public class CameraPage extends AppCompatActivity {
         } catch (IOException ex) {
             ex.printStackTrace();
             throw new IOException("Failed to save bitmap to disk", ex);
-            //ex.printStackTrace();
-            //Log.e("Hello", "Hello world")
         }
     }
-
-
-
-    //This code no longer need
-//    public void viewFolderImg(View v) {
-//        String folderName = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + File.separator + "Sceneform/";
-//
-//        Uri selectedUri = Uri.parse(folderName);
-//        Intent intent = new Intent(Intent.ACTION_VIEW);
-//        intent.setDataAndType(selectedUri, "resource/folder");
-//        startActivity(intent);
-//    }
 }
