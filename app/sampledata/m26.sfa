@@ -12,7 +12,7 @@
   ],
   materials: [
     {
-      name: 'blinn16',
+      name: 'blinn19',
       parameters: [
         {
           baseColor: [
@@ -50,51 +50,13 @@
       source: 'build/sceneform_sdk/default_materials/fbx_material.sfm',
     },
     {
-      name: 'blinn17',
+      name: 'blinn25',
       parameters: [
         {
           baseColor: [
-            0.5,
-            0.083500000000000005,
-            0.083500000000000005,
             1,
-          ],
-        },
-        {
-          baseColorMap: null,
-        },
-        {
-          normalMap: null,
-        },
-        {
-          interpolatedColor: null,
-        },
-        {
-          metallic: 0,
-        },
-        {
-          metallicMap: null,
-        },
-        {
-          roughness: 1,
-        },
-        {
-          roughnessMap: null,
-        },
-        {
-          opacity: null,
-        },
-      ],
-      source: 'build/sceneform_sdk/default_materials/fbx_material.sfm',
-    },
-    {
-      name: 'blinn18',
-      parameters: [
-        {
-          baseColor: [
-            0.5,
-            0.083500000000000005,
-            0.083500000000000005,
+            0.036999999999999998,
+            0.036999999999999998,
             1,
           ],
         },
@@ -137,7 +99,7 @@
     collision: {},
     file: 'sampledata/m26.fbx',
     name: 'm26',
-    recenter: 'root',
+    recenter: {x:0.5,y:0.2,z:0.6},
   },
   version: '0.54:2',
 }

@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
     //handle bttn sign out
     public void GGSignOut(View view) {
         mAuth.signOut();
-        helloMsg.setText("No user");
+        helloMsg.setText("Welcome, Guest User");
         ggSignIn.setVisibility(View.VISIBLE);
         ggSignOut.setVisibility(View.GONE);
     }

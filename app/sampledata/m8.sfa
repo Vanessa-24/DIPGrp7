@@ -12,13 +12,13 @@
   ],
   materials: [
     {
-      name: 'aiMatte1',
+      name: 'phongE1',
       parameters: [
         {
           baseColor: [
-            0.236619,
-            0.11845700000000001,
-            0.00069200000000000002,
+            0.16800000000000001,
+            0.12281400000000001,
+            0.022512000000000001,
             1,
           ],
         },
@@ -61,7 +61,7 @@
     collision: {},
     file: 'sampledata/m8.fbx',
     name: 'm8',
-    recenter: 'root',
+    recenter: {x:0.5,y:0,z:0.67},
   },
   version: '0.54:2',
 }

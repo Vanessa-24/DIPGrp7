@@ -53,7 +53,8 @@ public class RecommendationPage extends AppCompatActivity {
 
     private String recoModels;
     private boolean getResult = false;
-
+    ImageView verifiedimage;
+    ImageView errorimage;
 
 
     @Override
@@ -66,7 +67,10 @@ public class RecommendationPage extends AppCompatActivity {
         fileName = intent.getStringExtra(CameraPage.fileNameMsg);
         Log.d("debugFace", fileName);
 
-        faceShapeRes = findViewById(R.id.msg2);
+        faceShapeRes = findViewById(R.id.msg1);
+
+        verifiedimage = findViewById(R.id.verifiedImg);
+        errorimage = findViewById(R.id.errorImg);
 
 
        new AsyncFaceShapedDetect().execute(faceShape_URL, fileName);
@@ -152,6 +156,10 @@ public class RecommendationPage extends AppCompatActivity {
     public void getResultString(String text){
         boolean yesno = true;
 
+        verifiedimage.setVisibility(View.VISIBLE);
+
+        // {"squared", "round", "triangle", "diamond", "rectangular", "oblong"});
+
         if(text.contains("squared")){
             FaceShape.publicFaceShape = "squared";
             // then can change the the res raw obj file dir name here, to make it less messy over at the camera page.
@@ -173,6 +181,7 @@ public class RecommendationPage extends AppCompatActivity {
             FaceShape.publicFaceShape = "oblong";
         }
         else {
+            errorimage.setVisibility(View.VISIBLE);
             FaceShape.publicFaceShape = "error is it??!?";
             yesno = false;
         }

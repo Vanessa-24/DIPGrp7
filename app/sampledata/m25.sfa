@@ -12,7 +12,7 @@
   ],
   materials: [
     {
-      name: 'blinn24',
+      name: 'blinn28',
       parameters: [
         {
           baseColor: [
@@ -61,7 +61,7 @@
     collision: {},
     file: 'sampledata/m25.fbx',
     name: 'm25',
-    recenter: 'root',
+    recenter: {x:0.5,y:0,z:0.72},
   },
   version: '0.54:2',
 }

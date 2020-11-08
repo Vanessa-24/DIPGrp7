@@ -99,7 +99,7 @@
     collision: {},
     file: 'sampledata/m36.fbx',
     name: 'm36',
-    recenter: 'root',
+    recenter: {x:0.5,y:0.2,z:0.45},
   },
   version: '0.54:2',
 }
