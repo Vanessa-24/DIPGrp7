@@ -75,7 +75,7 @@ public class CameraPage extends AppCompatActivity {
     private CustomArFragment customArFragment;
 
 
-    private int prevIView = -1, currentIView;
+    private int prevIViewID = -1;
 
     private ImageButton imagebtn1;
     private ImageButton imagebtn2;
@@ -318,17 +318,19 @@ public class CameraPage extends AppCompatActivity {
         }
     }
 
+    //used for product fragment
     public void loadMdl(View v) {
         if (augmentedFaceNodes[0] == null) {
             Log.d("debug", "facenode is null");
         }
 
         String mdlClicked = getResources().getResourceEntryName(v.getId());
-        currentIView = v.getId();
+        int currentIView = v.getId();
 
         loadMdl(mdlClicked, currentIView); //helper function
     }
 
+    //used as helper / or at reco fragment
     public void loadMdl( String mdlClicked, int currentIViewID) {
         if (augmentedFaceNodes[0] == null){
             Toast.makeText(getApplicationContext(), "Face not detected!", Toast.LENGTH_LONG).show();
@@ -346,15 +348,20 @@ public class CameraPage extends AppCompatActivity {
         }
 
         //update UI
-        if (prevIView != -1) {
-            ImageButton previousModel = findViewById(prevIView);
-            previousModel.setBackgroundColor(Color.parseColor("#ffffff")); //reflect old one off  in UI
+        if (prevIViewID != -1) {
+            ImageButton previousModel = findViewById(prevIViewID);
+            if (previousModel !=  null) {
+                previousModel.setBackgroundColor(Color.parseColor("#ffffff")); //reflect old one off  in UI
+            }
+        }
+        if (currentIViewID != prevIViewID) {
+            ImageButton currentModel = findViewById(currentIViewID);
+            if (currentModel != null) {
+                currentModel.setBackgroundColor(Color.parseColor("#b0b0b0")); //reflect new one on  in UI
+            }
         }
 
-        ImageButton currentModel = findViewById(currentIViewID);
-        currentModel.setBackgroundColor(Color.parseColor("#b0b0b0")); //reflect old one off  in UI
-
-        prevIView = currentIView;
+        prevIViewID = currentIViewID;
 
 
         if (previousId == currentId) { //toggle currentModel
