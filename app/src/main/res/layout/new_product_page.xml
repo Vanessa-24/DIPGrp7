@@ -18,11 +18,13 @@
                 android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#b19cd9"
+                android:background="#56000000"
                 app:tabTextAppearance="@style/MyCustomTabText"
                 app:tabTextColor="#ffffff"
-                app:tabSelectedTextColor="#6C0093"
-                app:tabIndicatorColor="#6C0093">
+                app:tabTextFont="@font/atma"
+                app:tabSelectedTextColor="@color/purple_light"
+                app:tabIndicatorColor="@color/purple_light">
+
 
             </com.google.android.material.tabs.TabLayout>
 
