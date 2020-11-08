@@ -61,7 +61,7 @@
     collision: {},
     file: 'sampledata/m9.fbx',
     name: 'm9',
-    recenter: 'root',
+    recenter: {x:0.5,y:0,z:0.67},
   },
   version: '0.54:2',
 }
