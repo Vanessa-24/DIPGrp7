@@ -147,7 +147,7 @@ public class RecommendationPage extends AppCompatActivity {
             String newRes = "";
             for (int i = 0; i < faceShape.length; i ++) {
                 if (res.contains(faceShape[i])) {
-                    newRes = faceShape[i];
+                    newRes = faceShape[i].toUpperCase();
                     break;
                 }
 
