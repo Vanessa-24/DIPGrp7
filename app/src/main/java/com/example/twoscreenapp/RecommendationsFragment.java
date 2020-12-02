@@ -4,9 +4,11 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +25,13 @@ public class RecommendationsFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    public View mView;
+    private ImageButton imagebtn1;
+    private ImageButton imagebtn2;
+    private ImageButton imagebtn3;
+    private ImageButton imagebtn4;
+    private ImageButton imagebtn5;
+    private boolean first_reco = true;
 
     public RecommendationsFragment() {
         // Required empty public constructor
@@ -59,6 +68,34 @@ public class RecommendationsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_recommendations, container, false);
+        super.onCreateView(inflater, container, savedInstanceState);
+        mView = inflater.inflate(R.layout.fragment_recommendations, container, false);
+        helperLoadImg(mView);
+        return mView;
+    }
+
+    public void helperLoadImg(View v){
+        if(RecommendationPage.pub_result != null) {
+            if (first_reco) {
+                imagebtn1 = v.findViewById(R.id.Model1);
+                imagebtn2 = v.findViewById(R.id.Model2);
+                imagebtn3 = v.findViewById(R.id.Model3);
+                imagebtn4 = v.findViewById(R.id.Model4);
+                imagebtn5 = v.findViewById(R.id.Model5);
+                for (int i = 0; i < RecommendationPage.pub_result.length; i++) {
+                    imagebtn1.setImageResource(getResources().getIdentifier(RecommendationPage.pub_result[0], "drawable", getActivity().getPackageName()));
+                    imagebtn2.setImageResource(getResources().getIdentifier(RecommendationPage.pub_result[1], "drawable", getActivity().getPackageName()));
+                    imagebtn3.setImageResource(getResources().getIdentifier(RecommendationPage.pub_result[2], "drawable", getActivity().getPackageName()));
+                    imagebtn4.setImageResource(getResources().getIdentifier(RecommendationPage.pub_result[3], "drawable", getActivity().getPackageName()));
+                    imagebtn5.setImageResource(getResources().getIdentifier(RecommendationPage.pub_result[4], "drawable", getActivity().getPackageName()));
+                    Log.d("insideTestReco", RecommendationPage.pub_result[i]);
+                }
+                first_reco = false;
+            }
+        }
+        else{
+            Log.d("pub_result", "Is length 0");
+            return;
+        }
     }
 }

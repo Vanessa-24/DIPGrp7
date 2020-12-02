@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:onClick="back">
+    tools:context=".CameraPage">
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -88,7 +89,8 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <include layout="@layout/new_product_page" />
+    <include
+        layout="@layout/new_product_page" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
