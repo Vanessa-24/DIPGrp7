@@ -42,6 +42,7 @@
         android:layout_height="50dp"
         android:backgroundTint="#38288B"
         android:onClick="GGSignOut"
+        android:fontFamily="@font/atma"
         android:text="LOG OUT"
         android:textColor="#FFFFFF"
         android:visibility="gone"
