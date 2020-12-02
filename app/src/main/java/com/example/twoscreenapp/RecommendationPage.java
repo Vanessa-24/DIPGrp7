@@ -148,7 +148,15 @@ public class RecommendationPage extends AppCompatActivity {
             progressDialog.dismiss();
             faceShapeRes.setText(result);
             uploadFaceshape(res);
-            verifiedimage.setVisibility(View.VISIBLE);
+
+            // Set corresponding verified and error images
+            if (res.equals("squared") || res.equals("round") || res.equals("triangle") || res.equals("diamond") || res.equals("rectangular") || res.equals("oblong")){
+                verifiedimage.setVisibility(View.VISIBLE);
+            }
+            else {
+              errorimage.setVisibility(View.VISIBLE);
+            }
+
         }
 
 
