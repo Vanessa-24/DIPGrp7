@@ -209,7 +209,6 @@ public class CameraPage extends AppCompatActivity {
 
         crrntRecoStringName = getResources().getResourceEntryName(v.getId());
         int crrentClickedId = v.getId();
-        Log.d("id", crrntRecoStringName);
 
         if (crrntRecoStringName.equals("Model1")) {
             Log.d("Model1 Func", "here");
@@ -350,17 +349,28 @@ public class CameraPage extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        String onColor = "#80FFFFFF";
+        String offColor = "#F5E6E3";
         //update UI
+
+        ImageButton previousModel = findViewById(prevIViewID);
+        ImageButton currentModel = findViewById(currentIViewID);
+
         if (prevIViewID != -1) {
-            ImageButton previousModel = findViewById(prevIViewID);
             if (previousModel !=  null) {
-                previousModel.setBackgroundColor(Color.parseColor("#F5E6E3")); //reflect old one off  in UI
+                previousModel.setBackgroundColor(Color.parseColor(offColor)); //reflect old one off  in UI
             }
         }
+
         if (currentIViewID != prevIViewID) {
-            ImageButton currentModel = findViewById(currentIViewID);
             if (currentModel != null) {
-                currentModel.setBackgroundColor(Color.parseColor("#80FFFFFF")); //reflect new one on  in UI
+                currentModel.setBackgroundColor(Color.parseColor(onColor)); //reflect new one on  in UI
+            }
+        } else {
+            if (augmentedFaceNodes[0].getFaceRegionsRenderable() == null) {
+                if (currentModel != null) {
+                    currentModel.setBackgroundColor(Color.parseColor(onColor)); //reflect new one on  in UI
+                }
             }
         }
 
