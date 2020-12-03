@@ -68,6 +68,8 @@ public class CameraPage extends AppCompatActivity {
     private ModelRenderable modelRenderable;
     private ModelRenderable modelRenderable1;
 
+    public static String model_shopcart = "";
+
     private boolean isAdded = false;
     private boolean trigger1 = false;
     private boolean trigger2 = false;
@@ -327,6 +329,7 @@ public class CameraPage extends AppCompatActivity {
         String mdlClicked = getResources().getResourceEntryName(v.getId());
         int currentIView = v.getId();
 
+
         loadMdl(mdlClicked, currentIView); //helper function
     }
 
@@ -380,8 +383,10 @@ public class CameraPage extends AppCompatActivity {
 
         previousId = currentId;
         if (!trigger2) {
+            model_shopcart = "";
             augmentedFaceNodes[0].setFaceRegionsRenderable(null);
         } else {
+            model_shopcart = mdlClicked.substring(1);
             ModelRenderable.builder()
                     .setSource(this, currentId)
                     .build()
@@ -394,6 +399,11 @@ public class CameraPage extends AppCompatActivity {
                     augmentedFaceNodes[0].setFaceRegionsRenderable(modelRenderable);
                     });
 
+        }
+
+        Log.d("Current_model", model_shopcart);
+        if(model_shopcart.equals("")){
+            Log.d("Current_model","Nth");
         }
 
     }

@@ -55,6 +55,7 @@ public class RecommendationPage extends AppCompatActivity {
     private boolean getResult = false;
     ImageView verifiedimage;
     ImageView errorimage;
+    private TextView faceShapeMsg;
 
 
     @Override
@@ -68,6 +69,8 @@ public class RecommendationPage extends AppCompatActivity {
         Log.d("debugFace", fileName);
 
         faceShapeRes = findViewById(R.id.msg2);
+
+        faceShapeMsg = findViewById(R.id.faceShapemsg);
 
         verifiedimage = findViewById(R.id.verifiedImg);
         errorimage = findViewById(R.id.errorImg);
@@ -152,9 +155,13 @@ public class RecommendationPage extends AppCompatActivity {
 
             }
 
-            if (newRes == "") {
+            if (newRes.equals("")) {
+                verifiedimage.setVisibility(View.INVISIBLE);
                 errorimage.setVisibility(View.VISIBLE);
+                faceShapeMsg.setText("ERROR:No FaceShape is found");
             } else {
+                errorimage.setVisibility(View.INVISIBLE);
+                faceShapeMsg.setText("Your FaceShape is");
                 verifiedimage.setVisibility(View.VISIBLE);
             }
 
@@ -162,12 +169,12 @@ public class RecommendationPage extends AppCompatActivity {
             uploadFaceshape(res);
 
             // Set corresponding verified and error images
-            if (res.equals("squared") || res.equals("round") || res.equals("triangle") || res.equals("diamond") || res.equals("rectangular") || res.equals("oblong")){
+            /*if (res.equals("squared") || res.equals("round") || res.equals("triangle") || res.equals("diamond") || res.equals("rectangular") || res.equals("oblong")){
                 verifiedimage.setVisibility(View.VISIBLE);
             }
             else {
               errorimage.setVisibility(View.VISIBLE);
-            }
+            }*/
 
         }
 

@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private TextView helloMsg;
     private Button ggSignIn, ggSignOut;
+    private Boolean signIn = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +58,9 @@ public class MainActivity extends AppCompatActivity {
             ggSignIn.setVisibility(View.GONE);
             ggSignOut.setVisibility(View.VISIBLE);
             helloMsg.setText("Hello, " + currentUser.getDisplayName());
+            signIn = true;
+        } else{
+            signIn = false;
         }
     }
 
@@ -106,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
                             helloMsg.setText("Hello, " + user.getDisplayName());
                             ggSignIn.setVisibility(View.GONE);
                             ggSignOut.setVisibility(View.VISIBLE);
+                            signIn = true;
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(MainActivity.this, "failed at sign in with Firebase", Toast.LENGTH_SHORT).show();
@@ -115,8 +120,14 @@ public class MainActivity extends AppCompatActivity {
     }
     //handle open camera page
     public void switchPage(View view) {
-        Intent intent = new Intent(this, CameraPage.class);
-        startActivity(intent);
+
+        if(signIn){
+            Intent intent = new Intent(this, CameraPage.class);
+            startActivity(intent);
+        } else{
+            Toast.makeText(getApplicationContext(), "Please sign in to continue", Toast.LENGTH_LONG).show();
+        }
+
     }
     //handle bttn sign in
     public void GGSignin(View view) {
@@ -129,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
         helloMsg.setText("Welcome, Guest User");
         ggSignIn.setVisibility(View.VISIBLE);
         ggSignOut.setVisibility(View.GONE);
+        signIn = false;
     }
 
 }
