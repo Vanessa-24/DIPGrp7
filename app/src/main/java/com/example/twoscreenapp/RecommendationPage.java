@@ -67,7 +67,7 @@ public class RecommendationPage extends AppCompatActivity {
         fileName = intent.getStringExtra(CameraPage.fileNameMsg);
         Log.d("debugFace", fileName);
 
-        faceShapeRes = findViewById(R.id.msg1);
+        faceShapeRes = findViewById(R.id.msg2);
 
         verifiedimage = findViewById(R.id.verifiedImg);
         errorimage = findViewById(R.id.errorImg);
@@ -146,7 +146,7 @@ public class RecommendationPage extends AppCompatActivity {
             String newRes = "";
             for (int i = 0; i < faceShape.length; i ++) {
                 if (res.contains(faceShape[i])) {
-                    newRes = faceShape[i];
+                    newRes = faceShape[i].toUpperCase();
                     break;
                 }
 
@@ -160,6 +160,15 @@ public class RecommendationPage extends AppCompatActivity {
 
             faceShapeRes.setText(newRes);
             uploadFaceshape(res);
+
+            // Set corresponding verified and error images
+            if (res.equals("squared") || res.equals("round") || res.equals("triangle") || res.equals("diamond") || res.equals("rectangular") || res.equals("oblong")){
+                verifiedimage.setVisibility(View.VISIBLE);
+            }
+            else {
+              errorimage.setVisibility(View.VISIBLE);
+            }
+
         }
 
         @Override
@@ -172,7 +181,6 @@ public class RecommendationPage extends AppCompatActivity {
 
     public void getResultString(String text){
         boolean yesno = true;
-
 
         // {"squared", "round", "triangle", "diamond", "rectangular", "oblong"});
 
@@ -199,6 +207,7 @@ public class RecommendationPage extends AppCompatActivity {
         else {
             FaceShape.publicFaceShape = "error is it??!?";
             yesno = false;
+            //errorimage.setVisibility(View.VISIBLE);
         }
 
         if (yesno){

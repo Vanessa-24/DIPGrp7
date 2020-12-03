@@ -8,5 +8,9 @@
     <color name="colorpressed">#F2FFFFFF</color>
     <color name="purple">#6C0093</color>
     <color name="purple_light">#8F75B1</color>
+    <color name="fragment_background">#F5E6E3</color>
+    <color name="tab_background">#443D53</color>
+    <color name="tab_unselectedtext">#ffffff</color>
+    <color name="tab_selectedtext">#8486A3</color>
 
 </resources>

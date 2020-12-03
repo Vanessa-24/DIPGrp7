@@ -352,13 +352,13 @@ public class CameraPage extends AppCompatActivity {
         if (prevIViewID != -1) {
             ImageButton previousModel = findViewById(prevIViewID);
             if (previousModel !=  null) {
-                previousModel.setBackgroundColor(Color.parseColor("#ffffff")); //reflect old one off  in UI
+                previousModel.setBackgroundColor(Color.parseColor("#F5E6E3")); //reflect old one off  in UI
             }
         }
         if (currentIViewID != prevIViewID) {
             ImageButton currentModel = findViewById(currentIViewID);
             if (currentModel != null) {
-                currentModel.setBackgroundColor(Color.parseColor("#b0b0b0")); //reflect new one on  in UI
+                currentModel.setBackgroundColor(Color.parseColor("#80FFFFFF")); //reflect new one on  in UI
             }
         }
 
