@@ -12,7 +12,12 @@
     </style>
 
     <style name="MyCustomTabText" parent="TextAppearance.Design.Tab">
+<<<<<<< HEAD
         <item name="android:textSize">12sp</item>
+=======
+        <item name="android:textSize">15sp</item>
+        <item name="android:fontFamily">@font/montserratregular</item>
+>>>>>>> parent of 7d29518... change font size
     </style>
 
     <style name="CustomDialogTheme" parent="android:Theme.Dialog">

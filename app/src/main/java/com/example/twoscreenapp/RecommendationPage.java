@@ -142,7 +142,6 @@ public class RecommendationPage extends AppCompatActivity {
             progressDialog.dismiss();
 
             // Set corresponding verified and error images
-
             String[] faceShape = {"squared", "round", "triangle", "diamond", "rectangular", "oblong"};
             String newRes = "";
             for (int i = 0; i < faceShape.length; i ++) {
