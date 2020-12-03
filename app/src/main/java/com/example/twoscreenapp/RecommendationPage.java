@@ -49,7 +49,7 @@ public class RecommendationPage extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private TextView faceShapeRes;
 
-    private static final String faceShape_URL = "http://ec2-3-15-150-137.us-east-2.compute.amazonaws.com:8080/upload";
+    private static final String faceShape_URL = "http://ec2-3-133-149-83.us-east-2.compute.amazonaws.com:8080/upload";
 
     private String recoModels;
     private boolean getResult = false;
@@ -142,7 +142,6 @@ public class RecommendationPage extends AppCompatActivity {
             progressDialog.dismiss();
 
             // Set corresponding verified and error images
-
             String[] faceShape = {"squared", "round", "triangle", "diamond", "rectangular", "oblong"};
             String newRes = "";
             for (int i = 0; i < faceShape.length; i ++) {
@@ -265,7 +264,7 @@ public class RecommendationPage extends AppCompatActivity {
         final String[] result = {"m1","m2","m3","m4"};
         Thread thread = new Thread(() -> {
             try {
-                java.net.URL url = new URL("http://ec2-3-15-150-137.us-east-2.compute.amazonaws.com:8080/reco");
+                java.net.URL url = new URL("http://ec2-3-133-149-83.us-east-2.compute.amazonaws.com:8080/reco");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
                 conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");

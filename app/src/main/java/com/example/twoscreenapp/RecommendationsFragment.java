@@ -90,6 +90,8 @@ public class RecommendationsFragment extends Fragment {
                     imagebtn5.setImageResource(getResources().getIdentifier(RecommendationPage.pub_result[4], "drawable", getActivity().getPackageName()));
                     Log.d("insideTestReco", RecommendationPage.pub_result[i]);
                 }
+                Log.d("loadImg", "load9ing..");
+
                 first_reco = false;
             }
         }
