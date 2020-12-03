@@ -89,7 +89,6 @@ public class MainActivity extends AppCompatActivity {
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Log.w("SignIn with GG", "Google sign in failed", e);
-                // ...
             }
         }
     }
@@ -127,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
     //handle bttn sign out
     public void GGSignOut(View view) {
         mAuth.signOut();
-        helloMsg.setText("No user");
+        helloMsg.setText("Welcome, Guest User");
         ggSignIn.setVisibility(View.VISIBLE);
         ggSignOut.setVisibility(View.GONE);
     }

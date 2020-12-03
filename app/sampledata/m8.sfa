@@ -1,0 +1,67 @@
+{
+  animations: [
+    {
+      clips: [
+        {
+          name: 'Take 001',
+          runtime_name: 'm8',
+        },
+      ],
+      path: 'sampledata/m8.fbx',
+    },
+  ],
+  materials: [
+    {
+      name: 'phongE1',
+      parameters: [
+        {
+          baseColor: [
+            0.16800000000000001,
+            0.12281400000000001,
+            0.022512000000000001,
+            1,
+          ],
+        },
+        {
+          baseColorMap: null,
+        },
+        {
+          normalMap: null,
+        },
+        {
+          interpolatedColor: null,
+        },
+        {
+          metallic: 0,
+        },
+        {
+          metallicMap: null,
+        },
+        {
+          roughness: 1,
+        },
+        {
+          roughnessMap: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/fbx_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+      'BoneIndices',
+      'BoneWeights',
+    ],
+    collision: {},
+    file: 'sampledata/m8.fbx',
+    name: 'm8',
+    recenter: {x:0.5,y:0,z:0.67},
+  },
+  version: '0.54:2',
+}

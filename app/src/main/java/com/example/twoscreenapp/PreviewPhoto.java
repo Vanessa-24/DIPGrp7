@@ -37,7 +37,7 @@ import org.json.JSONObject;
 
 public class PreviewPhoto extends AppCompatActivity {
 
-    private Button sharebtn;
+    private ImageButton sharebtn, shopbtn;
     private Bitmap myBitmap;
     private String fileName;
 
@@ -46,11 +46,16 @@ public class PreviewPhoto extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_preview_photo);
+        setContentView(R.layout.last_page);
 
         sharebtn = findViewById(R.id.share);
         // Assign the button to the share btn on the xml then set listener
         sharebtn.setOnClickListener(shareOnClickListener);
+
+        shopbtn = findViewById(R.id.shop);
+        // Assign the button to the share btn on the xml then set listener
+        shopbtn.setOnClickListener(shopOnClickListener);
+
 
         Intent intent = getIntent();
         //get the message of the intent
@@ -65,6 +70,11 @@ public class PreviewPhoto extends AppCompatActivity {
         }
     }
 
+    public void back(View view){
+        Intent intent = new Intent(this, CameraPage.class);
+        startActivity(intent);
+    }
+
     private View.OnClickListener shareOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -76,11 +86,6 @@ public class PreviewPhoto extends AppCompatActivity {
         Intent i = new Intent(Intent.ACTION_SEND);
 
         i.setType("image/*");
-        // ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            /*compress(Bitmap.CompressFormat.PNG, 100, stream);
-            byte[] bytes = stream.toByteArray();*/
-
-        // String fileName = i.getStringExtra(CameraPage.fileNameMsg);
 
         File imgFile1 = new  File(fileName);
         // the code to try to share the image
@@ -95,47 +100,18 @@ public class PreviewPhoto extends AppCompatActivity {
         }
     }
 
-//    public  String faceShapeDetect(String url, File file) {
-//
-//            try {
-//                HttpClient httpclient = new DefaultHttpClient();
-//                HttpPost httppost = new HttpPost(url);
-//
-//                MultipartEntityBuilder builder = MultipartEntityBuilder.create();
-//                builder.addBinaryBody(
-//                        "content", file, ContentType.MULTIPART_FORM_DATA, fileName);
-//                HttpEntity multipart = builder.build();
-//
-//                httppost.setEntity(multipart);
-//                HttpResponse response = httpclient.execute(httppost);
-//
-//
-//                HttpEntity entity = response.getEntity();
-//                String responseString = EntityUtils.toString(entity, "UTF-8");
-//                return responseString;
-//
-//            } catch (Exception e) {
-//                // show error
-//                Log.e("face shape err", e + "");
-//            }
-//            return "";
-//    }
+    private View.OnClickListener shopOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            shopButtonClicked();
+        }
+    };
 
-//    private void uploadFaceshape(String faceshape) {
-//        FirebaseUser currentUser = mAuth.getCurrentUser();
-//        String userID = currentUser.getUid();
-//        if (currentUser != null) {
-//            faceShapeRef = FirebaseDatabase.getInstance().getReference("FaceShape");
-//
-//            try {
-//                JSONObject data = new JSONObject(faceshape);
-//                FaceShape faceShape = new FaceShape(data.getString("shape"), data.getString("jawlines"));
-//                faceShapeRef.child(userID).setValue(faceShape);
-//                Toast.makeText(PreviewPhoto.this, "Save face shape to clould successfully", Toast.LENGTH_SHORT).show();
-//            } catch (JSONException e) {
-////                e.printStackTrace();
-//                Log.e("Upload data", "Failed" + e.getMessage());
-//            }
-//        }
-//    }
+    private void shopButtonClicked() {
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        String url;
+        url = "https://world.taobao.com/";
+        i.setData(Uri.parse(url));
+        startActivity(i);
+    }
 }

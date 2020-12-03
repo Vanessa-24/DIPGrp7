@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".CameraPage">
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -14,7 +16,7 @@
             android:layout_height="match_parent"
             android:id="@+id/arFragment"
             android:name="com.example.twoscreenapp.CustomArFragment"
-            tools:layout="@layout/activity_camera_page" />
+            tools:layout="@layout/new_camera_page" />
 
         <ImageButton
             android:id="@+id/cameraButton"
@@ -35,7 +37,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:background="#0000"
-            android:onClick="trigger1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/cameraButton"
             app:layout_constraintHorizontal_bias="0.435"
@@ -43,6 +44,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.953"
             app:srcCompat="@drawable/btn_sunglasses" />
+
+        <!--        android:onClick="trigger1"-->
 
         <ImageButton
             android:id="@+id/imageButton3"
@@ -69,8 +72,25 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.953"
             app:srcCompat="@drawable/ic_circle" />
+
+        <ImageButton
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="back"
+            android:background="#0000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.047"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.024"
+            app:srcCompat="@drawable/ic_return" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--    <include layout="@layout/product"/>-->
+    <include
+        layout="@layout/new_product_page" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+

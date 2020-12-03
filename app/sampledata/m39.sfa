@@ -1,0 +1,105 @@
+{
+  animations: [
+    {
+      clips: [
+        {
+          name: 'Take 001',
+          runtime_name: 'm39',
+        },
+      ],
+      path: 'sampledata/m39.fbx',
+    },
+  ],
+  materials: [
+    {
+      name: 'glass',
+      parameters: [
+        {
+          baseColor: [
+            0.89700000000000002,
+            0.58414699999999997,
+            0.25564500000000001,
+            1,
+          ],
+        },
+        {
+          baseColorMap: null,
+        },
+        {
+          normalMap: null,
+        },
+        {
+          interpolatedColor: null,
+        },
+        {
+          metallic: 0,
+        },
+        {
+          metallicMap: null,
+        },
+        {
+          roughness: 1,
+        },
+        {
+          roughnessMap: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/fbx_material.sfm',
+    },
+    {
+      name: 'frame',
+      parameters: [
+        {
+          baseColor: [
+            0.030533999999999999,
+            0.018068000000000001,
+            0.0049769999999999997,
+            1,
+          ],
+        },
+        {
+          baseColorMap: null,
+        },
+        {
+          normalMap: null,
+        },
+        {
+          interpolatedColor: null,
+        },
+        {
+          metallic: 0,
+        },
+        {
+          metallicMap: null,
+        },
+        {
+          roughness: 1,
+        },
+        {
+          roughnessMap: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/fbx_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+      'BoneIndices',
+      'BoneWeights',
+    ],
+    collision: {},
+    file: 'sampledata/m39.fbx',
+    name: 'm39',
+    recenter: {x:0.5,y:0.2,z:0.5},
+  },
+  version: '0.54:2',
+}
