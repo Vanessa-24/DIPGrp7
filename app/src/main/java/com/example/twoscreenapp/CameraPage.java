@@ -128,6 +128,8 @@ public class CameraPage extends AppCompatActivity {
         mbottomSheet.setVisibility(View.GONE);
         mBottomSheetBehavior = BottomSheetBehavior.from(mbottomSheet);
 
+        model_shopcart = "";
+
 
         ImageButton buttonExpand = findViewById(R.id.imageButton2);
 
@@ -266,7 +268,7 @@ public class CameraPage extends AppCompatActivity {
             ref = FirebaseDatabase.getInstance().getReference();
             String userID = currentUser.getUid();
             ref.child(userID).child("ratings").child(modelName).setValue(value);
-            Toast.makeText(this, "Save rating to clould successfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Save rating to cloud successfully", Toast.LENGTH_SHORT).show();
         }
     }
     private void rateModel(String modelName) {
@@ -349,7 +351,7 @@ public class CameraPage extends AppCompatActivity {
         }
 
         String onColor = "#80FFFFFF";
-        String offColor = "#F5E6E3";
+        String offColor = "#E3D9D8";
         //update UI
 
         ImageButton previousModel = findViewById(prevIViewID);

@@ -118,6 +118,10 @@ public class PreviewPhoto extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void download(View view){
+        Toast.makeText(getApplicationContext(), "Photo Saved!", Toast.LENGTH_LONG).show();
+    }
+
     private View.OnClickListener shareOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {

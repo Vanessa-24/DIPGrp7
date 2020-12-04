@@ -16,7 +16,7 @@
         android:contentDescription="Preview Photo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"   
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
@@ -27,39 +27,37 @@
         android:background="#00000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/download"
-        app:layout_constraintHorizontal_bias="0.476"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.927"
+        app:layout_constraintVertical_bias="0.93"
         app:srcCompat="@drawable/ic_shop" />
 
     <ImageButton
         android:id="@+id/share"
         android:layout_width="53dp"
         android:layout_height="48dp"
-        android:layout_marginEnd="56dp"
         android:background="#00000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/download"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.927"
+        app:layout_constraintVertical_bias="0.93"
         app:srcCompat="@drawable/ic_share" />
 
     <ImageButton
         android:id="@+id/download"
         android:layout_width="48dp"
         android:layout_height="47dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="50dp"
         android:background="#00000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/share"
-        app:layout_constraintHorizontal_bias="0.922"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
+        android:onClick="download"
+        app:layout_constraintBottom_toBottomOf="@+id/previewPhoto"
+        app:layout_constraintEnd_toEndOf="@+id/previewPhoto"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/previewPhoto"
+        app:layout_constraintTop_toTopOf="@+id/previewPhoto"
+        app:layout_constraintVertical_bias="0.93"
         app:srcCompat="@drawable/ic_download" />
 
     <ImageButton
