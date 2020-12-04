@@ -209,7 +209,8 @@ public class CameraPage extends AppCompatActivity {
         int crrentClickedId = v.getId();
         Log.d("id", crrntRecoStringName);
 
-        if (crrntRecoStringName.equals("Model1")) {
+        if (q
+                .equals("Model1")) {
             Log.d("Model1 Func", "here");
             loadMdl(RecommendationPage.pub_result[0], crrentClickedId);
         } else if (crrntRecoStringName.equals("Model2")) {
