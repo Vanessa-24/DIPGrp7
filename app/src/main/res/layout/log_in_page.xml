@@ -41,20 +41,20 @@
         android:id="@+id/logOut"
         android:layout_width="160dp"
         android:layout_height="50dp"
+        android:layout_marginTop="32dp"
         android:backgroundTint="#38288B"
-        android:onClick="GGSignOut"
-        android:text="LOG OUT"
-        android:padding="2dp"
         android:fontFamily="@font/montserratregular"
+        android:onClick="GGSignOut"
+        android:padding="2dp"
+        android:text="LOG OUT"
+
         android:textColor="#FFFFFF"
-        android:visibility="gone"
         android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.65" />
+        app:layout_constraintTop_toBottomOf="@+id/helloMsg" />
 
     <ImageView
         android:id="@+id/logo"
@@ -86,12 +86,12 @@
         android:id="@+id/skipbtn"
         android:layout_width="65dp"
         android:layout_height="50dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="128dp"
         android:background="@drawable/camera"
         android:onClick="switchPage"
         android:textColor="#38288B"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/googleSignIn" />
+        app:layout_constraintTop_toBottomOf="@+id/helloMsg" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

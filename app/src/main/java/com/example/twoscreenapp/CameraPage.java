@@ -25,7 +25,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.ar.core.AugmentedFace;
 import com.google.ar.core.Frame;
@@ -450,21 +449,6 @@ public class CameraPage extends AppCompatActivity {
                     toast.show();
                     return;
                 }
-                Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),
-                        "Photo saved", Snackbar.LENGTH_LONG);
-                snackbar.setAction("Open in Photos", v -> {
-                    File photoFile = new File(filename);
-
-                    Uri photoURI = FileProvider.getUriForFile(this,
-                            this.getPackageName() + ".ar.codelab.name.provider",
-                            photoFile);
-
-                    Intent intent = new Intent(Intent.ACTION_VIEW, photoURI);
-                    intent.setDataAndType(photoURI, "image/*");
-                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                    startActivity(intent);
-                });
-                snackbar.show();
 
                 //To preview the photo via an intent
                 Intent previewPhoto = new Intent(this, PreviewPhoto.class);
