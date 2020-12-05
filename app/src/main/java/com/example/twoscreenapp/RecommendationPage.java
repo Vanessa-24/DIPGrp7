@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -154,16 +155,30 @@ public class RecommendationPage extends AppCompatActivity {
                 }
 
             }
+            Button actionBtn = findViewById(R.id.getrecobtn);
 
             if (newRes.equals("")) {
                 verifiedimage.setVisibility(View.INVISIBLE);
                 errorimage.setVisibility(View.VISIBLE);
                 faceShapeMsg.setText("ERROR:No FaceShape is found");
+                actionBtn.setText("TRY AGAIN!");
+                actionBtn.setOnClickListener (v -> {
+                    Intent intents = new Intent(v.getContext(), ScanPage.class);
+                    startActivity(intents);
+                });;
             } else {
                 errorimage.setVisibility(View.INVISIBLE);
                 faceShapeMsg.setText("Your FaceShape is");
                 verifiedimage.setVisibility(View.VISIBLE);
+                actionBtn.setOnClickListener(v -> {
+                    try {
+                        getRec(v);
+                    } catch ( JSONException e ) {
+                        e.printStackTrace();
+                    }
+                });
             }
+
 
             faceShapeRes.setText(newRes);
             uploadFaceshape(res);
@@ -242,7 +257,6 @@ public class RecommendationPage extends AppCompatActivity {
                     HashMap<String, Map<String, String>> temp = (HashMap<String, Map<String, String>>) dataSnapshot.getValue();
 //                    temp.getClass();
                     String faceShape = temp.get("faceShape").get("face");
-
                     Map<String, String> ratings = temp.get("ratings");
 
                     try {
