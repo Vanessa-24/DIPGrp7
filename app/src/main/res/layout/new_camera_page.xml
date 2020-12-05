@@ -11,12 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-<!--        <fragment-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:id="@+id/arFragment"-->
-<!--            android:name="com.example.twoscreenapp.CustomArFragment"-->
-<!--            tools:layout="@layout/new_camera_page" />-->
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/arFragment"
+            android:name="com.example.twoscreenapp.CustomArFragment"
+            tools:layout="@layout/new_camera_page" />
 
         <ImageButton
             android:id="@+id/cameraButton"

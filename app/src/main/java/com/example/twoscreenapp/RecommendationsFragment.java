@@ -92,9 +92,10 @@ public class RecommendationsFragment extends Fragment {
                     imagebtn5.setImageResource(getResources().getIdentifier(RecommendationPage.pub_result[4], "drawable", getActivity().getPackageName()));
                     Log.d("insideTestReco", RecommendationPage.pub_result[i]);
                 }
+                Log.d("loadImg", RecommendationPage.pub_result[0] + RecommendationPage.pub_result[1] + RecommendationPage.pub_result[2] + RecommendationPage.pub_result[3] + RecommendationPage.pub_result[4] + "");
                 Log.d("loadImg", "load9ing..");
 
-                first_reco = false;
+//                first_reco = false;
             }
         }
         else{

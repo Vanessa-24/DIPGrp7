@@ -3,6 +3,8 @@ package com.example.twoscreenapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.FileProvider;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
@@ -208,7 +210,12 @@ public class CameraPage extends AppCompatActivity {
     public void refreshReco(View v) throws JSONException {
         RecommendationPage temp = new RecommendationPage();
         temp.getRec(v);
-
+//        Log.d("refresh", "refresh");
+//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//        fragmentTransaction.detach(recommendationsFragment);
+//        fragmentTransaction.attach(recommendationsFragment);
+//        fragmentTransaction.commit();
+//        Log.d("refresh", "reach heere");
         recommendationsFragment.helperLoadImg(recommendationsFragment.mView);
     }
 
@@ -338,6 +345,7 @@ public class CameraPage extends AppCompatActivity {
 
 
         loadMdl(mdlClicked, currentIView); //helper function
+
     }
 
     //used as helper / or at reco fragment
