@@ -41,6 +41,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.json.JSONException;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -151,7 +153,6 @@ public class CameraPage extends AppCompatActivity {
 
         productsFragment = new ProductsFragment();
         recommendationsFragment = new RecommendationsFragment();
-
         tabLayout.setupWithViewPager(viewPager);
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), 0);
@@ -204,6 +205,13 @@ public class CameraPage extends AppCompatActivity {
 
     }
 
+    public void refreshReco(View v) throws JSONException {
+        RecommendationPage temp = new RecommendationPage();
+        temp.getRec(v);
+
+        recommendationsFragment.helperLoadImg(recommendationsFragment.mView);
+    }
+
     public void TestReco(View v) {
         if(RecommendationPage.pub_result == null)
             return;
@@ -226,7 +234,6 @@ public class CameraPage extends AppCompatActivity {
             Log.d("Else Func", "here");
             loadMdl(RecommendationPage.pub_result[4], crrentClickedId);
         }
-
 
     }
 

@@ -90,7 +90,7 @@ public class RecommendationPage extends AppCompatActivity {
             try {
                 JSONObject data = new JSONObject(faceshape);
 //                FaceShape faceShape = new FaceShape(data.getString("shape"), data.getString("jawlines"));
-                databaseReference.child(userID).child("faceShape").child("face").setValue(data.getString("faceShape"));
+                databaseReference.child(userID).child("faceShape").child("face").setValue(data.getString("shape"));
                 Toast.makeText(RecommendationPage.this, "Save face shape to cloud successfully", Toast.LENGTH_SHORT).show();
             } catch (JSONException e) {
                 Log.e("Upload data", "Failed" + e.getMessage());
@@ -156,11 +156,13 @@ public class RecommendationPage extends AppCompatActivity {
 
             }
             Button actionBtn = findViewById(R.id.getrecobtn);
+            uploadFaceshape(res);
 
             if (newRes.equals("")) {
                 verifiedimage.setVisibility(View.INVISIBLE);
                 errorimage.setVisibility(View.VISIBLE);
                 faceShapeMsg.setText("ERROR:No FaceShape is found");
+
                 actionBtn.setText("TRY AGAIN!");
                 actionBtn.setOnClickListener (v -> {
                     Intent intents = new Intent(v.getContext(), ScanPage.class);
@@ -169,19 +171,23 @@ public class RecommendationPage extends AppCompatActivity {
             } else {
                 errorimage.setVisibility(View.INVISIBLE);
                 faceShapeMsg.setText("Your FaceShape is");
+                faceShapeRes.setText(newRes);
+
                 verifiedimage.setVisibility(View.VISIBLE);
+
                 actionBtn.setOnClickListener(v -> {
                     try {
                         getRec(v);
                     } catch ( JSONException e ) {
                         e.printStackTrace();
                     }
+                    Intent intents = new Intent(v.getContext(), CameraPage.class);
+                    startActivity(intents);
                 });
             }
 
 
-            faceShapeRes.setText(newRes);
-            uploadFaceshape(res);
+
 
             // Set corresponding verified and error images
             /*if (res.equals("squared") || res.equals("round") || res.equals("triangle") || res.equals("diamond") || res.equals("rectangular") || res.equals("oblong")){
@@ -256,6 +262,11 @@ public class RecommendationPage extends AppCompatActivity {
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     HashMap<String, Map<String, String>> temp = (HashMap<String, Map<String, String>>) dataSnapshot.getValue();
 //                    temp.getClass();
+                    if (temp.get("faceShape") == null) {
+                        Toast.makeText(v.getContext(), "No face shape data", Toast.LENGTH_SHORT).show();
+                        return ;
+                    }
+
                     String faceShape = temp.get("faceShape").get("face");
                     Map<String, String> ratings = temp.get("ratings");
 
@@ -363,8 +374,8 @@ public class RecommendationPage extends AppCompatActivity {
 
         thread.start();
         thread.join();
-        Intent intents = new Intent(this, CameraPage.class);
-        startActivity(intents);
+//        Intent intents = new Intent(this, CameraPage.class);
+//        startActivity(intents);
         return result;
     }
 }

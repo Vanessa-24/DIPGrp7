@@ -74,6 +74,8 @@ public class RecommendationsFragment extends Fragment {
         return mView;
     }
 
+
+
     public void helperLoadImg(View v){
         if(RecommendationPage.pub_result != null) {
             if (first_reco) {
