@@ -38,7 +38,6 @@
         android:id="@+id/msg2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="face shape result"
         android:fontFamily="@font/montserratmedium"
         android:textColor="#220033"
         android:gravity="center"
